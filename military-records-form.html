@@ -1,688 +1,943 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Information Management System</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            min-height: 100vh;
-            padding: 40px 20px;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1500px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 3px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 40px 50px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .header h1 {
-            font-size: 2.2em;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .header p {
-            font-size: 1em;
-            color: #c7d2e8;
-            font-weight: 400;
-        }
-
-        .form-content {
-            padding: 50px;
-        }
-
-        .section {
-            margin-bottom: 50px;
-            background: #f8f9fc;
-            padding: 35px;
-            border-radius: 5px;
-            border: 1px solid #9c9c9c;
-        }
-
-        .section-title {
-            font-size: 1.5em;
-            color: rgb(29, 44, 75);
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #667eea;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-
-
-        .form-grid {
-            /* display: grid; */
-            /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
-            gap: 25px;
-            margin-bottom: 10px;
-        }
-
-        .form-group {
-            display: flex;
-            /* flex-direction: column; */
-        }
-
-        .form-group label {
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 10px;
-            font-size: 0.95em;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            width: 30%;
-
-        }
-
-        .required::after {
-            content: '*';
-            color: #e53e3e;
-            margin-left: 4px;
-        }
-
-        .form-group input,
-        .form-group select {
-            padding: 8px 16px;
-            border: 1px solid #aaabac;
-            border-radius: 4px;
-            font-size: 0.95em;
-            transition: all 0.3s ease;
-            background: #ffffff;
-            color: #121213;
-            font-family: inherit;
-            width: 100%;
-            margin: 2px 20px;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #222222;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-            background: #ffffff;
-        }
-
-        .form-group select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232d3748' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 45px;
-        }
-
-        .table-container {
-            overflow-x: auto;
-            margin-top: 20px;
-            border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            background: white;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            min-width: 1100px;
-        }
-
-        thead {
-            background: linear-gradient(135deg, #242424 0%, #6a6b6b 100%);
-        }
-
-        th {
-            padding: 14px 8px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.85em;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        th:first-child {
-            border-top-left-radius: 4px;
-        }
-
-        th:last-child {
-            border-top-right-radius: 4px;
-        }
-
-        td {
-            padding: 14px 8px;
-            border-bottom: 0.5px solid #6b6b6b;
-            background: white;
-        }
-
-        tbody tr {
-            transition: all 0.2s ease;
-        }
-
-        tbody tr:hover {
-            background: #f8f9fc;
-            transform: scale(1.01);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        tbody tr:last-child td:first-child {
-            border-bottom-left-radius: 4px;
-        }
-
-        tbody tr:last-child td:last-child {
-            border-bottom-right-radius: 4px;
-        }
-
-        td input {
-            width: 100%;
-            padding: 8px 6px;
-            border: 1px solid #78797a;
-            border-radius: 6px;
-            font-size: 0.9em;
-            transition: all 0.2s ease;
-            font-family: inherit;
-        }
-
-        td input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .btn {
-            padding: 10px 28px;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-family: inherit;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: #2196F3;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #1976D2;
-            opacity: 0.9;
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        .btn-success {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: #45a049;
-            opacity: 0.9;
-        }
-
-        .btn-danger {
-            background: #f44336;
-            color: white;
-            padding: 8px 15px;
-            font-size: 0.9em;
-        }
-
-        .btn-danger:hover {
-            background: #da190b;
-            opacity: 0.9;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .btn-danger {
-            background: #e74c3c;
-            color: white;
-            padding: 7px 16px;
-            font-size: 0.85em;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-
-        .table-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .table-title {
-            font-size: 1.2em;
-            font-weight: 700;
-            color: #444343;
-        }
-
-        .btn-add-row {
-            color: rgb(14, 13, 13);
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            font-size: 1.6em;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            font-weight: 300;
-        }
-
-        .btn-add-row:hover {
-            transform: rotate(90deg) scale(1.1);
-        }
-
-        .btn-add-row:active {
-            transform: rotate(90deg) scale(0.95);
-        }
-
-        .info-badge {
-            display: inline-block;
-            background: #edf2f7;
-            color: #4a5568;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-            margin-top: 15px;
-        }
-
-        .status-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #00e013;
-            margin-right: 8px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.5;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .form-content {
-                padding: 30px 25px;
-            }
-
-            .section {
-                padding: 25px 20px;
-            }
-
-            .header {
-                padding: 30px 25px;
-            }
-
-            .header h1 {
-                font-size: 1.6em;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .table-container {
-                font-size: 0.85em;
-            }
-
-            .button-group {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-
-        /* For Chrome, Edge, Safari */
-        ::-webkit-scrollbar {
-            width: 6px;
-            /* Thin scrollbar */
-            height: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f0f0f0;
-            /* Track Background */
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #b3b3b3;
-            /* Scroll thumb color */
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #8e8e8e;
-            /* Darker when hovered */
-        }
-
-        /* Firefox */
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: #b3b3b3 #f0f0f0;
-        }
-    </style>
-</head>
-
-<body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Officer Record Form</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <div class="header-content">
-                <h1>PARTICULARS AND RECORD OF SERVICE OFFICERS</h1>
-                <p><span class="status-indicator"></span>BAFZ Securz Information Database</p>
+      <div class="header">
+        <div class="header-content">
+          <h1>PARTICULARS AND RECORD OF SERVICE OFFICERS</h1>
+          <p>
+            <span class="status-indicator"></span>BAFZ Securz Information
+            Database
+          </p>
+        </div>
+      </div>
+
+      <div class="form-content">
+        <!-- Person -->
+        <div class="section">
+          <h2 class="section-title">Person</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="required">Name</label
+              ><input type="text" id="person_name" maxlength="150" required placeholder="Enter Your Name"/>
             </div>
+            <div class="form-group">
+              <label class="required">Personal No</label
+              ><input type="text" id="person_personal_no" maxlength="50" required placeholder="e.g, BA-2004"/>
+            </div>
+            <div class="form-group">
+              <label>Mobile No</label
+              ><input type="text" id="person_mobile_no" maxlength="20" placeholder="0178* *****9"/>
+            </div>
+            <div class="form-group">
+              <label>Inactive Date</label
+              ><input type="date" id="inactive_date" />
+            </div>
+            <!-- <div class="form-group">
+              <label>Picture</label><input type="text" id="person_picture" />
+            </div> -->
+          </div>
         </div>
 
-        <div class="form-content">
-            <div class="section">
-                <h2 class="section-title">Personnel Information</h2>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="personal_number" class="required">Personnel Name</label>
-                        <input type="text" id="personal_number" name="name" placeholder="e.g., PID-12345"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <label for="personal_number" class="required">Personnel ID Number</label>
-                        <input type="text" id="personal_number" name="personal_number" placeholder="e.g., PID-12345"
-                            required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nid" class="required">National Identification Number</label>
-                        <input type="text" id="nid" name="nid" placeholder="Enter NID number" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name" class="required">Full Legal Name</label>
-                        <input type="text" id="name" name="name" placeholder="First Middle Last Name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rank">Rank / Designation</label>
-                        <input type="text" id="rank" name="rank" placeholder="Enter rank or position">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="blood_group" class="required">Blood Group</label>
-                        <select id="blood_group" name="blood_group" required>
-                            <option value="">Select blood group</option>
-                            <option value="A+">A Positive (A+)</option>
-                            <option value="A-">A Negative (A-)</option>
-                            <option value="B+">B Positive (B+)</option>
-                            <option value="B-">B Negative (B-)</option>
-                            <option value="AB+">AB Positive (AB+)</option>
-                            <option value="AB-">AB Negative (AB-)</option>
-                            <option value="O+">O Positive (O+)</option>
-                            <option value="O-">O Negative (O-)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="date_of_birth">Date of Birth</label>
-                        <input type="date" id="date_of_birth" name="date_of_birth">
-                    </div>
-                </div>
-                <div class="info-badge">All fields marked with (*) are mandatory</div>
+        <!-- Personal Info -->
+        <div class="section">
+          <h2 class="section-title">Personal Information</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="required">National ID Number</label
+              ><input type="text" id="national_id_number" maxlength="50" required placeholder="e.g, 19750515123456789" />
             </div>
-
-            <div class="section">
-                <h2 class="section-title">Medical History Records</h2>
-
-                <div class="table-header">
-                    <div class="table-title">Comprehensive Medical Log</div>
-                    <button class="btn-add-row" onclick="addRow()" type="button"
-                        title="Add new medical record">+</button>
-                </div>
-
-                <div class="table-container">
-                    <table id="med_table">
-                        <thead>
-                            <tr>
-                                <th>Disease / Condition</th>
-                                <th>Onset Date</th>
-                                <th>Recovery Date</th>
-                                <th>Medical Classification</th>
-                                <th>Classification Start</th>
-                                <th>Classification End</th>
-                                <th style="text-align: center; width: 120px;">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table_body">
-                        </tbody>
-                    </table>
-                </div>
-
+            <div class="form-group">
+              <label>Arms/Service</label
+              ><input type="text" id="arms_service" maxlength="100" placeholder="e.g, Infantry" />
             </div>
-
-
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="clearForm()" type="button">Clear All Data</button>
-                <button class="btn btn-success" onclick="saveJSON()">Export as JSON</button>
+            <div class="form-group">
+              <label>Date of Birth</label
+              ><input type="date" id="date_of_birth"  />
             </div>
+            <div class="form-group">
+              <label>Place of Birth</label
+              ><input type="text" id="place_of_birth" maxlength="100" placeholder="e.g, Dhaka, Bangladesh" />
+            </div>
+            <div class="form-group">
+              <label>Birth Certificate Number</label
+              ><input
+                type="text"
+                id="birth_certificate_number"
+                maxlength="100"
+                placeholder="e.g, 19750515001234" 
+              />
+            </div>
+            <div class="form-group">
+              <label>Height (cm)</label>
+              <input type="number" step="0.01" id="height_cm" placeholder="e.g, 62.5" />
+            </div>
+            <div class="form-group">
+              <label>Height (inch)</label
+              ><input type="number" step="0.01" id="height_inch" placeholder="e.g, 36.5"/>
+            </div>
+            <div class="form-group">
+              <label>Weight (kg)</label
+              ><input type="number" step="0.01" id="weight_kg" placeholder="e.g, 69.25"/>
+            </div>
+            <div class="form-group">
+              <label>Weight (pound)</label
+              ><input type="number" step="0.01" id="weight_pound" placeholder="e.g, 125.5"/>
+            </div>
+            <div class="form-group">
+              <label>Build</label><input type="text" id="build" maxlength="50" placeholder="e.g, Athletic"/>
+            </div>
+            <div class="form-group">
+              <label>Complexion</label><input type="text" id="complexion" maxlength="50"placeholder="e.g, Fair"/>
+            </div>
+            <div class="form-group">
+              <label>Eye Color</label><input type="text" id="eye_color" maxlength="30" placeholder="e.g, Brown"/>
+            </div>
+            <div class="form-group">
+              <label>Visible Identification Marks</label
+              ><input type="text" id="visible_identification_marks" style="height: 100px;"  placeholder="e.g, Small scar on left forearm"/>
+            </div>
+            <div class="form-group">
+              <label>Blood Group</label
+              ><select id="blood_group"> 
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Religion</label><input type="text" id="religion" maxlength="50" placeholder="e.g, Islam"/>
+            </div>
+            <div class="form-group">
+              <label>Caste</label><input type="text" id="caste" maxlength="50" placeholder="e.g, N/A"/>
+            </div>
+            <div class="form-group">
+              <label>Nationality</label><input type="text" id="nationality" maxlength="50" placeholder="e.g, Bangladeshi"/>
+            </div>
+            <div class="form-group">
+              <label>Previous Nationality</label
+              ><input type="text" id="previous_nationality" maxlength="50"  placeholder="e.g, N/A"/>
+            </div>
+            <div class="form-group">
+              <label>Present Medical Category</label
+              ><input type="text" id="present_medical_category" maxlength="50" placeholder="e.g, A1"/>
+            </div>
+            <div class="form-group">
+              <label>Present Nature of Disability</label
+              ><input
+                type="text"
+                id="present_nature_of_disability"
+                maxlength="100"
+                placeholder="e.g, N/A"
+              />
+            </div>
+            <div class="form-group">
+              <label>Present Attributes</label
+              ><input type="text" id="present_attributes" maxlength="100" placeholder="e.g, Fit for Active Service"/>
+            </div>
+            <div class="form-group">
+              <label>Email</label><input type="email" id="email" placeholder="e.g, ahmed.rahman@army.mil.bd"/>
+            </div>
+            <div class="form-group">
+              <label>Personal Phone No</label
+              ><input type="text" id="personal_phone_no" maxlength="20" placeholder="e.g, 0171234567"/>
+            </div>
+            <div class="form-group">
+              <label>TNT Phone No</label><input type="text" id="tnt_phone_no" maxlength="20" placeholder="e.g, 9876543"/>
+            </div>
+            <div class="form-group">
+              <label>Position Among Siblings</label
+              ><input type="number" id="position_among_siblings" placeholder="e.g, 3"/>
+            </div>
+            <div class="form-group">
+              <label>Marital Status</label
+              ><select id="marital_status"> 
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Widowed">Widowed</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Date of Marriage</label
+              ><input type="date" id="date_of_marriage" />
+            </div>
+          </div>
         </div>
+
+        <!-- Addresses -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Addresses</div>
+            <button
+              type="button"
+              onclick="addRow('addresses')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Address Type</th>
+                  <th>Street Address</th>
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Postal Code</th>
+                  <th>Country</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="addresses_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Language Skills -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Language Skills</div>
+            <button
+              type="button"
+              onclick="addRow('language_skills')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Language</th>
+                  <th>Proficiency</th>
+                  <th>Reading Skill</th>
+                  <th>Writing Skill</th>
+                  <th>Speaking Skill</th>
+                  <th>Acquiring Skill</th>
+                  <th>Remarks</th>
+                  <th>Institution</th>
+                  <th>Year</th>
+                  <th>Degree</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="language_skills_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Family Members -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Family Members</div>
+            <button
+              type="button"
+              onclick="addRow('family_members')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Relationship</th>
+                  <th>Name</th>
+                  <th>Nationality</th>
+                  <th>Date of Birth</th>
+                  <th>Is Deceased</th>
+                  <th>Occupation</th>
+                  <th>Annual Income</th>
+                  <th>Address</th>
+                  <th>Birth Registration</th>
+                  <th>National ID</th>
+                  <th>Education</th>
+                  <th>Dependency</th>
+                  <th>Sex</th>
+                  <th>Date of Expire</th>
+                  <th>Location of Grave</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="family_members_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Education</div>
+            <button
+              type="button"
+              onclick="addRow('education')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Institution Type</th>
+                  <th>Institution Name</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Examination Passed</th>
+                  <th>Subjects</th>
+                  <th>GPA</th>
+                  <th>Division</th>
+                  <th>Year of Passing</th>
+                  <th>Remarks</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="education_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Passports -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Passports</div>
+            <button
+              type="button"
+              onclick="addRow('passports')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Passport Number</th>
+                  <th>Issue Date</th>
+                  <th>Expiry Date</th>
+                  <th>Authority</th>
+                  <th>Passport Type</th>
+                  <th>Purpose</th>
+                  <th>Place of Issue</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="passports_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Medical Histories -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Medical Histories</div>
+            <button
+              type="button"
+              onclick="addRow('medical_histories')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name of Disease</th>
+                  <th>Nature of Injury</th>
+                  <th>Date From</th>
+                  <th>Date To</th>
+                  <th>Medical Category Class</th>
+                  <th>Category From</th>
+                  <th>Category To</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="medical_histories_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pre Commission Services -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Pre Commission Services</div>
+            <button
+              type="button"
+              onclick="addRow('pre_commission_services')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Unit</th>
+                  <th>Designation</th>
+                  <th>Date From</th>
+                  <th>Date To</th>
+                  <th>Remarks</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="pre_commission_services_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pre Commission Trainings -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Pre Commission Trainings</div>
+            <button
+              type="button"
+              onclick="addRow('pre_commission_trainings')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Location</th>
+                  <th>Appointment</th>
+                  <th>Distinction</th>
+                  <th>Remarks</th>
+                  <th>Date From</th>
+                  <th>Date To</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="pre_commission_trainings_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Commission -->
+        <div class="section">
+          <h2 class="section-title">Commission</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="required">Academy Course</label
+              ><input
+                type="text"
+                id="academy_course"
+                required
+                maxlength="100"
+              />
+            </div>
+            <div class="form-group">
+              <label>Date of Joining Academy</label
+              ><input type="date" id="date_of_joining_academy" />
+            </div>
+            <div class="form-group">
+              <label>Date of Commission</label
+              ><input type="date" id="date_of_commission" />
+            </div>
+            <div class="form-group">
+              <label class="required">Commission Type</label
+              ><select id="commission_type" required>
+                <option value="">Select</option>
+                <option value="Regular Commission">Regular Commission</option>
+                <option value="Short Service Commission">
+                  Short Service Commission
+                </option>
+                <option value="Temporary Commission">
+                  Temporary Commission
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="required">Commission Authority</label
+              ><input
+                type="text"
+                id="commission_authority"
+                required
+                maxlength="100"
+              />
+            </div>
+            <div class="form-group">
+              <label class="required">Order Number</label
+              ><input type="text" id="order_number" required maxlength="50"/>
+            </div>
+            <div class="form-group">
+              <label class="required">Ante Date Seniority</label
+              ><input type="date" id="ante_date_seniority" required />
+            </div>
+            <div class="form-group">
+              <label>Ante Date Authority</label
+              ><input type="text" id="ante_date_authority" maxlength="100" />
+            </div>
+            <div class="form-group">
+              <label>Permanent Commission Date</label
+              ><input type="date" id="permanent_commission_date" />
+            </div>
+            <div class="form-group">
+              <label class="required">Permanent Commission Authority</label
+              ><input
+                type="text"
+                id="permanent_commission_authority"
+                required
+                maxlength="100"
+              />
+            </div>
+            <div class="form-group">
+              <label>Date of Joining Bangladesh Army</label
+              ><input type="date" id="date_of_joining_bangladesh_army" />
+            </div>
+            <div class="form-group">
+              <label class="required">Joining Bangladesh Army Authority</label
+              ><input
+                type="text"
+                id="joining_bangladesh_army_authority"
+                required
+                maxlength="100"
+              />
+            </div>
+            <div class="form-group">
+              <label>Original Arms Service</label
+              ><input type="text" id="original_arms_service" maxlength="100" />
+            </div>
+            <div class="form-group">
+              <label>Previous Arms Service</label
+              ><input type="text" id="previous_arms_service" maxlength="100" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Post Commission Trainings -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Post Commission Trainings</div>
+            <button
+              type="button"
+              onclick="addRow('post_commission_trainings')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Training Type</th>
+                  <th>Course Name</th>
+                  <th>Location</th>
+                  <th>Date From</th>
+                  <th>Date To</th>
+                  <th>Result B Side</th>
+                  <th>Result Y Side</th>
+                  <th>Mark B Side</th>
+                  <th>Mark Y Side</th>
+                  <th>Remarks</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="post_commission_trainings_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Additional Qualifications -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Additional Qualifications</div>
+            <button
+              type="button"
+              onclick="addRow('additional_qualifications')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Qualification</th>
+                  <th>Date Obtained</th>
+                  <th>Authority</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="additional_qualifications_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Map Reading Promotion Exams -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Map Reading Promotion Exams</div>
+            <button
+              type="button"
+              onclick="addRow('map_reading_promotion_exams')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Exam Name</th>
+                  <th>Passing Year</th>
+                  <th>Authority</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="map_reading_promotion_exams_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Promotions -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Promotions</div>
+            <button
+              type="button"
+              onclick="addRow('promotions')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Promotion Date</th>
+                  <th>Promotion Type</th>
+                  <th>Rank</th>
+                  <th>Authority</th>
+                  <th>Order</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="promotions_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Service Records -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Service Records</div>
+            <button
+              type="button"
+              onclick="addRow('service_records')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date From</th>
+                  <th>Date To</th>
+                  <th>Appointment Type</th>
+                  <th>Appointment Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="service_records_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Operational Awards -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Operational Awards</div>
+            <button
+              type="button"
+              onclick="addRow('operational_awards')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Operation Name</th>
+                  <th>Date From</th>
+                  <th>Date To</th>
+                  <th>Appointment</th>
+                  <th>Award Receive</th>
+                  <th>Authority</th>
+                  <th>Remarks</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="operational_awards_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Non Operational Awards -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Non Operational Awards</div>
+            <button
+              type="button"
+              onclick="addRow('non_operational_awards')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Date Awarded</th>
+                  <th>Details</th>
+                  <th>Authority</th>
+                  <th>Remarks</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="non_operational_awards_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Overseas Visits -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Overseas Visits</div>
+            <button
+              type="button"
+              onclick="addRow('overseas_visits')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Person</th>
+                  <th>Visit Type</th>
+                  <th>Country</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Reason</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="overseas_visits_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Annual Incomes -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Annual Incomes</div>
+            <button
+              type="button"
+              onclick="addRow('annual_incomes')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Person</th>
+                  <th>Income Source</th>
+                  <th>Amount</th>
+                  <th>Year</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="annual_incomes_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Bank Accounts -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Bank Accounts</div>
+            <button
+              type="button"
+              onclick="addRow('bank_accounts')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Bank Name</th>
+                  <th>Account Number</th>
+                  <th>Account Type</th>
+                  <th>Branch</th>
+                  <th>Opening Date</th>
+                  <th>Closing Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="bank_accounts_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Military Legal Records -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Military Legal Records</div>
+            <button
+              type="button"
+              onclick="addRow('military_legal_records')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Military Legal Type</th>
+                  <th>Military Legal Name</th>
+                  <th>Remarks</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="military_legal_records_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Civil Legal Records -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Civil Legal Records</div>
+            <button
+              type="button"
+              onclick="addRow('civil_legal_records')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Law Section</th>
+                  <th>Crime Details</th>
+                  <th>Date Judgment</th>
+                  <th>Place</th>
+                  <th>Punishment</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="civil_legal_records_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Ranks Held -->
+        <div class="section">
+          <div class="table-header">
+            <div class="table-title">Ranks Held</div>
+            <button
+              type="button"
+              onclick="addRow('ranks_held')"
+              class="btn-add-row"
+            >
+              <span class="btn-icon">+</span>
+              <span class="btn-text">Add More</span>
+            </button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Promotion Type</th>
+                  <th>Rank</th>
+                  <th>Retrospective</th>
+                  <th>Notified</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="ranks_held_tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button class="btn btn-primary" onclick="clearForm()" type="button">
+            Clear All
+          </button>
+          <button class="btn btn-success" onclick="saveJSON()">
+            Download JSON
+          </button>
+        </div>
+      </div>
     </div>
-    <script>
-        window.onload = () => addRow();
-
-        // Add row
-        function addRow() {
-            const body = document.getElementById("table_body");
-            const row = document.createElement("tr");
-
-            row.innerHTML = `
-        <td><input type="text" name="disease_name[]" placeholder="Disease Name"></td>
-        <td><input type="date" name="from_date[]" placeholder="Onset date"></td>
-        <td><input type="date" name="to_date[]" placeholder="Recovery date"></td>
-        <td><input type="text" name="medical_class[]" placeholder="Medical Class"></td>
-        <td><input type="text" name="class_from[]" placeholder="Class From"></td>
-        <td><input type="text" name="class_to[]" placeholder="Class To"></td>
-        <td style="text-align:center;">
-            <button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button>
-        </td>
-    `;
-            body.appendChild(row);
-        }
-
-        // Delete row
-        function deleteRow(btn) {
-            const body = document.getElementById("table_body");
-            if (body.children.length <= 1) {
-                alert("At least one medical history entry must remain.");
-                return;
-            }
-            btn.closest("tr").remove();
-        }
-
-        // Reset form
-        function clearForm() {
-            if (!confirm("Clear all data?")) return;
-
-            ["personal_number", "nid", "name", "rank", "blood_group", "date_of_birth"]
-                .forEach(id => document.getElementById(id).value = "");
-
-            document.getElementById("table_body").innerHTML = "";
-            addRow();
-            alert("Form reset successfully.");
-        }
-
-        // Download helper
-        function downloadJSON(filename, data) {
-            const blob = new Blob([JSON.stringify(data, null, 4)], { type: "application/json" });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = filename;
-            link.click();
-        }
-
-        // Save JSON
-        function saveJSON() {
-            let errors = [];
-            let missingFieldCount = 0;  // total missing fields
-            let emptyRowCount = 0;      // how many rows contain at least one empty field
-
-            // Required main fields
-            const fields = {
-                "Personnel ID Number": "personal_number",
-                "National Identification Number": "nid",
-                "Full Legal Name": "name",
-                "Blood Group": "blood_group"
-            };
-
-            let values = {};
-            for (let label in fields) {
-                const id = fields[label];
-                const value = document.getElementById(id).value.trim();
-                values[id] = value;
-
-                if (!value) {
-                    errors.push(`• ${label} is required`);
-                    missingFieldCount++;
-                }
-            }
-
-            // Validate table rows
-            const rows = document.querySelectorAll("#table_body tr");
-
-            rows.forEach((row, index) => {
-                let rowHasEmpty = false;
-                const inputs = row.querySelectorAll("input");
-
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        const label = input.placeholder || input.name;
-                        errors.push(`• Row ${index + 1}: ${label} is required`);
-                        missingFieldCount++;
-                        rowHasEmpty = true;
-                    }
-                });
-
-                if (rowHasEmpty) emptyRowCount++;
-            });
-
-            // If any errors → show detailed alert
-            if (errors.length > 0) {
-                let message =
-                    `❗ Form has ${missingFieldCount} missing fields across ${emptyRowCount} rows.\n\n` +
-                    `Missing Details:\n\n` +
-                    errors.join("\n");
-
-                alert(message);
-                return;
-            }
-
-            // Build final JSON
-            let data = {
-                record_metadata: {
-                    export_date: new Date().toISOString(),
-                    version: "1.0",
-                    system: "Medical Information Management System"
-                },
-                personal_information: {
-                    personnel_id: values.personal_number,
-                    national_id: values.nid,
-                    full_name: values.name,
-                    rank: document.getElementById("rank").value.trim(),
-                    blood_group: values.blood_group,
-                    date_of_birth: document.getElementById("date_of_birth").value.trim()
-                },
-                medical_history: []
-            };
-
-            rows.forEach((row, index) => {
-                const get = name => row.querySelector(`input[name='${name}[]']`).value.trim();
-                data.medical_history.push({
-                    record_number: index + 1,
-                    disease_name: get("disease_name"),
-                    onset_date: get("from_date"),
-                    recovery_date: get("to_date"),
-                    medical_classification: get("medical_class"),
-                    classification_start: get("class_from"),
-                    classification_end: get("class_to")
-                });
-            });
-
-            const filename = `MED_${values.personal_number}_${new Date().toISOString().slice(0, 10)}.json`;
-            downloadJSON(filename, data);
-        }
-    </script>
-
-</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>
