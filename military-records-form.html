@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Information Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 3px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 1em;
+            color: #c7d2e8;
+            font-weight: 400;
+        }
+
+        .form-content {
+            padding: 50px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            background: #f8f9fc;
+            padding: 35px;
+            border-radius: 5px;
+            border: 1px solid #9c9c9c;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: rgb(29, 44, 75);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #667eea;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+
+
+        .form-grid {
+            /* display: grid; */
+            /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+            gap: 25px;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            /* flex-direction: column; */
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            width: 30%;
+
+        }
+
+        .required::after {
+            content: '*';
+            color: #e53e3e;
+            margin-left: 4px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 8px 16px;
+            border: 1px solid #aaabac;
+            border-radius: 4px;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            background: #ffffff;
+            color: #121213;
+            font-family: inherit;
+            width: 100%;
+            margin: 2px 20px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #222222;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            background: #ffffff;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232d3748' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 45px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            min-width: 1100px;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #242424 0%, #6a6b6b 100%);
+        }
+
+        th {
+            padding: 14px 8px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85em;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        th:first-child {
+            border-top-left-radius: 4px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 4px;
+        }
+
+        td {
+            padding: 14px 8px;
+            border-bottom: 0.5px solid #6b6b6b;
+            background: white;
+        }
+
+        tbody tr {
+            transition: all 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fc;
+            transform: scale(1.01);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 4px;
+        }
+
+        tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 4px;
+        }
+
+        td input {
+            width: 100%;
+            padding: 8px 6px;
+            border: 1px solid #78797a;
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        td input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            padding: 10px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            opacity: 0.9;
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #45a049;
+            opacity: 0.9;
+        }
+
+        .btn-danger {
+            background: #f44336;
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+
+        .btn-danger:hover {
+            background: #da190b;
+            opacity: 0.9;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+            padding: 7px 16px;
+            font-size: 0.85em;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .table-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #444343;
+        }
+
+        .btn-add-row {
+            color: rgb(14, 13, 13);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.6em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-weight: 300;
+        }
+
+        .btn-add-row:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .btn-add-row:active {
+            transform: rotate(90deg) scale(0.95);
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: #edf2f7;
+            color: #4a5568;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #00e013;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-content {
+                padding: 30px 25px;
+            }
+
+            .section {
+                padding: 25px 20px;
+            }
+
+            .header {
+                padding: 30px 25px;
+            }
+
+            .header h1 {
+                font-size: 1.6em;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .table-container {
+                font-size: 0.85em;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+
+        /* For Chrome, Edge, Safari */
+        ::-webkit-scrollbar {
+            width: 6px;
+            /* Thin scrollbar */
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            /* Track Background */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #b3b3b3;
+            /* Scroll thumb color */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8e8e8e;
+            /* Darker when hovered */
+        }
+
+        /* Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #b3b3b3 #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>PARTICULARS AND RECORD OF SERVICE OFFICERS</h1>
+                <p><span class="status-indicator"></span>BAFZ Securz Information Database</p>
+            </div>
+        </div>
+
+        <div class="form-content">
+            <div class="section">
+                <h2 class="section-title">Personnel Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="personal_number" class="required">Personnel Name</label>
+                        <input type="text" id="personal_number" name="name" placeholder="e.g., PID-12345"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="personal_number" class="required">Personnel ID Number</label>
+                        <input type="text" id="personal_number" name="personal_number" placeholder="e.g., PID-12345"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nid" class="required">National Identification Number</label>
+                        <input type="text" id="nid" name="nid" placeholder="Enter NID number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="required">Full Legal Name</label>
+                        <input type="text" id="name" name="name" placeholder="First Middle Last Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rank">Rank / Designation</label>
+                        <input type="text" id="rank" name="rank" placeholder="Enter rank or position">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="blood_group" class="required">Blood Group</label>
+                        <select id="blood_group" name="blood_group" required>
+                            <option value="">Select blood group</option>
+                            <option value="A+">A Positive (A+)</option>
+                            <option value="A-">A Negative (A-)</option>
+                            <option value="B+">B Positive (B+)</option>
+                            <option value="B-">B Negative (B-)</option>
+                            <option value="AB+">AB Positive (AB+)</option>
+                            <option value="AB-">AB Negative (AB-)</option>
+                            <option value="O+">O Positive (O+)</option>
+                            <option value="O-">O Negative (O-)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date_of_birth">Date of Birth</label>
+                        <input type="date" id="date_of_birth" name="date_of_birth">
+                    </div>
+                </div>
+                <div class="info-badge">All fields marked with (*) are mandatory</div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Medical History Records</h2>
+
+                <div class="table-header">
+                    <div class="table-title">Comprehensive Medical Log</div>
+                    <button class="btn-add-row" onclick="addRow()" type="button"
+                        title="Add new medical record">+</button>
+                </div>
+
+                <div class="table-container">
+                    <table id="med_table">
+                        <thead>
+                            <tr>
+                                <th>Disease / Condition</th>
+                                <th>Onset Date</th>
+                                <th>Recovery Date</th>
+                                <th>Medical Classification</th>
+                                <th>Classification Start</th>
+                                <th>Classification End</th>
+                                <th style="text-align: center; width: 120px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table_body">
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="clearForm()" type="button">Clear All Data</button>
+                <button class="btn btn-success" onclick="saveJSON()">Export as JSON</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = () => addRow();
+
+        // Add row
+        function addRow() {
+            const body = document.getElementById("table_body");
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+        <td><input type="text" name="disease_name[]" placeholder="Disease Name"></td>
+        <td><input type="date" name="from_date[]" placeholder="Onset date"></td>
+        <td><input type="date" name="to_date[]" placeholder="Recovery date"></td>
+        <td><input type="text" name="medical_class[]" placeholder="Medical Class"></td>
+        <td><input type="text" name="class_from[]" placeholder="Class From"></td>
+        <td><input type="text" name="class_to[]" placeholder="Class To"></td>
+        <td style="text-align:center;">
+            <button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button>
+        </td>
+    `;
+            body.appendChild(row);
+        }
+
+        // Delete row
+        function deleteRow(btn) {
+            const body = document.getElementById("table_body");
+            if (body.children.length <= 1) {
+                alert("At least one medical history entry must remain.");
+                return;
+            }
+            btn.closest("tr").remove();
+        }
+
+        // Reset form
+        function clearForm() {
+            if (!confirm("Clear all data?")) return;
+
+            ["personal_number", "nid", "name", "rank", "blood_group", "date_of_birth"]
+                .forEach(id => document.getElementById(id).value = "");
+
+            document.getElementById("table_body").innerHTML = "";
+            addRow();
+            alert("Form reset successfully.");
+        }
+
+        // Download helper
+        function downloadJSON(filename, data) {
+            const blob = new Blob([JSON.stringify(data, null, 4)], { type: "application/json" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+        }
+
+        // Save JSON
+        function saveJSON() {
+            let errors = [];
+            let missingFieldCount = 0;  // total missing fields
+            let emptyRowCount = 0;      // how many rows contain at least one empty field
+
+            // Required main fields
+            const fields = {
+                "Personnel ID Number": "personal_number",
+                "National Identification Number": "nid",
+                "Full Legal Name": "name",
+                "Blood Group": "blood_group"
+            };
+
+            let values = {};
+            for (let label in fields) {
+                const id = fields[label];
+                const value = document.getElementById(id).value.trim();
+                values[id] = value;
+
+                if (!value) {
+                    errors.push(`• ${label} is required`);
+                    missingFieldCount++;
+                }
+            }
+
+            // Validate table rows
+            const rows = document.querySelectorAll("#table_body tr");
+
+            rows.forEach((row, index) => {
+                let rowHasEmpty = false;
+                const inputs = row.querySelectorAll("input");
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        const label = input.placeholder || input.name;
+                        errors.push(`• Row ${index + 1}: ${label} is required`);
+                        missingFieldCount++;
+                        rowHasEmpty = true;
+                    }
+                });
+
+                if (rowHasEmpty) emptyRowCount++;
+            });
+
+            // If any errors → show detailed alert
+            if (errors.length > 0) {
+                let message =
+                    `❗ Form has ${missingFieldCount} missing fields across ${emptyRowCount} rows.\n\n` +
+                    `Missing Details:\n\n` +
+                    errors.join("\n");
+
+                alert(message);
+                return;
+            }
+
+            // Build final JSON
+            let data = {
+                record_metadata: {
+                    export_date: new Date().toISOString(),
+                    version: "1.0",
+                    system: "Medical Information Management System"
+                },
+                personal_information: {
+                    personnel_id: values.personal_number,
+                    national_id: values.nid,
+                    full_name: values.name,
+                    rank: document.getElementById("rank").value.trim(),
+                    blood_group: values.blood_group,
+                    date_of_birth: document.getElementById("date_of_birth").value.trim()
+                },
+                medical_history: []
+            };
+
+            rows.forEach((row, index) => {
+                const get = name => row.querySelector(`input[name='${name}[]']`).value.trim();
+                data.medical_history.push({
+                    record_number: index + 1,
+                    disease_name: get("disease_name"),
+                    onset_date: get("from_date"),
+                    recovery_date: get("to_date"),
+                    medical_classification: get("medical_class"),
+                    classification_start: get("class_from"),
+                    classification_end: get("class_to")
+                });
+            });
+
+            const filename = `MED_${values.personal_number}_${new Date().toISOString().slice(0, 10)}.json`;
+            downloadJSON(filename, data);
+        }
+    </script>
+
+</body>
+
+</html>
