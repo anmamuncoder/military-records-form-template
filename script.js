@@ -40,7 +40,6 @@ const options = {
     "Temporary Commission",
   ],
   training_types: ["Home Country", "Abroad"],
-  // Add two more options: Result B Side and Result Y Side
   result_b_side: ["A+", "A", "A-", "B", "C", "D", "F"],
   result_y_side: ["A+", "A", "A-", "B", "C", "D", "F"],
   promotion_types: ["Temporary", "Substantive", "Acting"],
@@ -82,7 +81,7 @@ const options = {
     "On the Staff Appointments",
     "Instructional Appointments",
   ],
-  service_record_type: ["Unit", "ERE"],
+  service_type: ["Unit", "ERE"],
   military_legal_type: ["Minor", "Severe", "Exemplary"],
   military_legal_name: [
     "Verbal Wng",
@@ -421,8 +420,8 @@ function addRow(type) {
         100
       )}</td>
        <td>${createSelect(
-         "service_record_type",
-         options.service_record_type
+         "service_type",
+         options.service_type
        )}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "operational_awards") {
