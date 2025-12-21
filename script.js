@@ -40,6 +40,8 @@ const options = {
     "Temporary Commission",
   ],
   training_types: ["Home Country", "Abroad"],
+  result_b_side: ["A+", "A", "A-", "B", "C", "D", "F"],
+  result_y_side: ["A+", "A", "A-", "B", "C", "D", "F"],
   promotion_types: ["Temporary", "Substantive", "Acting"],
   visit_types: [
     "Official PSI",
@@ -79,6 +81,7 @@ const options = {
     "On the Staff Appointments",
     "Instructional Appointments",
   ],
+  service_type: ["Unit", "ERE"],
   military_legal_type: ["Minor", "Severe", "Exemplary"],
   military_legal_name: [
     "Verbal Wng",
@@ -178,7 +181,7 @@ function addRow(type) {
       <td>${createInput("text", "street_address", "Street Address", true)}</td>
       <td>${createInput("text", "city", "City", false, 100)}</td>
       <td>${createInput("text", "state", "State", false, 100)}</td>
-      <td>${createInput("text", "postal_code", "Postal Code", false ,20)}</td>
+      <td>${createInput("text", "postal_code", "Postal Code", false, 20)}</td>
       <td>${createInput("text", "country", "Country", false, 100)}</td>
       <td>${createInput("date", "date", "", false)}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
@@ -219,7 +222,7 @@ function addRow(type) {
       true
     )}</td>
       <td>${createInput("text", "name", "Name", true, 200)}</td>
-      <td>${createInput("text", "nationality", "Nationality", false,50)}</td>
+      <td>${createInput("text", "nationality", "Nationality", false, 50)}</td>
       <td>${createInput("date", "date_of_birth", "", false)}</td>
       <td>${createSelect("is_deceased", ["false", "true"], true)}</td>
       <td>${createInput(
@@ -364,20 +367,10 @@ function addRow(type) {
       <td>${createInput("text", "location", "Location", true, 100)}</td>
       <td>${createInput("date", "date_from", "", false)}</td>
       <td>${createInput("date", "date_to", "", false)}</td>
-      <td>${createInput(
-        "text",
-        "result_b_side",
-        "Result B Side",
-        false,
-        100
-      )}</td>
-      <td>${createInput(
-        "text",
-        "result_y_side",
-        "Result Y Side",
-        false,
-        100
-      )}</td>
+       
+      <td>${createSelect("result_b_side", options.result_b_side)}</td>
+       
+      <td>${createSelect("result_y_side", options.result_y_side)}</td>
       <td>${createInput("number", "mark_obtained_b_side", "Mark B Side")}</td>
       <td>${createInput("number", "mark_obtained_y_side", "Mark Y Side")}</td>
       <td>${createInput("text", "remarks", "Remarks")}</td>
@@ -426,6 +419,10 @@ function addRow(type) {
         true,
         100
       )}</td>
+       <td>${createSelect(
+         "service_type",
+         options.service_type
+       )}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "operational_awards") {
     row.innerHTML = `<td>${createInput(
@@ -477,7 +474,7 @@ function addRow(type) {
       100
     )}</td>
       <td>${createInput("text", "account_number", "Account Number", true)}</td>
-      <td>${createSelect("account_type", options.account_types, true,)}</td>
+      <td>${createSelect("account_type", options.account_types, true)}</td>
       <td>${createInput("text", "branch", "Branch", true, 100)}</td>
       <td>${createInput("date", "opening_date", "", false)}</td>
       <td>${createInput("date", "closing_date", "")}</td>
@@ -1137,8 +1134,9 @@ function saveJSON() {
     type: "application/json",
   });
   const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob); 
-  link.download = `${data.person.personal_no}-RECORD.json` || "unknown_record.json"
+  link.href = URL.createObjectURL(blob);
+  link.download =
+    `${data.person.personal_no}-RECORD.json` || "unknown_record.json";
   link.click();
 }
 
