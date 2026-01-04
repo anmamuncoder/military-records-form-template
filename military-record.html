@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Officer Record Form</title>
-
     <style>
 
 * {
@@ -20,6 +19,13 @@ body {
   padding: 40px 20px;
   line-height: 1.6;
 }
+/* Mobile devices */
+@media (max-width: 768px) {
+  body {
+      padding: 0px;
+
+  }
+}
 
 .container {
   max-width: 1500px;
@@ -29,6 +35,52 @@ body {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
+
+ 
+/* Notice Box */
+.notice-box {
+    background: #fff8e1;
+    border-left: 6px solid #ff9800;
+    padding: 20px 25px;
+    margin-bottom: 30px;
+    border-radius: 6px;
+}
+
+.notice-box h2 {
+    color: #b36b00;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.notice-box ol {
+    padding-left: 20px;
+}
+
+.notice-box li {
+    margin-bottom: 14px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* English text style */
+.en-text {
+    display: block;
+    margin-top: 4px;
+    font-size: 14px;
+    color: #555;
+    font-style: italic;
+}
+
+ 
+ 
+
+
+
+
+
+
+
+
 
 .header {
   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
@@ -100,8 +152,9 @@ body {
 
 .form-group {
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: row;
 }
+
 
 .form-group label {
   font-weight: 600;
@@ -113,6 +166,8 @@ body {
   gap: 5px;
   width: 30%;
 }
+
+
 
 .required::after {
   content: "*";
@@ -132,6 +187,14 @@ body {
   font-family: inherit;
   width: 100%;
   margin: 2px 20px;
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .form-group input,
+  .form-group select{
+    margin: 0px;
+  }
 }
 
 .form-group input:focus,
@@ -503,12 +566,23 @@ td select[required]:focus {
     opacity: 0.5;
   }
 }
-
+ 
+ /* Mobile devices */ 
 @media (max-width: 768px) {
   .form-content {
-    padding: 30px 25px;
+    padding: 10px 5px;
   }
 
+  .form-group {
+    flex-direction: column;
+  }
+  
+  .form-group label {
+   width: 100%;
+  margin-top: 10px;
+  margin-bottom: 0px;
+
+  }
   .section {
     padding: 25px 20px;
   }
@@ -569,18 +643,73 @@ td select[required]:focus {
   scrollbar-color: #b3b3b3 #f0f0f0;
 }
 
+
     </style>
 
-  </head>
+  </head> 
   <body>
     <div class="container">
+
+
+    <!-- Notice Section -->
+    <div class="notice-box">
+        <h2>গুরুত্বপূর্ণ নির্দেশনা / Important Notice</h2>
+
+        <ol>
+            <li>
+                এই ফরমটি পূরণ করার পর সবশেষ <strong>Download</strong> বাটনে ক্লিক করলে
+                তথ্যগুলো একটি ফাইল আকারে Download হবে। যা পরবর্তীতে সেনাসদর,
+                সাঁজোয়া পরিদপ্তরের আর্মি ই-মেইলে
+                (<strong>armrdte@gmail.com</strong>) প্রেরণ করতে হবে। <br>
+                <span class="en-text">
+                    After completing the form, click the <strong>Download</strong> button to download the
+                    information as a file. This file must be sent to Army Headquarters,
+                    Armoured Directorate via email at <strong>armrdte@gmail.com</strong>.
+                </span>
+            </li>
+
+            <li>
+                ফাইলটি প্রেরণের সময় বর্তমান পদবীর সদ্য তোলা একটি পাসপোর্ট সাইজের ছবি
+                (৩৫০ কেবির বেশি নয়) সংযুক্ত করে দিতে হবে। <br>
+                <span class="en-text">
+                    While sending the file, a recent passport-size photograph in the current rank
+                    (not exceeding 350 KB) must be attached.
+                </span>
+            </li>
+
+            <li>
+                <strong>
+                    এই ফরম পূরণের সময় প্রদত্ত তথ্যসমূহ শুধুমাত্র ঐ সময়ে ব্যবহৃত ডিভাইসেই
+                    সংরক্ষিত হবে। পরবর্তীতে অন্য কোন সার্ভার বা কম্পিউটারে এটি দেখা যাবে না।
+                </strong>
+                <br>
+                <strong class="en-text">
+                    The information provided while filling out this form will be stored only on the
+                    device used at that time. It will not be saved or accessible on any server or
+                    other computer.
+                </strong>
+            </li>
+
+            <li>
+                <strong>
+                    ফরম পূরণ সম্পূর্ণ না করে কোন কারণে যদি ক্লোজ করে দেয়া হয় তাহলে পুনরায়
+                    আবার প্রথম থেকে শুরু করতে হবে। এক্ষেত্রে পূর্বের কোন তথ্য স্বয়ংক্রিয়ভাবে
+                    ফিরে আসবে না।
+                </strong>
+                <br>
+                <strong class="en-text">
+                    If the form is closed before completion for any reason, the process must be
+                    started again from the beginning. Previously entered data will not be restored
+                    automatically.
+                </strong>
+            </li>
+        </ol>
+    </div>
+
       <div class="header">
         <div class="header-content">
-          <h1>PARTICULARS AND RECORD OF SERVICE OFFICERS</h1>
-          <p>
-            <span class="status-indicator"></span>BAFZ Securz Information
-            Database
-          </p>
+          <h1>BAFZ-2043</h1>
+          <!-- <p><span class="status-indicator"></span>BAFZ Securz InformationDatabase</p> -->
         </div>
       </div>
 
@@ -590,8 +719,12 @@ td select[required]:focus {
           <h2 class="section-title">Person</h2>
           <div class="form-grid">
             <div class="form-group">
-              <label class="required">Name</label
+              <label class="required">Name (Capital) </label
               ><input type="text" id="person_name" maxlength="150" required placeholder="Enter Your Name"/>
+            </div>
+            <div class="form-group">
+              <label class="required">Short Name (Capital) </label
+              ><input type="text" id="short_name" maxlength="150" required placeholder="Enter Short Name"/>
             </div>
             <div class="form-group">
               <label class="required">Personal No</label
@@ -600,14 +733,7 @@ td select[required]:focus {
             <div class="form-group">
               <label>Mobile No</label
               ><input type="text" id="person_mobile_no" maxlength="20" placeholder="0178* *****9"/>
-            </div>
-            <div class="form-group">
-              <label>Inactive Date</label
-              ><input type="date" id="inactive_date" />
-            </div>
-            <!-- <div class="form-group">
-              <label>Picture</label><input type="text" id="person_picture" />
-            </div> -->
+            </div>  
           </div>
         </div>
 
@@ -1245,6 +1371,7 @@ td select[required]:focus {
                   <th>Appointment Type</th>
                   <th>Appointment Name</th>
                   <th>Record type</th>
+                  <th>Unit/ERE Name</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -1506,7 +1633,6 @@ td select[required]:focus {
       </div>
     </div>
     <script >
-
 
 const options = {
   blood_groups: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
@@ -1932,7 +2058,14 @@ function addRow(type) {
        <td>${createSelect(
          "service_type",
          options.service_type
-       )}</td>
+    )}</td>
+      <td>${createInput(
+        "text",
+        "unit_ere_name",
+        "Unit/ERE Name",
+        true,
+        100
+      )}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "operational_awards") {
     row.innerHTML = `<td>${createInput(
@@ -2288,6 +2421,7 @@ function validateRequiredSections() {
 
   // Validate Person section
   if (!getValue("person_name")) errors.push("Person - Name");
+  if (!getValue("short_name")) errors.push("Person - Short Name");
   if (!getValue("person_personal_no")) errors.push("Person - Personal No");
 
   // Validate Personal Info section
@@ -2537,6 +2671,7 @@ function saveJSON() {
     person: {
       name: getValue("person_name"),
       personal_no: getValue("person_personal_no"),
+      short_name: getValue("short_name"),
       mobile_no: getValue("person_mobile_no"),
       inactive_date: getDateValue("inactive_date"),
       // picture: getValue("person_picture") || null,

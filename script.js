@@ -422,7 +422,14 @@ function addRow(type) {
        <td>${createSelect(
          "service_type",
          options.service_type
-       )}</td>
+    )}</td>
+      <td>${createInput(
+        "text",
+        "unit_ere_name",
+        "Unit/ERE Name",
+        true,
+        100
+      )}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "operational_awards") {
     row.innerHTML = `<td>${createInput(
@@ -778,6 +785,7 @@ function validateRequiredSections() {
 
   // Validate Person section
   if (!getValue("person_name")) errors.push("Person - Name");
+  if (!getValue("short_name")) errors.push("Person - Short Name");
   if (!getValue("person_personal_no")) errors.push("Person - Personal No");
 
   // Validate Personal Info section
@@ -1027,6 +1035,7 @@ function saveJSON() {
     person: {
       name: getValue("person_name"),
       personal_no: getValue("person_personal_no"),
+      short_name: getValue("short_name"),
       mobile_no: getValue("person_mobile_no"),
       inactive_date: getDateValue("inactive_date"),
       // picture: getValue("person_picture") || null,
