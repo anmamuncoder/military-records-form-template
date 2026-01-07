@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -31,9 +32,9 @@ body {
  
 /* Notice Box */
 .notice-box {
-    background: #fff8e1;
+    background: #000;
     border-left: 6px solid #ff9800;
-    padding: 20px 25px;
+    padding: 10px 15px;
     margin-bottom: 30px;
     border-radius: 6px;
 }
@@ -49,9 +50,8 @@ body {
 }
 
 .notice-box li {
-    margin-bottom: 14px;
-    line-height: 1.6;
-    color: #333;
+    margin-bottom: 4px;
+    color: #fff;
 }
 
 /* English text style */
@@ -59,7 +59,7 @@ body {
     display: block;
     margin-top: 4px;
     font-size: 14px;
-    color: #555;
+    color: wheat;
     font-style: italic;
 }
 
