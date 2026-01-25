@@ -1590,8 +1590,7 @@ td select[required]:focus {
           <div class="table-container">
             <table>
               <thead>
-                <tr>
-                  <th>Person</th>
+                <tr> 
                   <th>Visit Type</th>
                   <th>Country</th>
                   <th>Start Date</th>
@@ -2050,7 +2049,7 @@ td select[required]:focus {
         100
       )}</td>
       <td>${createInput("text", "subjects", "Subjects", false)}</td>
-      <td>${createInput("text", "gpa", "GPA", false)}</td>
+      <td>${createInput("number", "gpa", "GPA", false)}</td>
       <td>${createSelect("division", options.divisions, false)}</td>
       <td>${createInput("number", "year_of_passing", "Year", false)}</td>
       <td>${createInput("text", "remarks", "Remarks", true)}</td>
@@ -2234,12 +2233,7 @@ td select[required]:focus {
       <td>${createInput("text", "remarks", "Remarks", true)}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "overseas_visits") {
-          row.innerHTML = `<td>${createInput(
-            "text",
-            "person",
-            "Person",
-            true
-          )}</td>
+          row.innerHTML = ` 
       <td>${createSelect("visit_type", options.visit_types, true)}</td>
       <td>${createInput("text", "country", "Country", true, 100)}</td>
       <td>${createInput("date", "start_date", "", true)}</td>
