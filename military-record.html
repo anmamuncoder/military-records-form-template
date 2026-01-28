@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,8 +12,13 @@
       }
 
       body {
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, sans-serif;
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
         min-height: 100vh;
         padding: 40px 20px;
         line-height: 1.6;
@@ -36,26 +41,26 @@
 
       /* Notice Box */
       .notice-box {
-          background: #000;
-          border-left: 6px solid #ff9800;
-          padding: 10px 15px;
-          margin-bottom: 30px;
-          border-radius: 6px;
+        background: #000;
+        border-left: 6px solid #ff9800;
+        padding: 10px 15px;
+        margin-bottom: 30px;
+        border-radius: 6px;
       }
 
       .notice-box h2 {
-          color: #b36b00;
-          margin-bottom: 15px;
-          font-size: 22px;
+        color: #b36b00;
+        margin-bottom: 15px;
+        font-size: 22px;
       }
 
       .notice-box ol {
-          padding-left: 20px;
+        padding-left: 20px;
       }
 
       .notice-box li {
-          margin-bottom: 4px;
-          color: #fff;
+        margin-bottom: 4px;
+        color: #fff;
       }
 
       /* English text style */
@@ -626,60 +631,96 @@
     </style>
   </head>
   <body>
+    <!-- Remove Code before deployment  -->
+    <div style="position: relative">
+      <button
+        onclick="saveJSON()"
+        style="
+          position: fixed;
+          top: 16px;
+          right: 16px;
+          z-index: 50;
+          background-color: #ef4444;
+          color: white;
+          font-weight: 600;
+          padding: 8px 16px;
+          border-radius: 6px;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+          border: none;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        "
+        onmouseover="this.style.backgroundColor = '#dc2626'"
+        onmouseout="this.style.backgroundColor = '#ef4444'"
+      >
+        Console Result
+      </button>
+    </div>
+    <!-- Remove Code before deployment  -->
     <div class="container">
       <!-- Notice Section -->
       <div class="notice-box">
-          <h2>গুরুত্বপূর্ণ নির্দেশনা / Important Notice</h2>
+        <h2>গুরুত্বপূর্ণ নির্দেশনা / Important Notice</h2>
 
-          <ol>
-              <li>
-                  এই ফরমটি পূরণ করার পর সবশেষ <strong>Download</strong> বাটনে ক্লিক করলে
-                  তথ্যগুলো একটি ফাইল আকারে Download হবে। যা পরবর্তীতে সেনাসদর,
-                  সাঁজোয়া পরিদপ্তরের আর্মি ই-মেইলে
-                  (<strong>armddte.gso2coord@army.mil.bd, armddte@army.mil.bd, armddte@gmail.com</strong>) প্রেরণ করতে হবে। <br>
-                  <span class="en-text">
-                      After completing the form, click the <strong>Download</strong> button to download the
-                      information as a file. This file must be sent to Army Headquarters,
-                      Armoured Directorate via email at <strong>armddte.gso2coord@army.mil.bd, armddte@army.mil.bd, armddte@gmail.com</strong>.
-                  </span>
-              </li>
+        <ol>
+          <li>
+            এই ফরমটি পূরণ করার পর সবশেষ <strong>Download</strong> বাটনে ক্লিক
+            করলে তথ্যগুলো একটি ফাইল আকারে Download হবে। যা পরবর্তীতে সেনাসদর,
+            সাঁজোয়া পরিদপ্তরের আর্মি ই-মেইলে (<strong
+              >armddte.gso2coord@army.mil.bd, armddte@army.mil.bd,
+              armddte@gmail.com</strong
+            >) প্রেরণ করতে হবে। <br />
+            <span class="en-text">
+              After completing the form, click the
+              <strong>Download</strong> button to download the information as a
+              file. This file must be sent to Army Headquarters, Armoured
+              Directorate via email at
+              <strong
+                >armddte.gso2coord@army.mil.bd, armddte@army.mil.bd,
+                armddte@gmail.com</strong
+              >.
+            </span>
+          </li>
 
-              <li>
-                  ফাইলটি প্রেরণের সময় বর্তমান পদবীর সদ্য তোলা একটি পাসপোর্ট সাইজের ছবি
-                  (৩৫০ কেবির বেশি নয়) সংযুক্ত করে দিতে হবে এবং ফাইল দুটি যিপ করে বিএ নাম্বার হিসেবে সেভ করে পাঠাইতে হবে। <br>
-                  <span class="en-text">
-                      While sending the file, a recent passport-size photograph in the current rank
-                      (not exceeding 350 KB) must be attached and both files should be zipped and saved as BA numbers before sending..
-                  </span>
-              </li>
+          <li>
+            ফাইলটি প্রেরণের সময় বর্তমান পদবীর সদ্য তোলা একটি পাসপোর্ট সাইজের ছবি
+            (৩৫০ কেবির বেশি নয়) সংযুক্ত করে দিতে হবে এবং ফাইল দুটি যিপ করে বিএ
+            নাম্বার হিসেবে সেভ করে পাঠাইতে হবে। <br />
+            <span class="en-text">
+              While sending the file, a recent passport-size photograph in the
+              current rank (not exceeding 350 KB) must be attached and both
+              files should be zipped and saved as BA numbers before sending..
+            </span>
+          </li>
 
-              <li>
-                  <strong>
-                      এই ফরম পূরণের সময় প্রদত্ত তথ্যসমূহ শুধুমাত্র ঐ সময়ে ব্যবহৃত ডিভাইসেই
-                      সংরক্ষিত হবে। পরবর্তীতে অন্য কোন সার্ভার বা কম্পিউটারে এটি দেখা যাবে না।
-                  </strong>
-                  <br>
-                  <strong class="en-text">
-                      The information provided while filling out this form will be stored only on the
-                      device used at that time. It will not be saved or accessible on any server or
-                      other computer.
-                  </strong>
-              </li>
+          <li>
+            <strong>
+              এই ফরম পূরণের সময় প্রদত্ত তথ্যসমূহ শুধুমাত্র ঐ সময়ে ব্যবহৃত
+              ডিভাইসেই সংরক্ষিত হবে। পরবর্তীতে অন্য কোন সার্ভার বা কম্পিউটারে
+              এটি দেখা যাবে না।
+            </strong>
+            <br />
+            <strong class="en-text">
+              The information provided while filling out this form will be
+              stored only on the device used at that time. It will not be saved
+              or accessible on any server or other computer.
+            </strong>
+          </li>
 
-              <li>
-                  <strong>
-                      ফরম পূরণ সম্পূর্ণ না করে কোন কারণে যদি ক্লোজ করে দেয়া হয় তাহলে পুনরায়
-                      আবার প্রথম থেকে শুরু করতে হবে। এক্ষেত্রে পূর্বের কোন তথ্য স্বয়ংক্রিয়ভাবে
-                      ফিরে আসবে না।
-                  </strong>
-                  <br>
-                  <strong class="en-text">
-                      If the form is closed before completion for any reason, the process must be
-                      started again from the beginning. Previously entered data will not be restored
-                      automatically.
-                  </strong>
-              </li>
-          </ol>
+          <li>
+            <strong>
+              ফরম পূরণ সম্পূর্ণ না করে কোন কারণে যদি ক্লোজ করে দেয়া হয় তাহলে
+              পুনরায় আবার প্রথম থেকে শুরু করতে হবে। এক্ষেত্রে পূর্বের কোন তথ্য
+              স্বয়ংক্রিয়ভাবে ফিরে আসবে না।
+            </strong>
+            <br />
+            <strong class="en-text">
+              If the form is closed before completion for any reason, the
+              process must be started again from the beginning. Previously
+              entered data will not be restored automatically.
+            </strong>
+          </li>
+        </ol>
       </div>
 
       <div class="header">
@@ -705,12 +746,11 @@
               />
             </div>
             <div class="form-group">
-              <label class="required">Short Name (Capital) </label
+              <label>Short Name (Capital) </label
               ><input
                 type="text"
                 id="short_name"
                 maxlength="150"
-                required
                 placeholder="Enter Short Name"
               />
             </div>
@@ -1282,7 +1322,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label class="required">Commission Authority</label
+              <label>Commission Authority</label
               ><input
                 type="text"
                 id="commission_authority"
@@ -1291,11 +1331,11 @@
               />
             </div>
             <div class="form-group">
-              <label class="required">Order Number</label
+              <label>Order Number</label
               ><input type="text" id="order_number" required maxlength="50" />
             </div>
             <div class="form-group">
-              <label class="required">Ante Date Seniority</label
+              <label>Ante Date Seniority</label
               ><input type="date" id="ante_date_seniority" required />
             </div>
             <div class="form-group">
@@ -1307,7 +1347,7 @@
               ><input type="date" id="permanent_commission_date" />
             </div>
             <div class="form-group">
-              <label class="required">Permanent Commission Authority</label
+              <label>Permanent Commission Authority</label
               ><input
                 type="text"
                 id="permanent_commission_authority"
@@ -1320,7 +1360,7 @@
               ><input type="date" id="date_of_joining_bangladesh_army" />
             </div>
             <div class="form-group">
-              <label class="required">Joining Bangladesh Army Authority</label
+              <label>Joining Bangladesh Army Authority</label
               ><input
                 type="text"
                 id="joining_bangladesh_army_authority"
@@ -1569,7 +1609,7 @@
           <div class="table-container">
             <table>
               <thead>
-                <tr> 
+                <tr>
                   <th>Visit Type</th>
                   <th>Country</th>
                   <th>Start Date</th>
@@ -1740,7 +1780,7 @@
         </div>
       </div>
     </div>
-    
+
     <script>
       const options = {
         blood_groups: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
@@ -1851,7 +1891,7 @@
           required ? "required" : ""
         }><option value="">Select</option>`;
         opts.forEach(
-          (opt) => (html += `<option value="${opt}">${opt}</option>`)
+          (opt) => (html += `<option value="${opt}">${opt}</option>`),
         );
         return html + "</select>";
       }
@@ -1861,7 +1901,7 @@
         name,
         placeholder = "",
         required = false,
-        maxLength = null
+        maxLength = null,
       ) {
         const maxAttr = maxLength ? ` maxlength="${maxLength}"` : "";
         return `<input type="${type}" name="${name}" placeholder="${placeholder}" ${
@@ -1927,7 +1967,7 @@
           row.innerHTML = `<td>${createSelect(
             "address_type",
             options.address_types,
-            true
+            true,
           )}</td>
       <td>${createInput("text", "street_address", "Street Address", true)}</td>
       <td>${createInput("text", "city", "City", false, 100)}</td>
@@ -1942,23 +1982,23 @@
             "language",
             "Language",
             true,
-            50
+            50,
           )}</td>
       <td>${createSelect("proficiency", options.proficiency_levels, false)}</td>
       <td>${createSelect(
         "reading_skill",
         options.proficiency_levels,
-        false
+        false,
       )}</td>
       <td>${createSelect(
         "writing_skill",
         options.proficiency_levels,
-        false
+        false,
       )}</td>
       <td>${createSelect(
         "speaking_skill",
         options.proficiency_levels,
-        false
+        false,
       )}</td>
       <td>${createSelect("acquiring_skill", options.acquiring, false)}</td>
       <td>${createInput("text", "remarks", "Remarks", false)}</td>
@@ -1970,7 +2010,7 @@
           row.innerHTML = `<td>${createSelect(
             "relationship",
             options.relationships,
-            true
+            true,
           )}</td>
       <td>${createInput("text", "name", "Name", true, 200)}</td>
       <td>${createInput("text", "nationality", "Nationality", false, 50)}</td>
@@ -1981,7 +2021,7 @@
         "occupation_profession",
         "Occupation",
         false,
-        100
+        100,
       )}</td>
       <td>${createInput("number", "annual_income", "Annual Income", false)}</td>
       <td>${createInput("text", "address", "Address", false)}</td>
@@ -1990,7 +2030,7 @@
         "birth_registration",
         "Birth Registration",
         false,
-        100
+        100,
       )}</td>
       <td>${createInput("text", "national_id", "National ID", false, 20)}</td>
       <td>${createInput("text", "education", "Education", false, 200)}</td>
@@ -2002,7 +2042,7 @@
         "location_of_grave",
         "Location of Grave",
         false,
-        100
+        100,
       )}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "education") {
@@ -2010,14 +2050,14 @@
             "institution_type",
             options.education_types,
             true,
-            10
+            10,
           )}</td>
       <td>${createInput(
         "text",
         "institution_name",
         "Institution Name",
         true,
-        200
+        200,
       )}</td>
       <td>${createInput("date", "start_date", "", false)}</td>
       <td>${createInput("date", "end_date", "", false)}</td>
@@ -2026,26 +2066,26 @@
         "examination_passed",
         "Examination Passed",
         false,
-        100
+        100,
       )}</td>
       <td>${createInput("text", "subjects", "Subjects", false)}</td>
       <td>${createInput("number", "gpa", "GPA", false)}</td>
       <td>${createSelect("division", options.divisions, false)}</td>
       <td>${createInput("number", "year_of_passing", "Year", false)}</td>
-      <td>${createInput("text", "remarks", "Remarks", true)}</td>
+      <td>${createInput("text", "remarks", "Remarks")}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "passports") {
           row.innerHTML = `<td>${createSelect(
             "status",
             options.passport_status,
-            false
+            false,
           )}</td>
       <td>${createInput(
         "text",
         "passport_number",
         "Passport Number",
         true,
-        50
+        50,
       )}</td>
       <td>${createInput("date", "issue_date", "", false)}</td>
       <td>${createInput("date", "expiry_date", "", false)}</td>
@@ -2057,7 +2097,7 @@
         "place_of_issue",
         "Place of Issue",
         false,
-        100
+        100,
       )}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "medical_histories") {
@@ -2065,24 +2105,24 @@
             "text",
             "name_of_disease",
             "Disease Name",
-            true
+            true,
           )}</td>
       <td>${createSelect(
         "nature_of_injury",
         options.nature_of_injury,
-        true
+        true,
       )}</td>
       <td>${createInput(
         "date",
         "date_of_medical_admission_from",
         "",
-        false
+        false,
       )}</td>
       <td>${createInput("date", "date_of_medical_admission_to", "", false)}</td>
       <td>${createSelect(
         "medical_category_class",
         options.medical_category_class,
-        false
+        false,
       )}</td>
       <td>${createInput("date", "medical_category_from", "", false)}</td>
       <td>${createInput("date", "medical_category_to", "", false)}</td>
@@ -2093,12 +2133,12 @@
             "unit",
             "Unit",
             true,
-            100
+            100,
           )}</td>
       <td>${createInput("text", "designation", "Designation", true, 100)}</td>
       <td>${createInput("date", "date_from", "", false)}</td>
       <td>${createInput("date", "date_to", "", false)}</td>
-      <td>${createInput("text", "remarks", "Remarks", true)}</td>
+      <td>${createInput("text", "remarks", "Remarks")}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "pre_commission_trainings") {
           row.innerHTML = `<td>${createInput(
@@ -2106,11 +2146,11 @@
             "location",
             "Location",
             true,
-            100
+            100,
           )}</td>
       <td>${createInput("text", "appointment", "Appointment", true, 100)}</td>
-      <td>${createInput("text", "distinction", "Distinction", true)}</td>
-      <td>${createInput("text", "remarks", "Remarks", true)}</td>
+      <td>${createInput("text", "distinction", "Distinction")}</td>
+      <td>${createInput("text", "remarks", "Remarks")}</td>
       <td>${createInput("date", "date_from", "", false)}</td>
       <td>${createInput("date", "date_to", "", false)}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
@@ -2118,9 +2158,9 @@
           row.innerHTML = `<td>${createSelect(
             "training_type",
             options.training_types,
-            true
+            true,
           )}</td>
-      <td>${createInput("text", "course_name", "Course Name", false, 200)}</td>
+      <td>${createInput("text", "course_name", "Course Name", true, 200)}</td>
       <td>${createInput("text", "location", "Location", true, 100)}</td>
       <td>${createInput("date", "date_from", "", false)}</td>
       <td>${createInput("date", "date_to", "", false)}</td>
@@ -2138,7 +2178,7 @@
             "qualification",
             "Qualification",
             true,
-            200
+            200,
           )}</td>
       <td>${createInput("date", "date_obtained", "", true)}</td>
       <td>${createInput("text", "authority", "Authority", true, 100)}</td>
@@ -2149,7 +2189,7 @@
             "exam_name",
             "Exam Name",
             true,
-            100
+            100,
           )}</td>
       <td>${createInput("number", "passing_year", "Passing Year", true)}</td>
       <td>${createInput("text", "authority", "Authority", false, 100)}</td>
@@ -2159,7 +2199,7 @@
             "date",
             "promotion_date",
             "",
-            true
+            true,
           )}</td>
       <td>${createSelect("promotion_type", options.promotion_types, true)}</td>
       <td>${createSelect("rank", options.ranks, true)}</td>
@@ -2171,19 +2211,13 @@
             "date",
             "date_from",
             "",
-            true
+            true,
           )}</td>
-      <td>${createInput("date", "date_to", "")}</td>
-      <td>${createSelect("appointment_type", options.appointment_types)}</td>
-      <td>${createInput("text", "appointment_name", "Appointment Name")}</td>
-       <td>${createSelect("service_type", options.service_type, true)}</td>
-      <td>${createInput(
-        "text",
-        "unit_ere_name",
-        "Unit/ERE Name",
-        true,
-        100
-      )}</td>
+      <td>${createInput("date", "date_to", "", true)}</td>
+      <td>${createSelect("appointment_type", options.appointment_types, true)}</td>
+      <td>${createInput("text", "appointment_name", "Appointment Name", true)}</td>
+       <td>${createSelect("service_type", options.service_type)}</td>
+      <td>${createInput("text", "unit_ere_name", "Unit/ERE Name")}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "operational_awards") {
           row.innerHTML = `<td>${createInput(
@@ -2191,26 +2225,26 @@
             "operation_name",
             "Operation Name",
             true,
-            200
+            200,
           )}</td>
       <td>${createInput("date", "date_from", "", false)}</td>
       <td>${createInput("date", "date_to", "", false)}</td>
       <td>${createInput("text", "appointment", "Appointment", true, 100)}</td>
-      <td>${createInput("text", "award_receive", "Award Receive", true)}</td>
+      <td>${createInput("text", "award_receive", "Award Receive")}</td>
       <td>${createInput("text", "authority", "Authority", false, 100)}</td>
-      <td>${createInput("text", "remarks", "Remarks", true)}</td>
+      <td>${createInput("text", "remarks", "Remarks")}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "non_operational_awards") {
           row.innerHTML = `<td>${createInput(
             "text",
             "description",
             "Description",
-            true
+            true,
           )}</td>
       <td>${createInput("date", "date_awarded", "", true)}</td>
-      <td>${createInput("text", "details", "Details", true)}</td>
-      <td>${createInput("text", "authority", "Authority", true, 100)}</td>
-      <td>${createInput("text", "remarks", "Remarks", true)}</td>
+      <td>${createInput("text", "details", "Details")}</td>
+      <td>${createInput("text", "authority", "Authority",false, 100)}</td>
+      <td>${createInput("text", "remarks", "Remarks")}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "overseas_visits") {
           row.innerHTML = ` 
@@ -2218,14 +2252,14 @@
       <td>${createInput("text", "country", "Country", true, 100)}</td>
       <td>${createInput("date", "start_date", "", true)}</td>
       <td>${createInput("date", "end_date", "", true)}</td>
-      <td>${createInput("text", "reason", "Reason", true)}</td>
+      <td>${createInput("text", "reason", "Reason")}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "annual_incomes") {
           row.innerHTML = `<td>${createInput(
             "text",
             "person",
             "Person",
-            true
+            true,
           )}</td>
       <td>${createSelect("income_source", options.income_sources, true)}</td>
       <td>${createInput("number", "amount", "Amount", true)}</td>
@@ -2237,7 +2271,7 @@
             "bank_name",
             "Bank Name",
             true,
-            100
+            100,
           )}</td>
       <td>${createInput("text", "account_number", "Account Number", true)}</td>
       <td>${createSelect("account_type", options.account_types, true)}</td>
@@ -2249,12 +2283,12 @@
           row.innerHTML = `<td>${createSelect(
             "military_legal_type",
             options.military_legal_type,
-            true
+            true,
           )}</td>
       <td>${createSelect(
         "military_legal_name",
         options.military_legal_name,
-        true
+        true,
       )}</td>
       <td>${createInput("text", "remarks", "Remarks")}</td>
       <td>${createInput("date", "date", "", true)}</td>
@@ -2265,12 +2299,12 @@
             "law_section",
             "Law Section",
             true,
-            100
+            100,
           )}</td>
-      <td>${createInput("text", "crime_details", "Crime Details", true)}</td>
-      <td>${createInput("date", "date_judgment", "", true)}</td>
+      <td>${createInput("text", "crime_details", "Crime Details", false)}</td>
+      <td>${createInput("date", "date_judgment", "", false)}</td>
       <td>${createInput("text", "place", "Place", true, 100)}</td>
-      <td>${createInput("text", "punishment", "Punishment", true)}</td>
+      <td>${createInput("text", "punishment", "Punishment", false)}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "ranks_held") {
           row.innerHTML = `<td>${createInput("date", "date", "", true)}</td>
@@ -2349,7 +2383,7 @@
 
         // Find or create the add-first-row button container
         let addFirstBtnContainer = section.querySelector(
-          ".add-first-row-container"
+          ".add-first-row-container",
         );
         let addFirstBtn = addFirstBtnContainer
           ? addFirstBtnContainer.querySelector(".btn-add-first-row")
@@ -2382,7 +2416,7 @@
             addFirstBtnContainer.appendChild(addFirstBtn);
             tableContainer.insertBefore(
               addFirstBtnContainer,
-              tableContainer.firstChild
+              tableContainer.firstChild,
             );
           }
           // Ensure the button container is visible
@@ -2517,7 +2551,7 @@
           const inputs = row.querySelectorAll("input, select");
           requiredFields.forEach((fieldName) => {
             const input = Array.from(inputs).find(
-              (inp) => inp.name === fieldName
+              (inp) => inp.name === fieldName,
             );
             if (!input) return;
 
@@ -2529,7 +2563,7 @@
                 const rowNum = index + 1;
                 const friendlyFieldName = "Is Deceased";
                 errors.push(
-                  `${sectionName} - Entry ${rowNum}: ${friendlyFieldName}`
+                  `${sectionName} - Entry ${rowNum}: ${friendlyFieldName}`,
                 );
               }
             } else if (!value || value === "" || value === "Select") {
@@ -2542,7 +2576,7 @@
                 .replace(/Gpa/g, "GPA")
                 .replace(/No/g, "No.");
               errors.push(
-                `${sectionName} - Entry ${rowNum}: ${friendlyFieldName}`
+                `${sectionName} - Entry ${rowNum}: ${friendlyFieldName}`,
               );
             }
           });
@@ -2556,7 +2590,7 @@
 
         // Validate Person section
         if (!getValue("person_name")) errors.push("Person - Name");
-        if (!getValue("short_name")) errors.push("Person - Short Name");
+        // if (!getValue("short_name")) errors.push("Person - Short Name");
         if (!getValue("person_personal_no"))
           errors.push("Person - Personal No");
 
@@ -2569,8 +2603,8 @@
           ...validateTableRequiredFields(
             "addresses",
             ["address_type", "street_address"],
-            "Address"
-          )
+            "Address",
+          ),
         );
 
         // Validate Language Skills
@@ -2578,8 +2612,8 @@
           ...validateTableRequiredFields(
             "language_skills",
             ["language"],
-            "Language Skill"
-          )
+            "Language Skill",
+          ),
         );
 
         // Validate Family Members
@@ -2587,17 +2621,17 @@
           ...validateTableRequiredFields(
             "family_members",
             ["relationship", "name", "is_deceased"],
-            "Family Member"
-          )
+            "Family Member",
+          ),
         );
 
         // Validate Education
         errors.push(
           ...validateTableRequiredFields(
             "education",
-            ["institution_type", "institution_name", "remarks"],
-            "Education"
-          )
+            ["institution_type", "institution_name"],
+            "Education",
+          ),
         );
 
         // Validate Passports
@@ -2605,8 +2639,8 @@
           ...validateTableRequiredFields(
             "passports",
             ["passport_number"],
-            "Passport"
-          )
+            "Passport",
+          ),
         );
 
         // Validate Medical Histories
@@ -2614,26 +2648,26 @@
           ...validateTableRequiredFields(
             "medical_histories",
             ["name_of_disease", "nature_of_injury"],
-            "Medical History"
-          )
+            "Medical History",
+          ),
         );
 
         // Validate Pre Commission Services
         errors.push(
           ...validateTableRequiredFields(
             "pre_commission_services",
-            ["unit", "designation", "remarks"],
-            "Pre Commission Service"
-          )
+            ["unit", "designation"],
+            "Pre Commission Service",
+          ),
         );
 
         // Validate Pre Commission Trainings
         errors.push(
           ...validateTableRequiredFields(
             "pre_commission_trainings",
-            ["location", "appointment", "distinction", "remarks"],
-            "Pre Commission Training"
-          )
+            ["location", "appointment"],
+            "Pre Commission Training",
+          ),
         );
 
         // Validate Commission section
@@ -2641,23 +2675,23 @@
           errors.push("Commission - Academy Course");
         if (!getValue("commission_type"))
           errors.push("Commission - Commission Type");
-        if (!getValue("commission_authority"))
-          errors.push("Commission - Commission Authority");
-        if (!getValue("order_number")) errors.push("Commission - Order Number");
-        if (!getValue("ante_date_seniority"))
-          errors.push("Commission - Ante Date Seniority");
-        if (!getValue("permanent_commission_authority"))
-          errors.push("Commission - Permanent Commission Authority");
-        if (!getValue("joining_bangladesh_army_authority"))
-          errors.push("Commission - Joining Bangladesh Army Authority");
+        // if (!getValue("commission_authority"))
+        //   errors.push("Commission - Commission Authority");
+        // if (!getValue("order_number")) errors.push("Commission - Order Number");
+        // if (!getValue("ante_date_seniority"))
+        //   errors.push("Commission - Ante Date Seniority");
+        // if (!getValue("permanent_commission_authority"))
+        //   errors.push("Commission - Permanent Commission Authority");
+        // if (!getValue("joining_bangladesh_army_authority"))
+        //   errors.push("Commission - Joining Bangladesh Army Authority");
 
         // Validate Post Commission Trainings
         errors.push(
           ...validateTableRequiredFields(
             "post_commission_trainings",
-            ["training_type", "location"],
-            "Post Commission Training"
-          )
+            ["training_type", "course_name", "location"],
+            "Post Commission Training",
+          ),
         );
 
         // Validate Additional Qualifications
@@ -2665,8 +2699,8 @@
           ...validateTableRequiredFields(
             "additional_qualifications",
             ["qualification", "date_obtained", "authority"],
-            "Additional Qualification"
-          )
+            "Additional Qualification",
+          ),
         );
 
         // Validate Map Reading Promotion Exams
@@ -2674,8 +2708,8 @@
           ...validateTableRequiredFields(
             "map_reading_promotion_exams",
             ["exam_name", "passing_year"],
-            "Map Reading Promotion Exam"
-          )
+            "Map Reading Promotion Exam",
+          ),
         );
 
         // Validate Promotions
@@ -2683,50 +2717,44 @@
           ...validateTableRequiredFields(
             "promotions",
             ["promotion_date", "promotion_type", "rank"],
-            "Promotion"
-          )
+            "Promotion",
+          ),
         );
 
         // Validate Service Records
         errors.push(
           ...validateTableRequiredFields(
             "service_records",
-            ["date_from", "service_type", "unit_ere_name"],
-            "Service Record"
-          )
+            ["date_from", "date_to", "appointment_type", "appointment_name"],
+            "Service Record",
+          ),
         );
 
         // Validate Operational Awards
         errors.push(
           ...validateTableRequiredFields(
             "operational_awards",
-            ["operation_name", "appointment", "award_receive", "remarks"],
-            "Operational Award"
-          )
+            ["operation_name", "appointment"],
+            "Operational Award",
+          ),
         );
 
         // Validate Non Operational Awards
         errors.push(
           ...validateTableRequiredFields(
             "non_operational_awards",
-            ["description", "date_awarded", "details", "authority", "remarks"],
-            "Non Operational Award"
-          )
+            ["description", "date_awarded"],
+            "Non Operational Award",
+          ),
         );
 
         // Validate Overseas Visits
         errors.push(
           ...validateTableRequiredFields(
             "overseas_visits",
-            [ 
-              "visit_type",
-              "country",
-              "start_date",
-              "end_date",
-              "reason",
-            ],
-            "Overseas Visit"
-          )
+            ["visit_type", "country", "start_date", "end_date"],
+            "Overseas Visit",
+          ),
         );
 
         // Validate Annual Incomes
@@ -2734,8 +2762,8 @@
           ...validateTableRequiredFields(
             "annual_incomes",
             ["person", "income_source", "amount", "year"],
-            "Annual Income"
-          )
+            "Annual Income",
+          ),
         );
 
         // Validate Bank Accounts
@@ -2743,8 +2771,8 @@
           ...validateTableRequiredFields(
             "bank_accounts",
             ["bank_name", "account_number", "account_type", "branch"],
-            "Bank Account"
-          )
+            "Bank Account",
+          ),
         );
 
         // Validate Military Legal Records
@@ -2752,17 +2780,17 @@
           ...validateTableRequiredFields(
             "military_legal_records",
             ["date", "military_legal_type", "military_legal_name"],
-            "Military Legal Record"
-          )
+            "Military Legal Record",
+          ),
         );
 
         // Validate Civil Legal Records
         errors.push(
           ...validateTableRequiredFields(
             "civil_legal_records",
-            ["law_section", "crime_details", "place", "punishment"],
-            "Civil Legal Record"
-          )
+            ["law_section", "place"],
+            "Civil Legal Record",
+          ),
         );
 
         // Validate Ranks Held
@@ -2770,8 +2798,8 @@
           ...validateTableRequiredFields(
             "ranks_held",
             ["date", "promotion_type", "rank"],
-            "Ranks Held"
-          )
+            "Ranks Held",
+          ),
         );
 
         if (errors.length > 0) {
@@ -2846,7 +2874,7 @@
             previous_nationality: getValue("previous_nationality") || null,
             present_medical_category: getValue("present_medical_category"),
             present_nature_of_disability: getValue(
-              "present_nature_of_disability"
+              "present_nature_of_disability",
             ),
             present_attributes: getValue("present_attributes"),
             email: getValue("email"),
@@ -2874,16 +2902,16 @@
             ante_date_seniority: getDateValue("ante_date_seniority"),
             ante_date_authority: getValue("ante_date_authority") || null,
             permanent_commission_date: getDateValue(
-              "permanent_commission_date"
+              "permanent_commission_date",
             ),
             permanent_commission_authority: getValue(
-              "permanent_commission_authority"
+              "permanent_commission_authority",
             ),
             date_of_joining_bangladesh_army: getDateValue(
-              "date_of_joining_bangladesh_army"
+              "date_of_joining_bangladesh_army",
             ),
             joining_bangladesh_army_authority: getValue(
-              "joining_bangladesh_army_authority"
+              "joining_bangladesh_army_authority",
             ),
             original_arms_service: getValue("original_arms_service") || null,
             previous_arms_service: getValue("previous_arms_service") || null,
@@ -2891,7 +2919,7 @@
           post_commission_trainings: getTableData("post_commission_trainings"),
           additional_qualifications: getTableData("additional_qualifications"),
           map_reading_promotion_exams: getTableData(
-            "map_reading_promotion_exams"
+            "map_reading_promotion_exams",
           ),
           promotions: getTableData("promotions"),
           service_records: getTableData("service_records"),
@@ -2928,7 +2956,7 @@
             regex,
             (match, prefix, number, suffix) => {
               return `${prefix}${parseFloat(number).toFixed(1)}${suffix}`;
-            }
+            },
           );
         });
 
@@ -2937,6 +2965,7 @@
         });
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
+
         link.download =
           `${data.person.personal_no}-RECORD.json` || "unknown_record.json";
         link.click();
