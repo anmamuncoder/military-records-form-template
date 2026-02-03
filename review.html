@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Review</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(245, 245, 245, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-container {
+            background-color: #ffffff;
+            width: 95%;
+            max-width: 1200px;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .popup-header {
+            background-color: #cfcdcd;
+            color: #333;
+            padding: 20px 30px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .popup-header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .popup-header p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .popup-content {
+            overflow-y: auto;
+            padding: 25px 30px;
+            flex: 1;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 10px 15px;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-left: 4px solid #bbb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        table th {
+            background-color: #f9f9f9;
+            color: #212121;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #ddd;
+            font-size: 13px;
+
+        }
+
+        table td {
+            padding: 9px 12px;
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        table tr:hover {
+            background-color: #ebebeb;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+        }
+
+        .review-item {
+            display: flex;
+            border: 1px solid #ddd;
+            background-color: #fafafa;
+        }
+
+        .review-label {
+            background-color: #f5f5f5;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 14px;
+            width: 45%;
+            border-right: 1px solid #ddd;
+        }
+
+        .review-value {
+            padding: 8px 12px;
+            font-size: 14px;
+            width: 55%;
+            color: #333;
+        }
+
+        .popup-footer {
+            background-color: #f5f5f5;
+            padding: 15px 30px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-close {
+            background-color: #ccc;
+            color: #333;
+        }
+
+        .btn-close:hover {
+            background-color: #bbb;
+        }
+
+        .btn-print {
+            background-color: #fff;
+            color: #333;
+            border: 2px solid #999;
+        }
+
+        .btn-print:hover {
+            background-color: #f0f0f0;
+        }
+
+        .no-data {
+            font-style: italic;
+            color: #999;
+            font-size: 12px;
+        }
+
+        @media print {
+            body {
+                background-color: #fff;
+            }
+
+            .popup-overlay {
+                position: static;
+                background-color: #fff;
+            }
+
+            .popup-footer {
+                display: none;
+            }
+
+            .popup-container {
+                max-height: none;
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .popup-header h1 {
+                font-size: 18px;
+            }
+
+            table {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-header">
+                <h1 id="headerName">Personnel Information Review</h1>
+                <p id="headerDetails">Complete Service Record and Personal Information</p>
+            </div>
+
+            <div class="popup-content" id="popupContent">
+                <!-- Content will be dynamically generated here -->
+            </div>
+
+            <div class="popup-footer">
+                <button class="btn btn-print" onclick="window.print()">Download</button>
+                <button class="btn btn-close" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Personnel Data
+        const personnelData = {
+            "person": {
+                "name": "ABDULLAH AL MAHMUD",
+                "personal_no": "BA-10961",
+                "short_name": "ABDULLAH",
+                "mobile_no": "01936716425",
+                "inactive_date": null
+            },
+            "personal_Info": {
+                "national_id_number": "1507423729",
+                "arms_service": "AC",
+                "date_of_birth": "1998-01-01",
+                "place_of_birth": "Lakshmipur",
+                "birth_certificate_number": "19985114370012450",
+                "height_cm": 5.0,
+                "height_inch": 9.0,
+                "weight_kg": 130.0,
+                "weight_pound": 60.0,
+                "build": "average",
+                "complexion": "fair",
+                "eye_color": "Brown",
+                "visible_identification_marks": "stiches on left eye brow",
+                "blood_group": "AB+",
+                "religion": "Islam",
+                "caste": null,
+                "nationality": "Bangladeshi",
+                "previous_nationality": null,
+                "present_medical_category": "AYE",
+                "present_nature_of_disability": "NA",
+                "present_attributes": "NA",
+                "email": "abdullahalmahmud116@gmail.com",
+                "personal_phone_no": "01936716425",
+                "tnt_phone_no": null,
+                "position_among_siblings": 2,
+                "marital_status": "Married",
+                "date_of_marriage": "2024-10-12"
+            },
+            "addresses": [
+                {
+                    "address_type": "Present",
+                    "street_address": "Motobi",
+                    "city": "Lakshmipur",
+                    "state": "Chandraganj",
+                    "postal_code": null,
+                    "country": "Bangladesh",
+                    "date": "1998-01-01"
+                },
+                {
+                    "address_type": "Permanent",
+                    "street_address": "Motobi",
+                    "city": "Lakshmipur",
+                    "state": "Chandraganj",
+                    "postal_code": null,
+                    "country": "Bangladesh",
+                    "date": "1998-01-01"
+                }
+            ],
+            "language_skills": [
+                {
+                    "language": "arabic",
+                    "proficiency": null,
+                    "reading_skill": "Basic",
+                    "writing_skill": null,
+                    "speaking_skill": null,
+                    "acquiring_skill": null,
+                    "remarks": null,
+                    "institution": null,
+                    "year": null,
+                    "degree": null
+                },
+                {
+                    "language": "english",
+                    "proficiency": null,
+                    "reading_skill": "Basic",
+                    "writing_skill": null,
+                    "speaking_skill": null,
+                    "acquiring_skill": null,
+                    "remarks": null,
+                    "institution": null,
+                    "year": null,
+                    "degree": null
+                }
+            ],
+            "family_members": [
+                {
+                    "relationship": "Spouse",
+                    "name": "MST HALIMA AKTER URMI",
+                    "nationality": "Bangladeshi",
+                    "date_of_birth": "2003-11-15",
+                    "is_deceased": true,
+                    "occupation_profession": "student",
+                    "annual_income": null,
+                    "address": null,
+                    "birth_registration": "20032692071009012",
+                    "national_id": null,
+                    "education": "BSS",
+                    "dependency": false,
+                    "sex": "Female",
+                    "date_of_expire": null,
+                    "location_of_grave": null
+                },
+                {
+                    "relationship": "Father",
+                    "name": "LATE ABU BOKAR SIDDIK",
+                    "nationality": "Bangladeshi",
+                    "date_of_birth": "1963-01-01",
+                    "is_deceased": true,
+                    "occupation_profession": "-",
+                    "annual_income": null,
+                    "address": null,
+                    "birth_registration": null,
+                    "national_id": null,
+                    "education": null,
+                    "dependency": false,
+                    "sex": null,
+                    "date_of_expire": null,
+                    "location_of_grave": null
+                },
+                {
+                    "relationship": "Mother",
+                    "name": "JOBAYDA AKTER NILA",
+                    "nationality": "Bangladeshi",
+                    "date_of_birth": "1998-01-01",
+                    "is_deceased": true,
+                    "occupation_profession": "Teacher",
+                    "annual_income": 400000.0,
+                    "address": null,
+                    "birth_registration": null,
+                    "national_id": "1008403725",
+                    "education": null,
+                    "dependency": false,
+                    "sex": null,
+                    "date_of_expire": null,
+                    "location_of_grave": null
+                },
+                {
+                    "relationship": "Sibling",
+                    "name": "LATE ABDULLAH AL MASRUR",
+                    "nationality": "Bangladeshi",
+                    "date_of_birth": "1995-12-29",
+                    "is_deceased": true,
+                    "occupation_profession": "-",
+                    "annual_income": null,
+                    "address": null,
+                    "birth_registration": null,
+                    "national_id": "4615013515",
+                    "education": null,
+                    "dependency": false,
+                    "sex": null,
+                    "date_of_expire": null,
+                    "location_of_grave": null
+                }
+            ],
+            "education": [
+                {
+                    "institution_type": "SSC",
+                    "institution_name": "MANDARI HIGH SCHOOL",
+                    "start_date": null,
+                    "end_date": null,
+                    "examination_passed": "2013",
+                    "subjects": "-",
+                    "gpa": 5.0,
+                    "division": null,
+                    "year_of_passing": 2013,
+                    "remarks": "-"
+                },
+                {
+                    "institution_type": "HSC",
+                    "institution_name": "DR. MAHBUBUR RAHMAN MOLLAH COLLAGE",
+                    "start_date": null,
+                    "end_date": null,
+                    "examination_passed": "2015",
+                    "subjects": null,
+                    "gpa": 5.0,
+                    "division": null,
+                    "year_of_passing": 2015,
+                    "remarks": "-"
+                },
+                {
+                    "institution_type": "Honours/Degree/BBA",
+                    "institution_name": "MIST",
+                    "start_date": null,
+                    "end_date": null,
+                    "examination_passed": "2023",
+                    "subjects": "BSC",
+                    "gpa": 2.8,
+                    "division": null,
+                    "year_of_passing": 2023,
+                    "remarks": "-"
+                }
+            ],
+            "passports": [
+                {
+                    "status": "OLD",
+                    "passport_number": "MEDFDFSDF",
+                    "issue_date": "2025-12-24",
+                    "expiry_date": "2030-12-23",
+                    "authority": "-",
+                    "passport_type": "Official",
+                    "purpose": "Official",
+                    "place_of_issue": "DIP/DHAKA"
+                },
+                {
+                    "status": "New",
+                    "passport_number": "ESDFSDF",
+                    "issue_date": "2025-12-24",
+                    "expiry_date": "2030-12-23",
+                    "authority": "-",
+                    "passport_type": "Official",
+                    "purpose": "Official",
+                    "place_of_issue": "DIP/DHAKA"
+                }
+            ],
+            "medical_histories": [
+                {
+                    "name_of_disease": "Minor Injury",
+                    "nature_of_injury": "Minor",
+                    "admission_from": "2026-02-04",
+                    "admission_to": "2026-02-04",
+                    "medical_category_class": "Perm C"
+                },
+                {
+                    "name_of_disease": "Severe Injury",
+                    "nature_of_injury": "Severe",
+                    "admission_from": "2026-02-10",
+                    "admission_to": "2026-02-20",
+                    "medical_category_class": "Perm C"
+                }
+            ],
+            "pre_commission_services": [
+                {
+                    "unit": "Bangladesh Military Academy",
+                    "designation": "Deputy Managing Director",
+                    "date_from": "2016-01-01",
+                    "date_to": "2017-12-31",
+                    "remarks": "None"
+                },
+                {
+                    "unit": "Bangladesh Military Academy",
+                    "designation": "Managing Director",
+                    "date_from": "2018-01-01",
+                    "date_to": "2019-12-31",
+                    "remarks": "Good"
+                }
+            ],
+            "pre_commission_trainings": [
+                {
+                    "location": "Sylhet, Bangladesh",
+                    "appointment": "Hello World",
+                    "distinction": "Merit",
+                    "remarks": "Good",
+                    "date_from": "2017-01-01",
+                    "date_to": "2017-06-01"
+                }
+            ],
+            "commission": {
+                "academy_course": "79BMA L/C",
+                "date_of_joining_academy": "2018-01-10",
+                "date_of_commission": "2020-12-24",
+                "commission_type": "Regular Commission",
+                "commission_authority": "69/AC/2023",
+                "order_number": "-",
+                "ante_date_seniority": "2020-12-24",
+                "ante_date_authority": null,
+                "permanent_commission_date": null,
+                "permanent_commission_authority": "69/AC/2023",
+                "date_of_joining_bangladesh_army": null,
+                "joining_bangladesh_army_authority": "24 DEC 2020",
+                "original_arms_service": null,
+                "previous_arms_service": null
+            },
+            "post_commission_trainings": [
+                {
+                    "training_type": "Abroad",
+                    "course_name": "OBC",
+                    "location": "Sylhet, Bangladesh",
+                    "date_from": "2026-02-05",
+                    "date_to": "2026-02-18",
+                    "result_b_side": "B",
+                    "result_y_side": "Y+",
+                    "mark_obtained_b_side": 2,
+                    "mark_obtained_y_side": 2,
+                    "remarks": "None"
+                },
+                {
+                    "training_type": "Local",
+                    "course_name": "Junior Command Course",
+                    "location": "School of Infantry & Tactics, Sylhet",
+                    "date_from": "2024-07-01",
+                    "date_to": "2024-09-30",
+                    "result_b_side": "A",
+                    "result_y_side": "Y",
+                    "mark_obtained_b_side": 3,
+                    "mark_obtained_y_side": 3,
+                    "remarks": "Excellent performance"
+                },
+                {
+                    "training_type": "UN Mission",
+                    "course_name": "Peacekeeping Operations Course",
+                    "location": "UN Training Centre, Ghana",
+                    "date_from": "2025-03-10",
+                    "date_to": "2025-04-25",
+                    "result_b_side": "B+",
+                    "result_y_side": "Y+",
+                    "mark_obtained_b_side": 2,
+                    "mark_obtained_y_side": 2,
+                    "remarks": "Field oriented training"
+                }
+            ],
+            "additional_qualifications": [
+                {
+                    "qualification": "Computer Science and Technology at Sylhet Polytechnic Institute.",
+                    "date_obtained": "2026-02-13",
+                    "authority": "anmamuncoder"
+                },
+                {
+                    "qualification": "Cyber Security Awareness Course",
+                    "date_obtained": "2024-11-20",
+                    "authority": "BIPSOT"
+                },
+                {
+                    "qualification": "Advanced Leadership Development Program",
+                    "date_obtained": "2025-08-15",
+                    "authority": "Defence Services Command and Staff College (DSCSC)"
+                }
+            ],
+            "map_reading_promotion_exams": [
+                {
+                    "exam_name": "Secondary School Certificate",
+                    "passing_year": 2013,
+                    "authority": "Board of Intermediate & Secondary Education"
+                },
+                {
+                    "exam_name": "Map Reading & Navigation Test",
+                    "passing_year": 2021,
+                    "authority": "School of Infantry & Tactics"
+                },
+                {
+                    "exam_name": "Advanced Map Reading Examination",
+                    "passing_year": 2024,
+                    "authority": "Army Training Command"
+                }
+            ],
+            "promotions": [
+                {
+                    "promotion_date": "2020-12-23",
+                    "promotion_type": "Temporary",
+                    "rank": "Captain",
+                    "authority": "69/AC/2023",
+                    "order": null
+                }
+            ],
+            "service_records": [
+                {
+                    "date_from": "2024-01-10",
+                    "date_to": "2024-12-31",
+                    "appointment_type": "Unit Appointment",
+                    "appointment_name": "Platoon Commander",
+                    "service_type": "Unit",
+                    "unit_ere_name": "1st Infantry Battalion"
+                },
+                {
+                    "date_from": "2025-01-05",
+                    "date_to": "2025-11-20",
+                    "appointment_type": "On the Staff Appointments",
+                    "appointment_name": "Company Commander, 3rd Battalion",
+                    "service_type": "ERE",
+                    "unit_ere_name": "HQ Eastern Command"
+                }
+            ],
+            "operational_awards": [
+                {
+                    "operation_name": "Operation Search Light",
+                    "date_from": "2023-03-01",
+                    "date_to": "2023-04-15",
+                    "appointment": "Operations Officer",
+                    "award_receive": "Operation Medal",
+                    "authority": "Army Headquarters",
+                    "remarks": "Outstanding performance"
+                },
+                {
+                    "operation_name": "Operation Border Shield",
+                    "date_from": "2024-06-10",
+                    "date_to": "2024-07-05",
+                    "appointment": "Company Commander",
+                    "award_receive": "Chief of Army Staff Commendation",
+                    "authority": "COAS",
+                    "remarks": "Excellent leadership"
+                }
+            ],
+            "non_operational_awards": [
+                {
+                    "description": "Best Officer Award",
+                    "date_awarded": "2022-12-16",
+                    "details": "For discipline and leadership",
+                    "authority": "Formation Commander",
+                    "remarks": "Annual award"
+                },
+                {
+                    "description": "Service Excellence Medal",
+                    "date_awarded": "2025-03-26",
+                    "details": "10 years of honorable service",
+                    "authority": "Army Headquarters",
+                    "remarks": "Long service recognition"
+                }
+            ],
+            "overseas_visits": [
+                {
+                    "visit_type": "UN Peacekeeping Mission",
+                    "country": "Central African Republic",
+                    "start_date": "2023-09-01",
+                    "end_date": "2024-03-30",
+                    "reason": "Peacekeeping deployment"
+                },
+                {
+                    "visit_type": "Foreign Training",
+                    "country": "Turkey",
+                    "start_date": "2025-08-05",
+                    "end_date": "2025-10-15",
+                    "reason": "Staff College Course"
+                }
+            ],
+            "annual_incomes": [
+                {
+                    "income_source": "Self",
+                    "amount": 40000.0,
+                    "year": 480000
+                }
+            ],
+            "bank_accounts": [
+                {
+                    "bank_name": "TRUST BANK LTD",
+                    "account_number": "0006-0210076045",
+                    "account_type": "Salary Account",
+                    "branch": "BHATIARI",
+                    "opening_date": null,
+                    "closing_date": null
+                }
+            ],
+            "military_legal_records": [
+                {
+                    "military_legal_type": "Minor",
+                    "military_legal_name": "Reprimand",
+                    "remarks": "None",
+                    "date": "2026-02-09"
+                },
+                {
+                    "military_legal_type": "Minor",
+                    "military_legal_name": "Warning",
+                    "remarks": "Late reporting",
+                    "date": "2024-11-15"
+                },
+                {
+                    "military_legal_type": "Major",
+                    "military_legal_name": "Disciplinary Action",
+                    "remarks": "Violation of standing orders",
+                    "date": "2023-08-22"
+                }
+            ],
+            "civil_legal_records": [
+                {
+                    "law_section": "Criminal Not",
+                    "crime_details": "asdfasdf",
+                    "date_judgment": "2026-02-13",
+                    "place": "Dhaka, Bangladesh",
+                    "punishment": "Fine"
+                },
+                {
+                    "law_section": "Traffic Act",
+                    "crime_details": "Speed limit violation",
+                    "date_judgment": "2022-06-18",
+                    "place": "Chattogram, Bangladesh",
+                    "punishment": "Monetary fine"
+                },
+                {
+                    "law_section": "Civil Dispute",
+                    "crime_details": "Land ownership dispute",
+                    "date_judgment": "2021-03-05",
+                    "place": "Lakshmipur, Bangladesh",
+                    "punishment": "Case dismissed"
+                }
+            ],
+            "ranks_held": [
+                {
+                    "date": "2020-12-24",
+                    "promotion_type": "Commission",
+                    "rank": "Lieutenant",
+                    "retrospective": "None",
+                    "notified": "Commission Order 2020"
+                },
+                {
+                    "date": "2022-01-15",
+                    "promotion_type": "Substantive",
+                    "rank": "Captain",
+                    "retrospective": "None",
+                    "notified": "Army Order 2022"
+                },
+                {
+                    "date": "2024-06-10",
+                    "promotion_type": "Substantive",
+                    "rank": "Major",
+                    "retrospective": "None",
+                    "notified": "Army Order 2024"
+                },
+                {
+                    "date": "2026-02-18",
+                    "promotion_type": "Substantive",
+                    "rank": "Major General",
+                    "retrospective": "None111",
+                    "notified": "Army Order 2018"
+                }
+            ]
+        };
+
+        // Helper function to format values
+        function formatValue(value) {
+            if (value === null || value === undefined || value === '' || value === '-') {
+                return '<span class="no-data">N/A</span>';
+            }
+            return value;
+        }
+
+        // Helper function to format dates
+        function formatDate(dateString) {
+            if (!dateString) return '<span class="no-data">N/A</span>';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-GB');
+        }
+
+        // Generate Personal Information Section
+        function generatePersonalreview() {
+            const person = personnelData.person;
+            const review = personnelData.personal_Info;
+
+            return `
+                <div class="section">
+                    <div class="section-title">BASIC INFORMATION</div>
+                    <div class="review-grid">
+                        <div class="review-item">
+                            <div class="review-label">Name</div>
+                            <div class="review-value">${formatValue(person.name)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Personal Number</div>
+                            <div class="review-value">${formatValue(person.personal_no)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Short Name</div>
+                            <div class="review-value">${formatValue(person.short_name)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Mobile Number</div>
+                            <div class="review-value">${formatValue(person.mobile_no)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">National ID</div>
+                            <div class="review-value">${formatValue(review.national_id_number)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Arms/Service</div>
+                            <div class="review-value">${formatValue(review.arms_service)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Date of Birth</div>
+                            <div class="review-value">${formatDate(review.date_of_birth)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Place of Birth</div>
+                            <div class="review-value">${formatValue(review.place_of_birth)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Birth Certificate</div>
+                            <div class="review-value">${formatValue(review.birth_certificate_number)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Blood Group</div>
+                            <div class="review-value">${formatValue(review.blood_group)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Religion</div>
+                            <div class="review-value">${formatValue(review.religion)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Nationality</div>
+                            <div class="review-value">${formatValue(review.nationality)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Marital Status</div>
+                            <div class="review-value">${formatValue(review.marital_status)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Date of Marriage</div>
+                            <div class="review-value">${formatDate(review.date_of_marriage)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Email</div>
+                            <div class="review-value">${formatValue(review.email)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Medical Category</div>
+                            <div class="review-value">${formatValue(review.present_medical_category)}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">PHYSICAL ATTRIBUTES</div>
+                    <div class="review-grid">
+                        <div class="review-item">
+                            <div class="review-label">Height (cm)</div>
+                            <div class="review-value">${formatValue(review.height_cm)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Height (inch)</div>
+                            <div class="review-value">${formatValue(review.height_inch)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Weight (kg)</div>
+                            <div class="review-value">${formatValue(review.weight_kg)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Weight (pound)</div>
+                            <div class="review-value">${formatValue(review.weight_pound)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Build</div>
+                            <div class="review-value">${formatValue(review.build)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Complexion</div>
+                            <div class="review-value">${formatValue(review.complexion)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Eye Color</div>
+                            <div class="review-value">${formatValue(review.eye_color)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Identification Marks</div>
+                            <div class="review-value">${formatValue(review.visible_identification_marks)}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Generate Addresses Section
+        function generateAddresses() {
+            if (!personnelData.addresses || personnelData.addresses.length === 0) {
+                return '<div class="section"><div class="section-title">ADDRESSES</div><p class="no-data">No address reviewrmation available</p></div>';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">ADDRESSES</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Street Address</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Postal Code</th>
+                                <th>Country</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.addresses.forEach(addr => {
+                html += `
+                    <tr>
+                        <td>${formatValue(addr.address_type)}</td>
+                        <td>${formatValue(addr.street_address)}</td>
+                        <td>${formatValue(addr.city)}</td>
+                        <td>${formatValue(addr.state)}</td>
+                        <td>${formatValue(addr.postal_code)}</td>
+                        <td>${formatValue(addr.country)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Language Skills Section
+        function generateLanguageSkills() {
+            if (!personnelData.language_skills || personnelData.language_skills.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">LANGUAGE SKILLS</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Language</th>
+                                <th>Proficiency</th>
+                                <th>Reading</th>
+                                <th>Writing</th>
+                                <th>Speaking</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.language_skills.forEach(lang => {
+                html += `
+                    <tr>
+                        <td>${formatValue(lang.language)}</td>
+                        <td>${formatValue(lang.proficiency)}</td>
+                        <td>${formatValue(lang.reading_skill)}</td>
+                        <td>${formatValue(lang.writing_skill)}</td>
+                        <td>${formatValue(lang.speaking_skill)}</td>
+                        <td>${formatValue(lang.remarks)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Family Members Section
+        function generateFamilyMembers() {
+            if (!personnelData.family_members || personnelData.family_members.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">FAMILY MEMBERS</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Relationship</th>
+                                <th>Name</th>
+                                <th>Date of Birth</th>
+                                <th>Occupation</th>
+                                <th>Education</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.family_members.forEach(member => {
+                html += `
+                    <tr>
+                        <td>${formatValue(member.relationship)}</td>
+                        <td>${formatValue(member.name)}</td>
+                        <td>${formatDate(member.date_of_birth)}</td>
+                        <td>${formatValue(member.occupation_profession)}</td>
+                        <td>${formatValue(member.education)}</td>
+                        <td>${member.is_deceased ? 'Deceased' : 'Living'}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Education Section
+        function generateEducation() {
+            if (!personnelData.education || personnelData.education.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">EDUCATION</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Institution</th>
+                                <th>Examination</th>
+                                <th>Subjects</th>
+                                <th>GPA</th>
+                                <th>Year</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.education.forEach(edu => {
+                html += `
+                    <tr>
+                        <td>${formatValue(edu.institution_type)}</td>
+                        <td>${formatValue(edu.institution_name)}</td>
+                        <td>${formatValue(edu.examination_passed)}</td>
+                        <td>${formatValue(edu.subjects)}</td>
+                        <td>${formatValue(edu.gpa)}</td>
+                        <td>${formatValue(edu.year_of_passing)}</td>
+                        <td>${formatValue(edu.remarks)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Commission Information
+        function generateCommission() {
+            if (!personnelData.commission) return '';
+
+            const comm = personnelData.commission;
+
+            return `
+                <div class="section">
+                    <div class="section-title">COMMISSION INFORMATION</div>
+                    <div class="review-grid">
+                        <div class="review-item">
+                            <div class="review-label">Academy Course</div>
+                            <div class="review-value">${formatValue(comm.academy_course)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Date of Joining Academy</div>
+                            <div class="review-value">${formatDate(comm.date_of_joining_academy)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Date of Commission</div>
+                            <div class="review-value">${formatDate(comm.date_of_commission)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Commission Type</div>
+                            <div class="review-value">${formatValue(comm.commission_type)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Commission Authority</div>
+                            <div class="review-value">${formatValue(comm.commission_authority)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Order Number</div>
+                            <div class="review-value">${formatValue(comm.order_number)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Ante Date Seniority</div>
+                            <div class="review-value">${formatDate(comm.ante_date_seniority)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Joining Authority</div>
+                            <div class="review-value">${formatValue(comm.joining_bangladesh_army_authority)}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Generate Pre-Commission Services
+        function generatePreCommissionServices() {
+            if (!personnelData.pre_commission_services || personnelData.pre_commission_services.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">PRE-COMMISSION SERVICES</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Unit</th>
+                                <th>Designation</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.pre_commission_services.forEach(service => {
+                html += `
+                    <tr>
+                        <td>${formatValue(service.unit)}</td>
+                        <td>${formatValue(service.designation)}</td>
+                        <td>${formatDate(service.date_from)}</td>
+                        <td>${formatDate(service.date_to)}</td>
+                        <td>${formatValue(service.remarks)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Pre-Commission Trainings
+        function generatePreCommissionTrainings() {
+            if (!personnelData.pre_commission_trainings || personnelData.pre_commission_trainings.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">PRE-COMMISSION TRAININGS</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Location</th>
+                                <th>Appointment</th>
+                                <th>Distinction</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.pre_commission_trainings.forEach(training => {
+                html += `
+                    <tr>
+                        <td>${formatValue(training.location)}</td>
+                        <td>${formatValue(training.appointment)}</td>
+                        <td>${formatValue(training.distinction)}</td>
+                        <td>${formatDate(training.date_from)}</td>
+                        <td>${formatDate(training.date_to)}</td>
+                        <td>${formatValue(training.remarks)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Post Commission Training
+        function generatePostCommissionTraining() {
+            if (!personnelData.post_commission_trainings || personnelData.post_commission_trainings.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">POST COMMISSION TRAINING</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Course Name</th>
+                                <th>Location</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>B-Side</th>
+                                <th>Y-Side</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.post_commission_trainings.forEach(training => {
+                html += `
+                    <tr>
+                        <td>${formatValue(training.training_type)}</td>
+                        <td>${formatValue(training.course_name)}</td>
+                        <td>${formatValue(training.location)}</td>
+                        <td>${formatDate(training.date_from)}</td>
+                        <td>${formatDate(training.date_to)}</td>
+                        <td>${formatValue(training.result_b_side)} (${formatValue(training.mark_obtained_b_side)})</td>
+                        <td>${formatValue(training.result_y_side)} (${formatValue(training.mark_obtained_y_side)})</td>
+                        <td>${formatValue(training.remarks)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Additional Qualifications
+        function generateAdditionalQualifications() {
+            if (!personnelData.additional_qualifications || personnelData.additional_qualifications.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">ADDITIONAL QUALIFICATIONS</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Qualification</th>
+                                <th>Date Obtained</th>
+                                <th>Authority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.additional_qualifications.forEach(qual => {
+                html += `
+                    <tr>
+                        <td>${formatValue(qual.qualification)}</td>
+                        <td>${formatDate(qual.date_obtained)}</td>
+                        <td>${formatValue(qual.authority)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Map Reading/Promotion Exams
+        function generateMapReadingExams() {
+            if (!personnelData.map_reading_promotion_exams || personnelData.map_reading_promotion_exams.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">MAP READING & PROMOTION EXAMS</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Exam Name</th>
+                                <th>Passing Year</th>
+                                <th>Authority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.map_reading_promotion_exams.forEach(exam => {
+                html += `
+                    <tr>
+                        <td>${formatValue(exam.exam_name)}</td>
+                        <td>${formatValue(exam.passing_year)}</td>
+                        <td>${formatValue(exam.authority)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Promotions
+        function generatePromotions() {
+            if (!personnelData.promotions || personnelData.promotions.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">PROMOTIONS</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Rank</th>
+                                <th>Type</th>
+                                <th>Authority</th>
+                                <th>Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.promotions.forEach(promo => {
+                html += `
+                    <tr>
+                        <td>${formatDate(promo.promotion_date)}</td>
+                        <td>${formatValue(promo.rank)}</td>
+                        <td>${formatValue(promo.promotion_type)}</td>
+                        <td>${formatValue(promo.authority)}</td>
+                        <td>${formatValue(promo.order)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Ranks Held
+        function generateRanksHeld() {
+            if (!personnelData.ranks_held || personnelData.ranks_held.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">RANKS HELD</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Rank</th>
+                                <th>Promotion Type</th>
+                                <th>Retrospective</th>
+                                <th>Notified</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.ranks_held.forEach(rank => {
+                html += `
+                    <tr>
+                        <td>${formatDate(rank.date)}</td>
+                        <td>${formatValue(rank.rank)}</td>
+                        <td>${formatValue(rank.promotion_type)}</td>
+                        <td>${formatValue(rank.retrospective)}</td>
+                        <td>${formatValue(rank.notified)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Service Records
+        function generateServiceRecords() {
+            if (!personnelData.service_records || personnelData.service_records.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">SERVICE RECORDS</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Appointment Type</th>
+                                <th>Appointment Name</th>
+                                <th>Service Type</th>
+                                <th>Unit/ERE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.service_records.forEach(record => {
+                html += `
+                    <tr>
+                        <td>${formatDate(record.date_from)}</td>
+                        <td>${formatDate(record.date_to) || 'Present'}</td>
+                        <td>${formatValue(record.appointment_type)}</td>
+                        <td>${formatValue(record.appointment_name)}</td>
+                        <td>${formatValue(record.service_type)}</td>
+                        <td>${formatValue(record.unit_ere_name)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Awards
+        function generateAwards() {
+            let html = '';
+
+            // Operational Awards
+            if (personnelData.operational_awards && personnelData.operational_awards.length > 0) {
+                html += `
+                    <div class="section">
+                        <div class="section-title">OPERATIONAL AWARDS</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation Name</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Appointment</th>
+                                    <th>Award</th>
+                                    <th>Authority</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+
+                personnelData.operational_awards.forEach(award => {
+                    html += `
+                        <tr>
+                            <td>${formatValue(award.operation_name)}</td>
+                            <td>${formatDate(award.date_from)}</td>
+                            <td>${formatDate(award.date_to)}</td>
+                            <td>${formatValue(award.appointment)}</td>
+                            <td>${formatValue(award.award_receive)}</td>
+                            <td>${formatValue(award.authority)}</td>
+                            <td>${formatValue(award.remarks)}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            }
+
+            // Non-Operational Awards
+            if (personnelData.non_operational_awards && personnelData.non_operational_awards.length > 0) {
+                html += `
+                    <div class="section">
+                        <div class="section-title">NON-OPERATIONAL AWARDS</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Details</th>
+                                    <th>Authority</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+
+                personnelData.non_operational_awards.forEach(award => {
+                    html += `
+                        <tr>
+                            <td>${formatValue(award.description)}</td>
+                            <td>${formatDate(award.date_awarded)}</td>
+                            <td>${formatValue(award.details)}</td>
+                            <td>${formatValue(award.authority)}</td>
+                            <td>${formatValue(award.remarks)}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            }
+
+            return html;
+        }
+
+        // Generate Overseas Visits
+        function generateOverseasVisits() {
+            if (!personnelData.overseas_visits || personnelData.overseas_visits.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">OVERSEAS VISITS</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Visit Type</th>
+                                <th>Country</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.overseas_visits.forEach(visit => {
+                html += `
+                    <tr>
+                        <td>${formatValue(visit.visit_type)}</td>
+                        <td>${formatValue(visit.country)}</td>
+                        <td>${formatDate(visit.start_date)}</td>
+                        <td>${formatDate(visit.end_date)}</td>
+                        <td>${formatValue(visit.reason)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Passports
+        function generatePassports() {
+            if (!personnelData.passports || personnelData.passports.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">PASSPORT INFORMATION</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Passport Number</th>
+                                <th>Type</th>
+                                <th>Issue Date</th>
+                                <th>Expiry Date</th>
+                                <th>Purpose</th>
+                                <th>Place of Issue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.passports.forEach(passport => {
+                html += `
+                    <tr>
+                        <td>${formatValue(passport.status)}</td>
+                        <td>${formatValue(passport.passport_number)}</td>
+                        <td>${formatValue(passport.passport_type)}</td>
+                        <td>${formatDate(passport.issue_date)}</td>
+                        <td>${formatDate(passport.expiry_date)}</td>
+                        <td>${formatValue(passport.purpose)}</td>
+                        <td>${formatValue(passport.place_of_issue)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Bank Accounts
+        function generateBankAccounts() {
+            if (!personnelData.bank_accounts || personnelData.bank_accounts.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">BANK ACCOUNTS</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Bank Name</th>
+                                <th>Account Number</th>
+                                <th>Account Type</th>
+                                <th>Branch</th>
+                                <th>Opening Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.bank_accounts.forEach(account => {
+                html += `
+                    <tr>
+                        <td>${formatValue(account.bank_name)}</td>
+                        <td>${formatValue(account.account_number)}</td>
+                        <td>${formatValue(account.account_type)}</td>
+                        <td>${formatValue(account.branch)}</td>
+                        <td>${formatDate(account.opening_date)}</td>
+                        <td>${account.closing_date ? 'Closed' : 'Active'}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Annual Income
+        function generateAnnualIncome() {
+            if (!personnelData.annual_incomes || personnelData.annual_incomes.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">ANNUAL INCOME</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Income Source</th>
+                                <th>Amount (BDT)</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.annual_incomes.forEach(income => {
+                html += `
+                    <tr>
+                        <td>${formatValue(income.income_source)}</td>
+                        <td>${formatValue(income.amount)}</td>
+                        <td>${formatValue(income.year)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Medical History
+        function generateMedicalHistory() {
+            if (!personnelData.medical_histories || personnelData.medical_histories.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">MEDICAL HISTORY</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Disease/Injury</th>
+                                <th>Nature</th>
+                                <th>Admission From</th>
+                                <th>Admission To</th>
+                                <th>Medical Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.medical_histories.forEach(medical => {
+                html += `
+                    <tr>
+                        <td>${formatValue(medical.name_of_disease)}</td>
+                        <td>${formatValue(medical.nature_of_injury)}</td>
+                        <td>${formatDate(medical.admission_from)}</td>
+                        <td>${formatDate(medical.admission_to)}</td>
+                        <td>${formatValue(medical.medical_category_class)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Military Legal Records
+        function generateMilitaryLegalRecords() {
+            if (!personnelData.military_legal_records || personnelData.military_legal_records.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">MILITARY LEGAL RECORDS</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.military_legal_records.forEach(record => {
+                html += `
+                    <tr>
+                        <td>${formatValue(record.military_legal_type)}</td>
+                        <td>${formatValue(record.military_legal_name)}</td>
+                        <td>${formatDate(record.date)}</td>
+                        <td>${formatValue(record.remarks)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Generate Civil Legal Records
+        function generateCivilLegalRecords() {
+            if (!personnelData.civil_legal_records || personnelData.civil_legal_records.length === 0) {
+                return '';
+            }
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">CIVIL LEGAL RECORDS</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Law Section</th>
+                                <th>Crime Details</th>
+                                <th>Date of Judgment</th>
+                                <th>Place</th>
+                                <th>Punishment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            personnelData.civil_legal_records.forEach(record => {
+                html += `
+                    <tr>
+                        <td>${formatValue(record.law_section)}</td>
+                        <td>${formatValue(record.crime_details)}</td>
+                        <td>${formatDate(record.date_judgment)}</td>
+                        <td>${formatValue(record.place)}</td>
+                        <td>${formatValue(record.punishment)}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Main function to render all content
+        function renderContent() {
+            const contentDiv = document.getElementById('popupContent');
+
+            let allContent = '';
+            allContent += generatePersonalreview();
+            allContent += generateAddresses();
+            allContent += generateLanguageSkills();
+            allContent += generateFamilyMembers();
+            allContent += generateEducation();
+            allContent += generateCommission();
+            allContent += generatePreCommissionServices();
+            allContent += generatePreCommissionTrainings();
+            allContent += generatePostCommissionTraining();
+            allContent += generateAdditionalQualifications();
+            allContent += generateMapReadingExams();
+            allContent += generatePromotions();
+            allContent += generateRanksHeld();
+            allContent += generateServiceRecords();
+            allContent += generateAwards();
+            allContent += generateOverseasVisits();
+            allContent += generatePassports();
+            allContent += generateBankAccounts();
+            allContent += generateAnnualIncome();
+            allContent += generateMedicalHistory();
+            allContent += generateMilitaryLegalRecords();
+            allContent += generateCivilLegalRecords();
+
+            contentDiv.innerHTML = allContent;
+
+            // Update header
+            document.getElementById('headerName').textContent = personnelData.person.name;
+            document.getElementById('headerDetails').textContent = `Personal No: ${personnelData.person.personal_no} `;
+        }
+
+        // Close popup function
+        function closePopup() {
+            if (confirm('Are you sure you want to close this review?')) {
+                window.close();
+            }
+        }
+
+        // Initialize on page load
+        window.onload = function () {
+            renderContent();
+        };
+    </script>
+</body>
+
+</html>

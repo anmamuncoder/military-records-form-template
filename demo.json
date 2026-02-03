@@ -1,0 +1,513 @@
+{
+    "person": {
+        "name": "ABDULLAH AL MAHMUD",
+        "personal_no": "BA-10961",
+        "short_name": "ABDULLAH",
+        "mobile_no": "01936716425",
+        "inactive_date": null
+    },
+    "personal_info": {
+        "national_id_number": "1507423729",
+        "arms_service": "AC",
+        "date_of_birth": "1998-01-01",
+        "place_of_birth": "Lakshmipur",
+        "birth_certificate_number": "19985114370012450",
+        "height_cm": 5.0,
+        "height_inch": 9.0,
+        "weight_kg": 130.0,
+        "weight_pound": 60.0,
+        "build": "average",
+        "complexion": "fair",
+        "eye_color": "Brown",
+        "visible_identification_marks": "stiches on left eye brow",
+        "blood_group": "AB+",
+        "religion": "Islam",
+        "caste": null,
+        "nationality": "Bangladeshi",
+        "previous_nationality": null,
+        "present_medical_category": "AYE",
+        "present_nature_of_disability": "NA",
+        "present_attributes": "NA",
+        "email": "abdullahalmahmud116@gmail.com",
+        "personal_phone_no": "01936716425",
+        "tnt_phone_no": null,
+        "position_among_siblings": 2,
+        "marital_status": "Married",
+        "date_of_marriage": "2024-10-12"
+    },
+    "addresses": [
+        {
+            "address_type": "Present",
+            "street_address": "Motobi",
+            "city": "Lakshmipur",
+            "state": "Chandraganj",
+            "postal_code": null,
+            "country": "Bangladesh",
+            "date": "1998-01-01"
+        },
+        {
+            "address_type": "Permanent",
+            "street_address": "Motobi",
+            "city": "Lakshmipur",
+            "state": "Chandraganj",
+            "postal_code": null,
+            "country": "Bangladesh",
+            "date": "1998-01-01"
+        }
+    ],
+    "language_skills": [
+        {
+            "language": "arabic",
+            "proficiency": null,
+            "reading_skill": "Basic",
+            "writing_skill": null,
+            "speaking_skill": null,
+            "acquiring_skill": null,
+            "remarks": null,
+            "institution": null,
+            "year": null,
+            "degree": null
+        },
+        {
+            "language": "english",
+            "proficiency": null,
+            "reading_skill": "Basic",
+            "writing_skill": null,
+            "speaking_skill": null,
+            "acquiring_skill": null,
+            "remarks": null,
+            "institution": null,
+            "year": null,
+            "degree": null
+        }
+    ],
+    "family_members": [
+        {
+            "relationship": "Spouse",
+            "name": "MST HALIMA AKTER URMI",
+            "nationality": "Bangladeshi",
+            "date_of_birth": "2003-11-15",
+            "is_deceased": true,
+            "occupation_profession": "student",
+            "annual_income": null,
+            "address": null,
+            "birth_registration": "20032692071009012",
+            "national_id": null,
+            "education": "BSS",
+            "dependency": false,
+            "sex": "Female",
+            "date_of_expire": null,
+            "location_of_grave": null
+        },
+        {
+            "relationship": "Father",
+            "name": "LATE ABU BOKAR SIDDIK",
+            "nationality": "Bangladeshi",
+            "date_of_birth": "1963-01-01",
+            "is_deceased": true,
+            "occupation_profession": "-",
+            "annual_income": null,
+            "address": null,
+            "birth_registration": null,
+            "national_id": null,
+            "education": null,
+            "dependency": false,
+            "sex": null,
+            "date_of_expire": null,
+            "location_of_grave": null
+        },
+        {
+            "relationship": "Mother",
+            "name": "JOBAYDA AKTER NILA",
+            "nationality": "Bangladeshi",
+            "date_of_birth": "1998-01-01",
+            "is_deceased": true,
+            "occupation_profession": "Teacher",
+            "annual_income": 400000.0,
+            "address": null,
+            "birth_registration": null,
+            "national_id": "1008403725",
+            "education": null,
+            "dependency": false,
+            "sex": null,
+            "date_of_expire": null,
+            "location_of_grave": null
+        },
+        {
+            "relationship": "Sibling",
+            "name": "LATE ABDULLAH AL MASRUR",
+            "nationality": "Bangladeshi",
+            "date_of_birth": "1995-12-29",
+            "is_deceased": true,
+            "occupation_profession": "-",
+            "annual_income": null,
+            "address": null,
+            "birth_registration": null,
+            "national_id": "4615013515",
+            "education": null,
+            "dependency": false,
+            "sex": null,
+            "date_of_expire": null,
+            "location_of_grave": null
+        }
+    ],
+    "education": [
+        {
+            "institution_type": "SSC",
+            "institution_name": "MANDARI HIGH SCHOOL",
+            "start_date": null,
+            "end_date": null,
+            "examination_passed": "2013",
+            "subjects": "-",
+            "gpa": 5.0,
+            "division": null,
+            "year_of_passing": 2013,
+            "remarks": "-"
+        },
+        {
+            "institution_type": "HSC",
+            "institution_name": "DR. MAHBUBUR RAHMAN MOLLAH COLLAGE",
+            "start_date": null,
+            "end_date": null,
+            "examination_passed": "2015",
+            "subjects": null,
+            "gpa": 5.0,
+            "division": null,
+            "year_of_passing": 2015,
+            "remarks": "-"
+        },
+        {
+            "institution_type": "Honours/Degree/BBA",
+            "institution_name": "MIST",
+            "start_date": null,
+            "end_date": null,
+            "examination_passed": "2023",
+            "subjects": "BSC",
+            "gpa": 2.8,
+            "division": null,
+            "year_of_passing": 2023,
+            "remarks": "-"
+        }
+    ],
+    "passports": [
+        {
+            "status": "OLD",
+            "passport_number": "MEDFDFSDF",
+            "issue_date": "2025-12-24",
+            "expiry_date": "2030-12-23",
+            "authority": "-",
+            "passport_type": "Official",
+            "purpose": "Official",
+            "place_of_issue": "DIP/DHAKA"
+        },
+        {
+            "status": "New",
+            "passport_number": "ESDFSDF",
+            "issue_date": "2025-12-24",
+            "expiry_date": "2030-12-23",
+            "authority": "-",
+            "passport_type": "Official",
+            "purpose": "Official",
+            "place_of_issue": "DIP/DHAKA"
+        }
+    ],
+    "medical_histories": [
+        {
+            "name_of_disease": "Minor Injury",
+            "nature_of_injury": "Minor",
+            "admission_from": "2026-02-04",
+            "admission_to": "2026-02-04",
+            "medical_category_class": "Perm C"
+        },
+        {
+            "name_of_disease": "Severe Injury",
+            "nature_of_injury": "Severe",
+            "admission_from": "2026-02-10",
+            "admission_to": "2026-02-20",
+            "medical_category_class": "Perm C"
+        }
+    ],
+    "pre_commission_services": [
+        {
+            "unit": "Bangladesh Military Academy",
+            "designation": "Deputy Managing Director",
+            "date_from": "2016-01-01",
+            "date_to": "2017-12-31",
+            "remarks": "None"
+        },
+        {
+            "unit": "Bangladesh Military Academy",
+            "designation": "Managing Director",
+            "date_from": "2018-01-01",
+            "date_to": "2019-12-31",
+            "remarks": "Good"
+        }
+    ],
+    "pre_commission_trainings": [
+        {
+            "location": "Sylhet, Bangladesh",
+            "appointment": "Hello World",
+            "distinction": "Merit",
+            "remarks": "Good",
+            "date_from": "2017-01-01",
+            "date_to": "2017-06-01"
+        }
+    ],
+    "commission": {
+        "academy_course": "79BMA L/C",
+        "date_of_joining_academy": "2018-01-10",
+        "date_of_commission": "2020-12-24",
+        "commission_type": "Regular Commission",
+        "commission_authority": "69/AC/2023",
+        "order_number": "-",
+        "ante_date_seniority": "2020-12-24",
+        "ante_date_authority": null,
+        "permanent_commission_date": null,
+        "permanent_commission_authority": "69/AC/2023",
+        "date_of_joining_bangladesh_army": null,
+        "joining_bangladesh_army_authority": "24 DEC 2020",
+        "original_arms_service": null,
+        "previous_arms_service": null
+    },
+    "post_commission_trainings": [
+        {
+            "training_type": "Abroad",
+            "course_name": "OBC",
+            "location": "Sylhet, Bangladesh",
+            "date_from": "2026-02-05",
+            "date_to": "2026-02-18",
+            "result_b_side": "B",
+            "result_y_side": "Y+",
+            "mark_obtained_b_side": 2,
+            "mark_obtained_y_side": 2,
+            "remarks": "None"
+        },
+        {
+            "training_type": "Local",
+            "course_name": "Junior Command Course",
+            "location": "School of Infantry & Tactics, Sylhet",
+            "date_from": "2024-07-01",
+            "date_to": "2024-09-30",
+            "result_b_side": "A",
+            "result_y_side": "Y",
+            "mark_obtained_b_side": 3,
+            "mark_obtained_y_side": 3,
+            "remarks": "Excellent performance"
+        },
+        {
+            "training_type": "UN Mission",
+            "course_name": "Peacekeeping Operations Course",
+            "location": "UN Training Centre, Ghana",
+            "date_from": "2025-03-10",
+            "date_to": "2025-04-25",
+            "result_b_side": "B+",
+            "result_y_side": "Y+",
+            "mark_obtained_b_side": 2,
+            "mark_obtained_y_side": 2,
+            "remarks": "Field oriented training"
+        }
+    ],
+    "additional_qualifications": [
+        {
+            "qualification": "Computer Science and Technology at Sylhet Polytechnic Institute.",
+            "date_obtained": "2026-02-13",
+            "authority": "anmamuncoder"
+        },
+        {
+            "qualification": "Cyber Security Awareness Course",
+            "date_obtained": "2024-11-20",
+            "authority": "BIPSOT"
+        },
+        {
+            "qualification": "Advanced Leadership Development Program",
+            "date_obtained": "2025-08-15",
+            "authority": "Defence Services Command and Staff College (DSCSC)"
+        }
+    ],
+    "map_reading_promotion_exams": [
+        {
+            "exam_name": "Secondary School Certificate",
+            "passing_year": 2013,
+            "authority": "Board of Intermediate & Secondary Education"
+        },
+        {
+            "exam_name": "Map Reading & Navigation Test",
+            "passing_year": 2021,
+            "authority": "School of Infantry & Tactics"
+        },
+        {
+            "exam_name": "Advanced Map Reading Examination",
+            "passing_year": 2024,
+            "authority": "Army Training Command"
+        }
+    ],
+    "promotions": [
+        {
+            "promotion_date": "2020-12-23",
+            "promotion_type": "Temporary",
+            "rank": "Captain",
+            "authority": "69/AC/2023",
+            "order": null
+        }
+    ],
+    "service_records": [
+        {
+            "date_from": "2024-01-10",
+            "date_to": "2024-12-31",
+            "appointment_type": "Unit Appointment",
+            "appointment_name": "Platoon Commander",
+            "service_type": "Unit",
+            "unit_ere_name": "1st Infantry Battalion"
+        },
+        {
+            "date_from": "2025-01-05",
+            "date_to": "2025-11-20",
+            "appointment_type": "On the Staff Appointments",
+            "appointment_name": "Company Commander, 3rd Battalion",
+            "service_type": "ERE",
+            "unit_ere_name": "HQ Eastern Command"
+        }
+    ],
+    "operational_awards": [
+        {
+            "operation_name": "Operation Search Light",
+            "date_from": "2023-03-01",
+            "date_to": "2023-04-15",
+            "appointment": "Operations Officer",
+            "award_receive": "Operation Medal",
+            "authority": "Army Headquarters",
+            "remarks": "Outstanding performance"
+        },
+        {
+            "operation_name": "Operation Border Shield",
+            "date_from": "2024-06-10",
+            "date_to": "2024-07-05",
+            "appointment": "Company Commander",
+            "award_receive": "Chief of Army Staff Commendation",
+            "authority": "COAS",
+            "remarks": "Excellent leadership"
+        }
+    ],
+    "non_operational_awards": [
+        {
+            "description": "Best Officer Award",
+            "date_awarded": "2022-12-16",
+            "details": "For discipline and leadership",
+            "authority": "Formation Commander",
+            "remarks": "Annual award"
+        },
+        {
+            "description": "Service Excellence Medal",
+            "date_awarded": "2025-03-26",
+            "details": "10 years of honorable service",
+            "authority": "Army Headquarters",
+            "remarks": "Long service recognition"
+        }
+    ],
+    "overseas_visits": [
+        {
+            "visit_type": "UN Peacekeeping Mission",
+            "country": "Central African Republic",
+            "start_date": "2023-09-01",
+            "end_date": "2024-03-30",
+            "reason": "Peacekeeping deployment"
+        },
+        {
+            "visit_type": "Foreign Training",
+            "country": "Turkey",
+            "start_date": "2025-08-05",
+            "end_date": "2025-10-15",
+            "reason": "Staff College Course"
+        }
+    ],
+    "annual_incomes": [
+        {
+            "income_source": "Self",
+            "amount": 40000.0,
+            "year": 480000
+        }
+    ],
+    "bank_accounts": [
+        {
+            "bank_name": "TRUST BANK LTD",
+            "account_number": "0006-0210076045",
+            "account_type": "Salary Account",
+            "branch": "BHATIARI",
+            "opening_date": null,
+            "closing_date": null
+        }
+    ],
+    "military_legal_records": [
+        {
+            "military_legal_type": "Minor",
+            "military_legal_name": "Reprimand",
+            "remarks": "None",
+            "date": "2026-02-09"
+        },
+        {
+            "military_legal_type": "Minor",
+            "military_legal_name": "Warning",
+            "remarks": "Late reporting",
+            "date": "2024-11-15"
+        },
+        {
+            "military_legal_type": "Major",
+            "military_legal_name": "Disciplinary Action",
+            "remarks": "Violation of standing orders",
+            "date": "2023-08-22"
+        }
+    ],
+    "civil_legal_records": [
+        {
+            "law_section": "Criminal Not",
+            "crime_details": "asdfasdf",
+            "date_judgment": "2026-02-13",
+            "place": "Dhaka, Bangladesh",
+            "punishment": "Fine"
+        },
+        {
+            "law_section": "Traffic Act",
+            "crime_details": "Speed limit violation",
+            "date_judgment": "2022-06-18",
+            "place": "Chattogram, Bangladesh",
+            "punishment": "Monetary fine"
+        },
+        {
+            "law_section": "Civil Dispute",
+            "crime_details": "Land ownership dispute",
+            "date_judgment": "2021-03-05",
+            "place": "Lakshmipur, Bangladesh",
+            "punishment": "Case dismissed"
+        }
+    ],
+    "ranks_held": [
+        {
+            "date": "2020-12-24",
+            "promotion_type": "Commission",
+            "rank": "Lieutenant",
+            "retrospective": "None",
+            "notified": "Commission Order 2020"
+        },
+        {
+            "date": "2022-01-15",
+            "promotion_type": "Substantive",
+            "rank": "Captain",
+            "retrospective": "None",
+            "notified": "Army Order 2022"
+        },
+        {
+            "date": "2024-06-10",
+            "promotion_type": "Substantive",
+            "rank": "Major",
+            "retrospective": "None",
+            "notified": "Army Order 2024"
+        },
+        {
+            "date": "2026-02-18",
+            "promotion_type": "Substantive",
+            "rank": "Major General",
+            "retrospective": "None111",
+            "notified": "Army Order 2018"
+        }
+    ]
+}

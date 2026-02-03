@@ -761,7 +761,7 @@
             </div>
             <div class="form-group">
               <label>Date of Birth</label
-              ><input type="date" id="date_of_birth" />
+              ><input type="date" id="date_of_birth"  min="1900-01-01" max="2099-12-31"/>
             </div>
             <div class="form-group">
               <label>Place of Birth</label
@@ -974,7 +974,7 @@
             </div>
             <div class="form-group">
               <label>Date of Marriage</label
-              ><input type="date" id="date_of_marriage" />
+              ><input type="date" id="date_of_marriage" min="1900-01-01" max="2099-12-31" />
             </div>
           </div>
         </div>
@@ -1262,11 +1262,11 @@
             </div>
             <div class="form-group">
               <label>Date of Joining Academy</label
-              ><input type="date" id="date_of_joining_academy" />
+              ><input type="date" id="date_of_joining_academy"  min="1900-01-01" max="2099-12-31"/>
             </div>
             <div class="form-group">
               <label>Date of Commission</label
-              ><input type="date" id="date_of_commission" />
+              ><input type="date" id="date_of_commission"  min="1900-01-01" max="2099-12-31"/>
             </div>
             <div class="form-group">
               <label class="required">Commission Type</label
@@ -1296,7 +1296,7 @@
             </div>
             <div class="form-group">
               <label class="required">Ante Date Seniority</label
-              ><input type="date" id="ante_date_seniority" required />
+              ><input type="date" id="ante_date_seniority" required  min="1900-01-01" max="2099-12-31"/>
             </div>
             <div class="form-group">
               <label>Ante Date Authority</label
@@ -1304,7 +1304,7 @@
             </div>
             <div class="form-group">
               <label>Permanent Commission Date</label
-              ><input type="date" id="permanent_commission_date" />
+              ><input type="date" id="permanent_commission_date"  min="1900-01-01" max="2099-12-31"/>
             </div>
             <div class="form-group">
               <label class="required">Permanent Commission Authority</label
@@ -1317,7 +1317,7 @@
             </div>
             <div class="form-group">
               <label>Date of Joining Bangladesh Army</label
-              ><input type="date" id="date_of_joining_bangladesh_army" />
+              ><input type="date" id="date_of_joining_bangladesh_army"  min="1900-01-01" max="2099-12-31"/>
             </div>
             <div class="form-group">
               <label class="required">Joining Bangladesh Army Authority</label
@@ -1736,7 +1736,7 @@
           <button class="btn btn-primary" onclick="clearForm()" type="button">
             Clear All
           </button>
-          <button class="btn btn-success" onclick="saveJSON()">Download</button>
+          <button class="btn btn-success" onclick="saveJSON()">Next</button>
         </div>
       </div>
     </div>
@@ -1864,9 +1864,15 @@
         maxLength = null
       ) {
         const maxAttr = maxLength ? ` maxlength="${maxLength}"` : "";
+         // Add min/max for date type to enforce 4-digit year
+        let dateAttr = "";
+        if (type === "date") {
+          dateAttr = ` min="1900-01-01" max="2099-12-31"`;
+        }
+
         return `<input type="${type}" name="${name}" placeholder="${placeholder}" ${
-          required ? "required" : ""
-        }${maxAttr}>`;
+        required ? "required" : ""
+        }${maxAttr}${dateAttr}>`;
       }
 
       function validateTableRows(type) {
@@ -1934,7 +1940,7 @@
       <td>${createInput("text", "state", "State", false, 100)}</td>
       <td>${createInput("text", "postal_code", "Postal Code", false, 20)}</td>
       <td>${createInput("text", "country", "Country", false, 100)}</td>
-      <td>${createInput("date", "date", "", false)}</td>
+      <td>${createInput("date", "date", "", false )}</td>
       <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "language_skills") {
           row.innerHTML = `<td>${createInput(
