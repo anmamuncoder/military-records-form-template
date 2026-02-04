@@ -1024,7 +1024,7 @@ function showModal() {
 }
 
 function closeModal() {
-  if (confirm("Are you sure you want to close this review?")) {
+  if (confirm("Are you sure you want to back to editing?")) {
     document.getElementById("reviewModal").style.display = "none";
   }
 }
