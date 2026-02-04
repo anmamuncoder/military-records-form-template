@@ -24,7 +24,7 @@ body {
 }
 
 .container {
-  max-width: 1500px;
+  max-width: 1600px;
   margin: 0 auto;
   background: #ffffff;
   border-radius: 3px;
@@ -215,17 +215,22 @@ thead {
   background: linear-gradient(135deg, #242424 0%, #6a6b6b 100%);
 }
 
-th {
+.table-container th {
   padding: 14px 8px;
   text-align: left;
   font-weight: 600;
   font-size: 0.85em;
   color: #ffffff;
+  background-color: transparent;
   text-transform: uppercase;
   letter-spacing: 1px;
   min-width: 120px;
   width: auto;
   white-space: nowrap;
+}
+
+.table-container th:hover {
+  background-color: transparent;
 }
 
 th.required-header::after {
@@ -258,7 +263,6 @@ tbody tr {
 
 tbody tr:hover {
   background: #f8f9fc;
-  /* transform: scale(1.01); */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -638,9 +642,8 @@ td select[required]:focus {
 
 .popup-container {
   background-color: #ffffff;
-  width: 95%;
-  max-width: 1200px;
-  max-height: 90vh;
+  width: 100%;
+  max-height: 95vh;
   border-radius: 8px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -713,9 +716,9 @@ table tr:nth-child(even) {
   background-color: #f5f5f5;
 }
 
-table tr:hover {
+/* table tr:hover {
   background-color: #ebebeb;
-}
+} */
 
 .review-grid {
   display: grid;

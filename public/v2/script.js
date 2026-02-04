@@ -1909,108 +1909,102 @@ function generateServiceRecords() {
 }
 
 // Generate Awards
-function generateAwards() {
-  let html = "";
-
-  // Check if both award types are empty
-  const hasOperationalAwards =
-    personnelData.operational_awards &&
-    personnelData.operational_awards.length > 0;
-  const hasNonOperationalAwards =
-    personnelData.non_operational_awards &&
-    personnelData.non_operational_awards.length > 0;
-
-  if (!hasOperationalAwards && !hasNonOperationalAwards) {
-    return '<div class="section"><div class="section-title">AWARDS</div><p class="no-data">No awards information available</p></div>';
+// Generate Operational Awards Section
+function generateOperationalAwards() {
+  if (
+    !personnelData.operational_awards ||
+    personnelData.operational_awards.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">OPERATIONAL AWARDS</div><p class="no-data">No operational awards information available</p></div>';
   }
 
-  // Operational Awards
-  if (
-    personnelData.operational_awards &&
-    personnelData.operational_awards.length > 0
-  ) {
-    html += `
-                    <div class="section">
-                        <div class="section-title">OPERATIONAL AWARDS</div>
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Operation Name</th>
-                                        <th>From</th>
-                                        <th>To</th>
-                                        <th>Appointment</th>
-                                        <th>Award</th>
-                                        <th>Authority</th>
-                                        <th>Remarks</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+  let html = `
+                <div class="section">
+                    <div class="section-title">OPERATIONAL AWARDS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation Name</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Appointment</th>
+                                    <th>Award</th>
+                                    <th>Authority</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
             `;
 
-    personnelData.operational_awards.forEach((award) => {
-      html += `
-                        <tr>
-                            <td>${formatValue(award.operation_name)}</td>
-                            <td>${formatDate(award.date_from)}</td>
-                            <td>${formatDate(award.date_to)}</td>
-                            <td>${formatValue(award.appointment)}</td>
-                            <td>${formatValue(award.award_receive)}</td>
-                            <td>${formatValue(award.authority)}</td>
-                            <td>${formatValue(award.remarks)}</td>
-                        </tr>
-                    `;
-    });
-
+  personnelData.operational_awards.forEach((award) => {
     html += `
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${formatValue(award.operation_name)}</td>
+                        <td>${formatDate(award.date_from)}</td>
+                        <td>${formatDate(award.date_to)}</td>
+                        <td>${formatValue(award.appointment)}</td>
+                        <td>${formatValue(award.award_receive)}</td>
+                        <td>${formatValue(award.authority)}</td>
+                        <td>${formatValue(award.remarks)}</td>
+                    </tr>
                 `;
-  }
+  });
 
-  // Non-Operational Awards
+  html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+  return html;
+}
+
+// Generate Non-Operational Awards Section
+function generateNonOperationalAwards() {
   if (
-    personnelData.non_operational_awards &&
-    personnelData.non_operational_awards.length > 0
+    !personnelData.non_operational_awards ||
+    personnelData.non_operational_awards.length === 0
   ) {
-    html += `
-                    <div class="section">
-                        <div class="section-title">NON-OPERATIONAL AWARDS</div>
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Description</th>
-                                        <th>Date</th>
-                                        <th>Details</th>
-                                        <th>Authority</th>
-                                        <th>Remarks</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                `;
-
-    personnelData.non_operational_awards.forEach((award) => {
-      html += `
-                        <tr>
-                            <td>${formatValue(award.description)}</td>
-                            <td>${formatDate(award.date_awarded)}</td>
-                            <td>${formatValue(award.details)}</td>
-                            <td>${formatValue(award.authority)}</td>
-                            <td>${formatValue(award.remarks)}</td>
-                        </tr>
-                    `;
-    });
-
-    html += `
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-                `;
+    return '<div class="section"><div class="section-title">NON-OPERATIONAL AWARDS</div><p class="no-data">No non-operational awards information available</p></div>';
   }
+
+  let html = `
+                <div class="section">
+                    <div class="section-title">NON-OPERATIONAL AWARDS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Details</th>
+                                    <th>Authority</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+  personnelData.non_operational_awards.forEach((award) => {
+    html += `
+                    <tr>
+                        <td>${formatValue(award.description)}</td>
+                        <td>${formatDate(award.date_awarded)}</td>
+                        <td>${formatValue(award.details)}</td>
+                        <td>${formatValue(award.authority)}</td>
+                        <td>${formatValue(award.remarks)}</td>
+                    </tr>
+                `;
+  });
+
+  html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
 
   return html;
 }
@@ -2360,23 +2354,24 @@ function renderContent() {
   allContent += generateLanguageSkills();
   allContent += generateFamilyMembers();
   allContent += generateEducation();
-  allContent += generateCommission();
+  allContent += generatePassports();
+  allContent += generateMedicalHistory();
   allContent += generatePreCommissionServices();
   allContent += generatePreCommissionTrainings();
+  allContent += generateCommission();
   allContent += generatePostCommissionTraining();
   allContent += generateAdditionalQualifications();
   allContent += generateMapReadingExams();
   allContent += generatePromotions();
-  allContent += generateRanksHeld();
   allContent += generateServiceRecords();
-  allContent += generateAwards();
+  allContent += generateOperationalAwards();
+  allContent += generateNonOperationalAwards();
   allContent += generateOverseasVisits();
-  allContent += generatePassports();
-  allContent += generateBankAccounts();
   allContent += generateAnnualIncome();
-  allContent += generateMedicalHistory();
+  allContent += generateBankAccounts();
   allContent += generateMilitaryLegalRecords();
   allContent += generateCivilLegalRecords();
+  allContent += generateRanksHeld();
 
   contentDiv.innerHTML = allContent;
 
