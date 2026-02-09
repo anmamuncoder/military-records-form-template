@@ -5,995 +5,997 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Officer Record Form</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family:
-          "Inter",
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          Roboto,
-          sans-serif;
-        min-height: 100vh;
-        padding: 40px 20px;
-        line-height: 1.6;
-      }
-      /* Mobile devices */
-      @media (max-width: 768px) {
-        body {
-          padding: 0px;
-        }
-      }
-
-      .container {
-        max-width: 1600px;
-        margin: 0 auto;
-        background: #ffffff;
-        border-radius: 3px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        overflow: hidden;
-      }
-
-      /* Notice Box */
-      .notice-box {
-        background: #000;
-        border-left: 6px solid #ff9800;
-        padding: 10px 15px;
-        margin-bottom: 30px;
-        border-radius: 6px;
-      }
-
-      .notice-box h2 {
-        color: #b36b00;
-        margin-bottom: 15px;
-        font-size: 22px;
-      }
-
-      .notice-box ol {
-        padding-left: 20px;
-      }
-
-      .notice-box li {
-        margin-bottom: 4px;
-        color: #fff;
-      }
-
-      /* English text style */
-      .en-text {
-        display: block;
-        margin-top: 4px;
-        font-size: 14px;
-        color: #555;
-        font-style: italic;
-      }
-
-      .header {
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        color: white;
-        padding: 40px 50px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .header::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        right: -10%;
-        width: 400px;
-        height: 400px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 50%;
-      }
-
-      .header-content {
-        position: relative;
-        z-index: 1;
-      }
-
-      .header h1 {
-        font-size: 2.2em;
-        font-weight: 700;
-        margin-bottom: 8px;
-        letter-spacing: -0.5px;
-      }
-
-      .header p {
-        font-size: 1em;
-        color: #c7d2e8;
-        font-weight: 400;
-      }
-
-      .form-content {
-        padding: 50px;
-      }
-
-      .section {
-        margin-bottom: 50px;
-        background: #f8f9fc;
-        padding: 35px;
-        border-radius: 5px;
-        border: 1px solid #9c9c9c;
-      }
-
-      .section-title {
-        font-size: 1.5em;
-        color: rgb(29, 44, 75);
-        margin-bottom: 30px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #667eea;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .form-grid {
-        /* display: grid; */
-        /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
-        gap: 25px;
-        margin-bottom: 10px;
-      }
-
-      .form-group {
-        display: flex;
-        flex-direction: row;
-      }
-
-      .form-group label {
-        font-weight: 600;
-        color: #2d3748;
-        margin-bottom: 10px;
-        font-size: 0.95em;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        width: 30%;
-      }
-
-      .required::after {
-        content: "*";
-        color: #e53e3e;
-        margin-left: 4px;
-      }
-
-      .form-group input,
-      .form-group select {
-        padding: 8px 16px;
-        border: 1px solid #aaabac;
-        border-radius: 4px;
-        font-size: 0.95em;
-        transition: all 0.3s ease;
-        background: #ffffff;
-        color: #121213;
-        font-family: inherit;
-        width: 100%;
-        margin: 2px 20px;
-      }
-
-      /* Mobile devices */
-      @media (max-width: 768px) {
-        .form-group input,
-        .form-group select {
-          margin: 0px;
-        }
-      }
-
-      .form-group input:focus,
-      .form-group select:focus {
-        outline: none;
-        border-color: #222222;
-        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-        background: #ffffff;
-      }
-
-      .form-group select {
-        cursor: pointer;
-        appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232d3748' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 16px center;
-        padding-right: 45px;
-      }
-
-      .table-container {
-        overflow-x: auto;
-        margin-top: 20px;
-        border-radius: 4px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        background: white;
-        width: 100%;
-        display: block;
-      }
-
-      table {
-        border-collapse: separate;
-        border-spacing: 0;
-        min-width: 100%;
-        width: max-content;
-      }
-
-      thead {
-        background: linear-gradient(135deg, #242424 0%, #6a6b6b 100%);
-      }
-
-      .table-container th {
-        padding: 14px 8px;
-        text-align: left;
-        font-weight: 600;
-        font-size: 0.85em;
-        color: #ffffff;
-        background-color: transparent;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        min-width: 120px;
-        width: auto;
-        white-space: nowrap;
-      }
-
-      .table-container th:hover {
-        background-color: transparent;
-      }
-
-      th.required-header::after {
-        content: " *";
-        color: #ffeb3b;
-        font-weight: 700;
-        margin-left: 2px;
-      }
-
-      th:first-child {
-        border-top-left-radius: 4px;
-      }
-
-      th:last-child {
-        border-top-right-radius: 4px;
-      }
-
-      td {
-        padding: 14px 8px;
-        border-bottom: 0.5px solid #6b6b6b;
-        background: white;
-        min-width: 120px;
-        max-width: 300px;
-        word-wrap: break-word;
-      }
-
-      tbody tr {
-        transition: all 0.2s ease;
-      }
-
-      tbody tr:hover {
-        background: #f8f9fc;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      }
-
-      tbody tr:last-child td:first-child {
-        border-bottom-left-radius: 4px;
-      }
-
-      tbody tr:last-child td:last-child {
-        border-bottom-right-radius: 4px;
-      }
-
-      td input {
-        width: 100%;
-        padding: 8px 6px;
-        border: 1px solid #78797a;
-        border-radius: 6px;
-        font-size: 0.9em;
-        transition: all 0.2s ease;
-        font-family: inherit;
-        min-width: 100px;
-      }
-
-      td input:focus {
-        outline: none;
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-      }
-
-      td input[required] {
-        border-left: 3px solid #e53e3e;
-        background-color: #fff5f5;
-      }
-
-      td input[required]:focus {
-        border-left-color: #e53e3e;
-        background-color: #ffffff;
-      }
-
-      td select {
-        width: 100%;
-        padding: 8px 6px;
-        border: 1px solid #78797a;
-        border-radius: 6px;
-        font-size: 0.9em;
-        transition: all 0.2s ease;
-        font-family: inherit;
-        background: #ffffff;
-        color: #121213;
-        cursor: pointer;
-        appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232d3748' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 8px center;
-        padding-right: 30px;
-        min-width: 100px;
-      }
-
-      td select:focus {
-        outline: none;
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-      }
-
-      td select[required] {
-        border-left: 3px solid #e53e3e;
-        background-color: #fff5f5;
-      }
-
-      td select[required]:focus {
-        border-left-color: #e53e3e;
-        background-color: #ffffff;
-      }
-
-      .btn {
-        padding: 10px 28px;
-        border: none;
-        border-radius: 8px;
-        font-size: 0.95em;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-family: inherit;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-
-      .btn-primary {
-        background: #2196f3;
-        color: white;
-      }
-
-      .btn-primary:hover {
-        background: #1976d2;
-        opacity: 0.9;
-      }
-
-      .btn-primary:active {
-        transform: translateY(0);
-      }
-
-      .btn-success {
-        background: #4caf50;
-        color: white;
-      }
-
-      .btn-success:hover {
-        background: #45a049;
-        opacity: 0.9;
-      }
-
-      .btn-danger {
-        background: #f44336;
-        color: white;
-        padding: 8px 15px;
-        font-size: 0.9em;
-      }
-
-      .btn-danger:hover {
-        background: #da190b;
-        opacity: 0.9;
-      }
-
-      .button-group {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-
-      .btn-danger {
-        background: #e74c3c;
-        color: white;
-        padding: 7px 16px;
-        font-size: 0.85em;
-      }
-
-      .button-group {
-        display: flex;
-        gap: 15px;
-        margin-top: 30px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-      }
-
-      .table-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-        gap: 15px;
-      }
-
-      .table-title {
-        font-size: 1.2em;
-        font-weight: 700;
-        color: #444343;
-        flex: 1;
-        min-width: 200px;
-      }
-
-      .btn-add-row {
-        background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 8px;
-        font-size: 0.95em;
-        font-weight: 600;
-        cursor: pointer;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-      }
-
-      .btn-add-row:hover {
-        transform: translateY(-2px);
-      }
-
-      .btn-add-row:active {
-        transform: translateY(0);
-      }
-
-      .btn-add-row .btn-icon {
-        font-size: 1.2em;
-        font-weight: 300;
-        line-height: 1;
-      }
-
-      .btn-add-row .btn-text {
-        font-size: 0.95em;
-      }
-
-      .btn-add-first-row {
-        background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 8px;
-        font-size: 1em;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
-        width: 100%;
-        max-width: 300px;
-        margin: 20px auto;
-      }
-
-      .btn-add-first-row:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
-        background: linear-gradient(135deg, #45a049 0%, #4caf50 100%);
-      }
-
-      .btn-add-first-row:active {
-        transform: translateY(0);
-      }
-
-      .btn-add-first-row::before {
-        content: "+";
-        font-size: 1.3em;
-        font-weight: 300;
-        line-height: 1;
-        margin-right: 8px;
-        display: inline-block;
-      }
-
-      .add-first-row-container {
-        display: none;
-      }
-
-      .add-first-row-container p {
-        color: #718096;
-        font-size: 0.9em;
-        margin-top: 10px;
-        font-style: italic;
-      }
-
-      .btn-add-first-row::before {
-        content: "+";
-        font-size: 1.3em;
-        font-weight: 300;
-        line-height: 1;
-        margin-right: 5px;
-      }
-
-      .info-badge {
-        display: inline-block;
-        background: #edf2f7;
-        color: #4a5568;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-size: 0.85em;
-        font-weight: 600;
-        margin-top: 15px;
-      }
-
-      .status-indicator {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #00e013;
-        margin-right: 8px;
-        animation: pulse 2s infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-
-        50% {
-          opacity: 0.5;
-        }
-      }
-
-      /* Mobile devices */
-      @media (max-width: 768px) {
-        .form-content {
-          padding: 10px 5px;
-        }
-
-        .form-group {
-          flex-direction: column;
-        }
-
-        .form-group label {
-          width: 100%;
-          margin-top: 10px;
-          margin-bottom: 0px;
-        }
-        .section {
-          padding: 25px 20px;
-        }
-
-        .header {
-          padding: 30px 25px;
-        }
-
-        .header h1 {
-          font-size: 1.6em;
-        }
-
-        .form-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .table-container {
-          font-size: 0.85em;
-        }
-
-        .button-group {
-          flex-direction: column;
-        }
-
-        .btn {
-          width: 100%;
-          justify-content: center;
-        }
-      }
-
-      /* For Chrome, Edge, Safari */
-      ::-webkit-scrollbar {
-        width: 6px;
-        /* Thin scrollbar */
-        height: 6px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: #f0f0f0;
-        /* Track Background */
-        border-radius: 10px;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: #b3b3b3;
-        /* Scroll thumb color */
-        border-radius: 10px;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: #8e8e8e;
-        /* Darker when hovered */
-      }
-
-      /* Firefox */
-      * {
-        scrollbar-width: thin;
-        scrollbar-color: #b3b3b3 #f0f0f0;
-      }
-
-      /* Review Modal Styles */
-      .popup-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(245, 245, 245, 0.95);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-      }
-
-      .popup-container {
-        background-color: #ffffff;
-        width: 100%;
-        max-width: 1500px;
-        max-height: 100vh;
-        border-radius: 8px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .popup-header {
-        background-color: #cfcdcd;
-        color: #333;
-        padding: 20px 30px;
-        border-bottom: 2px solid #ccc;
-      }
-
-      .popup-header h1 {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-
-      .popup-header p {
-        font-size: 14px;
-        color: #666;
-      }
-
-      .popup-content {
-        overflow-y: auto;
-        padding: 25px 30px;
-        flex: 1;
-      }
-
-      .section {
-        margin-bottom: 25px;
-      }
-
-      .section-title {
-        background-color: #f0f0f0;
-        color: #333;
-        padding: 10px 15px;
-        font-size: 15px;
-        font-weight: bold;
-        margin-bottom: 10px;
-        border-left: 4px solid #bbb;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 15px;
-        font-size: 14px;
-      }
-
-      table th {
-        background-color: #f9f9f9;
-        color: #212121;
-        padding: 10px 12px;
-        text-align: left;
-        font-weight: bold;
-        border: 1px solid #ddd;
-        font-size: 13px;
-      }
-
-      table td {
-        padding: 9px 12px;
-        border: 1px solid #ddd;
-        color: #333;
-      }
-
-      table tr:nth-child(even) {
-        background-color: #f5f5f5;
-      }
-
-      /* table tr:hover {
+  
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  min-height: 100vh;
+  padding: 40px 20px;
+  line-height: 1.6;
+}
+/* Mobile devices */
+@media (max-width: 768px) {
+  body {
+    padding: 0px;
+  }
+}
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+/* Notice Box */
+.notice-box {
+  background: #000;
+  border-left: 6px solid #ff9800;
+  padding: 10px 15px;
+  margin-bottom: 30px;
+  border-radius: 6px;
+}
+
+.notice-box h2 {
+  color: #b36b00;
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+.notice-box ol {
+  padding-left: 20px;
+}
+
+.notice-box li {
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+/* English text style */
+.en-text {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  color: #555;
+  font-style: italic;
+}
+
+.header {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  padding: 40px 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.header h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.header p {
+  font-size: 1em;
+  color: #c7d2e8;
+  font-weight: 400;
+}
+
+.form-content {
+  padding: 50px;
+}
+
+.section {
+  margin-bottom: 50px;
+  background: #f8f9fc;
+  padding: 35px;
+  border-radius: 5px;
+  border: 1px solid #9c9c9c;
+}
+
+.section-title {
+  font-size: 1.5em;
+  color: rgb(29, 44, 75);
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #667eea;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-grid {
+  /* display: grid; */
+  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+  gap: 25px;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 10px;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 30%;
+}
+
+.required::after {
+  content: "*";
+  color: #e53e3e;
+  margin-left: 4px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px 16px;
+  border: 1px solid #aaabac;
+  border-radius: 4px;
+  font-size: 0.95em;
+  transition: all 0.3s ease;
+  background: #ffffff;
+  color: #121213;
+  font-family: inherit;
+  width: 100%;
+  margin: 2px 20px;
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .form-group input,
+  .form-group select {
+    margin: 0px;
+  }
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #222222;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  background: #ffffff;
+}
+
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232d3748' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 45px;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: white;
+  width: 100%;
+  display: block;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 100%;
+  width: max-content;
+}
+
+thead {
+  background: linear-gradient(135deg, #242424 0%, #6a6b6b 100%);
+}
+
+.table-container th {
+  padding: 14px 8px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85em;
+  color: #ffffff;
+  background-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 120px;
+  width: auto;
+  white-space: nowrap;
+}
+
+.table-container th:hover {
+  background-color: transparent;
+}
+
+th.required-header::after {
+  content: " *";
+  color: #ffeb3b;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+th:first-child {
+  border-top-left-radius: 4px;
+}
+
+th:last-child {
+  border-top-right-radius: 4px;
+}
+
+td {
+  padding: 14px 8px;
+  border-bottom: 0.5px solid #6b6b6b;
+  background: white;
+  min-width: 120px;
+  max-width: 300px;
+  word-wrap: break-word;
+}
+
+tbody tr {
+  transition: all 0.2s ease;
+}
+
+tbody tr:hover {
+  background: #f8f9fc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 4px;
+}
+
+tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 4px;
+}
+
+td input {
+  width: 100%;
+  padding: 8px 6px;
+  border: 1px solid #78797a;
+  border-radius: 6px;
+  font-size: 0.9em;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  min-width: 100px;
+}
+
+td input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+td input[required] {
+  border-left: 3px solid #e53e3e;
+  background-color: #fff5f5;
+}
+
+td input[required]:focus {
+  border-left-color: #e53e3e;
+  background-color: #ffffff;
+}
+
+td select {
+  width: 100%;
+  padding: 8px 6px;
+  border: 1px solid #78797a;
+  border-radius: 6px;
+  font-size: 0.9em;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  background: #ffffff;
+  color: #121213;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232d3748' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-right: 30px;
+  min-width: 100px;
+}
+
+td select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+td select[required] {
+  border-left: 3px solid #e53e3e;
+  background-color: #fff5f5;
+}
+
+td select[required]:focus {
+  border-left-color: #e53e3e;
+  background-color: #ffffff;
+}
+
+.btn {
+  padding: 10px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: #2196f3;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #1976d2;
+  opacity: 0.9;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-success {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #45a049;
+  opacity: 0.9;
+}
+
+.btn-danger {
+  background: #f44336;
+  color: white;
+  padding: 8px 15px;
+  font-size: 0.9em;
+}
+
+.btn-danger:hover {
+  background: #da190b;
+  opacity: 0.9;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-danger {
+  background: #e74c3c;
+  color: white;
+  padding: 7px 16px;
+  font-size: 0.85em;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.table-title {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #444343;
+  flex: 1;
+  min-width: 200px;
+}
+
+.btn-add-row {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.btn-add-row:hover {
+  transform: translateY(-2px);
+}
+
+.btn-add-row:active {
+  transform: translateY(0);
+}
+
+.btn-add-row .btn-icon {
+  font-size: 1.2em;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.btn-add-row .btn-text {
+  font-size: 0.95em;
+}
+
+.btn-add-first-row {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto;
+}
+
+.btn-add-first-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+  background: linear-gradient(135deg, #45a049 0%, #4caf50 100%);
+}
+
+.btn-add-first-row:active {
+  transform: translateY(0);
+}
+
+.btn-add-first-row::before {
+  content: "+";
+  font-size: 1.3em;
+  font-weight: 300;
+  line-height: 1;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.add-first-row-container {
+  display: none;
+}
+
+.add-first-row-container p {
+  color: #718096;
+  font-size: 0.9em;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.btn-add-first-row::before {
+  content: "+";
+  font-size: 1.3em;
+  font-weight: 300;
+  line-height: 1;
+  margin-right: 5px;
+}
+
+.info-badge {
+  display: inline-block;
+  background: #edf2f7;
+  color: #4a5568;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00e013;
+  margin-right: 8px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .form-content {
+    padding: 10px 5px;
+  }
+
+  .form-group {
+    flex-direction: column;
+  }
+
+  .form-group label {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+  .section {
+    padding: 25px 20px;
+  }
+
+  .header {
+    padding: 30px 25px;
+  }
+
+  .header h1 {
+    font-size: 1.6em;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table-container {
+    font-size: 0.85em;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* For Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 6px;
+  /* Thin scrollbar */
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  /* Track Background */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b3b3b3;
+  /* Scroll thumb color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8e8e8e;
+  /* Darker when hovered */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #b3b3b3 #f0f0f0;
+}
+
+/* Review Modal Styles */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(245, 245, 245, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-container {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 1500px;
+  max-height: 100vh;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-header {
+  background-color: #cfcdcd;
+  color: #333;
+  padding: 20px 30px;
+  border-bottom: 2px solid #ccc;
+}
+
+.popup-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.popup-header p {
+  font-size: 14px;
+  color: #666;
+}
+
+.popup-content {
+  overflow-y: auto;
+  padding: 25px 30px;
+  flex: 1;
+}
+
+.section {
+  margin-bottom: 25px;
+}
+
+.section-title {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 10px 15px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-left: 4px solid #bbb;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+table th {
+  background-color: #f9f9f9;
+  color: #212121;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: bold;
+  border: 1px solid #ddd;
+  font-size: 13px;
+}
+
+table td {
+  padding: 9px 12px;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+table tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+/* table tr:hover {
   background-color: #ebebeb;
 } */
 
-      .review-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2px;
-      }
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
 
-      .review-item {
-        display: flex;
-        border: 1px solid #ddd;
-        background-color: #fafafa;
-      }
+.review-item {
+  display: flex;
+  border: 1px solid #ddd;
+  background-color: #fafafa;
+}
 
-      .review-label {
-        background-color: #f5f5f5;
-        padding: 8px 12px;
-        font-weight: bold;
-        font-size: 14px;
-        width: 45%;
-        border-right: 1px solid #ddd;
-      }
+.review-label {
+  background-color: #f5f5f5;
+  padding: 8px 12px;
+  font-weight: bold;
+  font-size: 14px;
+  width: 45%;
+  border-right: 1px solid #ddd;
+}
 
-      .review-value {
-        padding: 8px 12px;
-        font-size: 14px;
-        width: 55%;
-        color: #333;
-      }
+.review-value {
+  padding: 8px 12px;
+  font-size: 14px;
+  width: 55%;
+  color: #333;
+}
 
-      .popup-footer {
-        background-color: #f5f5f5;
-        padding: 15px 30px;
-        border-top: 1px solid #ddd;
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-      }
+.popup-footer {
+  background-color: #f5f5f5;
+  padding: 15px 30px;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
 
-      .btn-print {
-        background-color: #fff;
-        color: #333;
-        border: 2px solid #999;
-      }
+.btn-print {
+  background-color: #fff;
+  color: #333;
+  border: 2px solid #999;
+}
 
-      .btn-print:hover {
-        background-color: #f0f0f0;
-      }
+.btn-print:hover {
+  background-color: #f0f0f0;
+}
 
-      .btn-close {
-        background-color: #ccc;
-        color: #333;
-      }
+.btn-close {
+  background-color: #ccc;
+  color: #333;
+}
 
-      .btn-close:hover {
-        background-color: #bbb;
-      }
+.btn-close:hover {
+  background-color: #bbb;
+}
 
-      .no-data {
-        font-style: italic;
-        color: #999;
-        font-size: 12px;
-      }
+.no-data {
+  font-style: italic;
+  color: #999;
+  font-size: 12px;
+}
 
-      @media print {
-        body {
-          background-color: #fff;
-        }
+@media print {
+  body {
+    background-color: #fff;
+  }
 
-        .popup-overlay {
-          position: static;
-          background-color: #fff;
-        }
+  .popup-overlay {
+    position: static;
+    background-color: #fff;
+  }
 
-        .popup-footer {
-          display: none;
-        }
+  .popup-footer {
+    display: none;
+  }
 
-        .popup-container {
-          max-height: none;
-          box-shadow: none;
-        }
-      }
+  .popup-container {
+    max-height: none;
+    box-shadow: none;
+  }
+}
 
-      @media (max-width: 768px) {
-        .review-grid {
-          grid-template-columns: 1fr;
-        }
+@media (max-width: 768px) {
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
 
-        .popup-header h1 {
-          font-size: 18px;
-        }
+  .popup-header h1 {
+    font-size: 18px;
+  }
 
-        .popup-header {
-          padding: 15px 20px;
-        }
+  .popup-header {
+    padding: 15px 20px;
+  }
 
-        .popup-content {
-          padding: 15px 20px;
-        }
+  .popup-content {
+    padding: 15px 20px;
+  }
 
-        .popup-footer {
-          padding: 15px 20px;
-        }
+  .popup-footer {
+    padding: 15px 20px;
+  }
 
-        table {
-          font-size: 11px;
-        }
+  table {
+    font-size: 11px;
+  }
 
-        table th,
-        table td {
-          padding: 6px 8px;
-          white-space: nowrap;
-        }
+  table th,
+  table td {
+    padding: 6px 8px;
+    white-space: nowrap;
+  }
 
-        /* Make tables horizontally scrollable on mobile */
-        .table-container {
-          overflow-x: auto;
-          -webkit-overflow-scrolling: touch;
-        }
+  /* Make tables horizontally scrollable on mobile */
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
-        .table-container table {
-          min-width: 600px; /* Ensure minimum width for readability */
-        }
+  .table-container table {
+    min-width: 600px; /* Ensure minimum width for readability */
+  }
 
-        /* Stack review items vertically on very small screens */
-        .review-item {
-          flex-direction: column;
-        }
+  /* Stack review items vertically on very small screens */
+  .review-item {
+    flex-direction: column;
+  }
 
-        .review-label,
-        .review-value {
-          width: 100%;
-          border-right: none;
-          border-bottom: 1px solid #ddd;
-        }
+  .review-label,
+  .review-value {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
 
-        .review-value {
-          border-bottom: none;
-        }
+  .review-value {
+    border-bottom: none;
+  }
 
-        /* Improve section spacing on mobile */
-        .section {
-          margin-bottom: 20px;
-        }
+  /* Improve section spacing on mobile */
+  .section {
+    margin-bottom: 20px;
+  }
 
-        .section-title {
-          font-size: 14px;
-          padding: 8px 12px;
-        }
-      }
+  .section-title {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
 
-      @media (max-width: 480px) {
-        .popup-container {
-          width: 98%;
-          max-height: 95vh;
-        }
+@media (max-width: 480px) {
+  .popup-container {
+    width: 98%;
+    max-height: 95vh;
+  }
 
-        .popup-header h1 {
-          font-size: 16px;
-        }
+  .popup-header h1 {
+    font-size: 16px;
+  }
 
-        .popup-header p {
-          font-size: 12px;
-        }
+  .popup-header p {
+    font-size: 12px;
+  }
 
-        table {
-          font-size: 10px;
-        }
+  table {
+    font-size: 10px;
+  }
 
-        table th,
-        table td {
-          padding: 4px 6px;
-        }
+  table th,
+  table td {
+    padding: 4px 6px;
+  }
 
-        .review-label,
-        .review-value {
-          padding: 6px 8px;
-          font-size: 13px;
-        }
+  .review-label,
+  .review-value {
+    padding: 6px 8px;
+    font-size: 13px;
+  }
 
-        .section-title {
-          font-size: 13px;
-          padding: 6px 10px;
-        }
+  .section-title {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
 
-        .btn-print,
-        .btn-close {
-          padding: 8px 16px;
-          font-size: 14px;
-        }
-      }
+  .btn-print,
+  .btn-close {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
 
-      @media (max-width: 320px) {
-        .popup-container {
-          width: 100%;
-          border-radius: 0;
-          max-height: 100vh;
-        }
+@media (max-width: 320px) {
+  .popup-container {
+    width: 100%;
+    border-radius: 0;
+    max-height: 100vh;
+  }
 
-        .popup-header {
-          padding: 10px 15px;
-        }
+  .popup-header {
+    padding: 10px 15px;
+  }
 
-        .popup-content {
-          padding: 10px 15px;
-        }
+  .popup-content {
+    padding: 10px 15px;
+  }
 
-        .popup-footer {
-          padding: 10px 15px;
-        }
+  .popup-footer {
+    padding: 10px 15px;
+  }
 
-        table {
-          font-size: 9px;
-        }
+  table {
+    font-size: 9px;
+  }
 
-        .table-container table {
-          min-width: 500px;
-        }
-      }
+  .table-container table {
+    min-width: 500px;
+  }
+}
 
-      /* Additional responsive improvements */
-      @media (min-width: 769px) and (max-width: 1024px) {
-        .popup-container {
-          max-width: 1000px;
-        }
+/* Additional responsive improvements */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .popup-container {
+    max-width: 1000px;
+  }
 
-        .review-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
+  .review-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
-      @media (min-width: 1025px) and (max-width: 1440px) {
-        .popup-container {
-          max-width: 1100px;
-        }
-      }
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .popup-container {
+    max-width: 1100px;
+  }
+}
 
-      /* Ensure tables are always readable */
-      .table-container {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        margin-bottom: 15px;
-      }
+/* Ensure tables are always readable */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 15px;
+}
 
-      .table-container table {
-        margin-bottom: 0;
-      }
+.table-container table {
+  margin-bottom: 0;
+}
 
-      /* Improve table readability on all devices */
-      table th {
-        position: sticky;
-        top: 0;
-        background-color: #f9f9f9;
-        z-index: 1;
-      }
+/* Improve table readability on all devices */
+table th {
+  position: sticky;
+  top: 0;
+  background-color: #f9f9f9;
+  z-index: 1;
+}
 
-      /* Better spacing for review content */
-      .popup-content .section:last-child {
-        margin-bottom: 0;
-      }
+/* Better spacing for review content */
+.popup-content .section:last-child {
+  margin-bottom: 0;
+}
 
-      /* Ensure modal doesn't overflow on very wide screens */
-      @media (min-width: 1441px) {
-        .popup-container {
-          max-width: 1300px;
-        }
-      }
+/* Ensure modal doesn't overflow on very wide screens */
+@media (min-width: 1441px) {
+  .popup-container {
+    max-width: 1300px;
+  }
+}
+
     </style>
   </head>
   <body>
@@ -2182,191 +2184,184 @@
     </div>
 
     <script>
-      const options = {
-        blood_groups: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
-        address_types: ["Permanent", "Present", "Alternate"],
-        passport_types: ["Diplomatic", "Service", "Regular", "Official"],
-        passport_purposes: ["Official", "Personal", "Both"],
-        proficiency_levels: ["Basic", "Intermediate", "Advanced", "Native"],
-        acquiring: ["Self Learning", "Diploma", "Course", "Cadre", "Other"],
-        relationships: [
-          "Wife",
-          "Husband",
-          "Father",
-          "Mother",
-          "Sibling",
-          "Spouse",
-          "Child",
-          "Father-in-law",
-          "Mother-in-law",
-          "Brother-in-law",
-          "Sister-in-law",
-          "Next of Kin",
-        ],
-        marital_status: ["Single", "Married", "Divorced", "Widowed"],
-        education_types: [
-          "SSC",
-          "HSC",
-          "Honours/Degree/BBA",
-          "Masters/Masters Degree/MBA",
-          "M Phil",
-          "P Hd",
-        ],
-        divisions: [
-          "First Division/Class",
-          "Second Division/Class",
-          "Third Division/Class",
-          "Distinction",
-        ],
-        commission_types: [
-          "Regular Commission",
-          "Short Service Commission",
-          "Temporary Commission",
-        ],
-        training_types: ["Home Country", "Abroad"],
-        result_b_side: ["A", "B+", "B", "B-", "C", "F"],
-        result_y_side: ["X", "Y+", "Y", "Y-"],
-        promotion_types: ["Temporary", "Substantive", "Acting"],
-        visit_types: [
-          "Official PSI",
-          "Study Tour",
-          "Purchase Committee",
-          "UN Mission",
-          "LRS, Msn Assessment Team",
-          "Misc reasons",
-          "Self-Financed",
-        ],
-        income_sources: [
-          "Self",
-          "Father",
-          "Mother",
-          "Father-in-law",
-          "Mother-in-law",
-          "Spouse",
-        ],
-        account_types: [
-          "Savings",
-          "Current",
-          "Fixed Deposit",
-          "Salary Account",
-        ],
-        sex: ["Male", "Female"],
-        passport_status: ["New", "Old"],
-        nature_of_injury: ["Severe", "Minor"],
-        medical_category_class: ["Temp C", "Perm C", "D"],
-        ranks: [
-          "Lieutenant",
-          "Captain",
-          "Major",
-          "Lieutenant Colonel",
-          "Colonel",
-          "Brigadier General",
-          "Major General",
-          "Lieutenant General",
-          "General",
-        ],
-        appointment_types: [
-          "Regimental and Command Appointments",
-          "On the Staff Appointments",
-          "Instructional Appointments",
-        ],
-        service_type: ["Unit", "ERE"],
-        military_legal_type: ["Minor", "Severe", "Exemplary"],
-        military_legal_name: [
-          "Verbal Wng",
-          "Written Wng",
-          "Reprimand",
-          "Severe Reprimand",
-          "RI",
-          "Rk Down",
-          "Forfeiture of Sr",
-          "Dismissed Without Facilities",
-          "Dismissed With Civ Jail",
-          "Other",
-        ],
-      };
+const options = {
+  blood_groups: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+  address_types: ["Permanent", "Present", "Alternate"],
+  passport_types: ["Diplomatic", "Service", "Regular", "Official"],
+  passport_purposes: ["Official", "Personal", "Both"],
+  proficiency_levels: ["Basic", "Intermediate", "Advanced", "Native"],
+  acquiring: ["Self Learning", "Diploma", "Course", "Cadre", "Other"],
+  relationships: [
+    "Wife",
+    "Husband",
+    "Father",
+    "Mother",
+    "Sibling",
+    "Spouse",
+    "Child",
+    "Father-in-law",
+    "Mother-in-law",
+    "Brother-in-law",
+    "Sister-in-law",
+    "Next of Kin",
+  ],
+  marital_status: ["Single", "Married", "Divorced", "Widowed"],
+  education_types: [
+    "SSC",
+    "HSC",
+    "Honours/Degree/BBA",
+    "Masters/Masters Degree/MBA",
+    "M Phil",
+    "P Hd",
+  ],
+  divisions: [
+    "First Division/Class",
+    "Second Division/Class",
+    "Third Division/Class",
+    "Distinction",
+  ],
+  commission_types: [
+    "Regular Commission",
+    "Short Service Commission",
+    "Temporary Commission",
+  ],
+  training_types: ["Home Country", "Abroad"],
+  result_b_side: ["A", "B+", "B", "B-", "C", "F"],
+  result_y_side: ["X", "Y+", "Y", "Y-"],
+  promotion_types: ["Temporary", "Substantive", "Acting"],
+  visit_types: [
+    "Official PSI",
+    "Study Tour",
+    "Purchase Committee",
+    "UN Mission",
+    "LRS, Msn Assessment Team",
+    "Misc reasons",
+    "Self-Financed",
+  ],
+  income_sources: [
+    "Self",
+    "Father",
+    "Mother",
+    "Father-in-law",
+    "Mother-in-law",
+    "Spouse",
+  ],
+  account_types: ["Savings", "Current", "Fixed Deposit", "Salary Account"],
+  sex: ["Male", "Female"],
+  passport_status: ["New", "Old"],
+  nature_of_injury: ["Severe", "Minor"],
+  medical_category_class: ["Temp C", "Perm C", "D"],
+  ranks: [
+    "Captain",
+    "Lieutenant",
+    "Major",
+    "Lieutenant Colonel",
+    "Colonel",
+    "Brigadier General",
+    "Major General",
+    "Lieutenant General",
+    "General",
+  ],
+  appointment_types: [
+    "Regimental and Command Appointments",
+    "On the Staff Appointments",
+    "Instructional Appointments",
+  ],
+  service_type: ["Unit", "ERE"],
+  military_legal_type: ["Minor", "Severe", "Exemplary"],
+  military_legal_name: [
+    "Verbal Wng",
+    "Written Wng",
+    "Reprimand",
+    "Severe Reprimand",
+    "RI",
+    "Rk Down",
+    "Forfeiture of Sr",
+    "Dismissed Without Facilities",
+    "Dismissed With Civ Jail",
+    "Other",
+  ],
+};
 
-      function createSelect(name, opts, required = false) {
-        let html = `<select name="${name}" ${required ? "required" : ""}><option value="">Select</option>`;
-        opts.forEach(
-          (opt) => (html += `<option value="${opt}">${opt}</option>`),
-        );
-        return html + "</select>";
+function createSelect(name, opts, required = false) {
+  let html = `<select name="${name}" ${required ? "required" : ""}><option value="">Select</option>`;
+  opts.forEach((opt) => (html += `<option value="${opt}">${opt}</option>`));
+  return html + "</select>";
+}
+
+function createInput(
+  type,
+  name,
+  placeholder = "",
+  required = false,
+  maxLength = null,
+) {
+  const maxAttr = maxLength ? ` maxlength="${maxLength}"` : "";
+  // Add min/max for date type to enforce 4-digit year
+  let dateAttr = "";
+  if (type === "date") {
+    dateAttr = ` min="1900-01-01" max="2099-12-31"`;
+  }
+
+  return `<input type="${type}" name="${name}" placeholder="${placeholder}" ${required ? "required" : ""}${maxAttr}${dateAttr}>`;
+}
+
+function validateTableRows(type) {
+  const tbody = document.getElementById(`${type}_tbody`);
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+
+  for (let row of rows) {
+    const inputs = row.querySelectorAll("input, select");
+    for (let input of inputs) {
+      const name = input.name;
+      const value = input.value.trim();
+      const isRequired = input.hasAttribute("required");
+
+      if (isRequired && !value) {
+        const fieldName = input.placeholder || input.name || "field";
+        const friendlyName = fieldName
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, (l) => l.toUpperCase());
+        return {
+          valid: false,
+          message: `Please complete all required fields before adding another row.\n\nMissing information: ${friendlyName}`,
+        };
       }
+    }
+  }
+  return { valid: true };
+}
 
-      function createInput(
-        type,
-        name,
-        placeholder = "",
-        required = false,
-        maxLength = null,
-      ) {
-        const maxAttr = maxLength ? ` maxlength="${maxLength}"` : "";
-        // Add min/max for date type to enforce 4-digit year
-        let dateAttr = "";
-        if (type === "date") {
-          dateAttr = ` min="1900-01-01" max="2099-12-31"`;
-        }
+function updateRequiredFields(type) {
+  const tbody = document.getElementById(`${type}_tbody`);
+  const rows = tbody.querySelectorAll("tr");
 
-        return `<input type="${type}" name="${name}" placeholder="${placeholder}" ${required ? "required" : ""}${maxAttr}${dateAttr}>`;
-      }
+  // Keep the required attribute as set in the row creation
+  // This function is mainly for maintaining consistency
+  rows.forEach((row) => {
+    row.querySelectorAll("input, select").forEach((input) => {
+      // The required attribute is already set correctly in addRow function
+      // No need to change it here
+    });
+  });
+}
 
-      function validateTableRows(type) {
-        const tbody = document.getElementById(`${type}_tbody`);
-        const rows = Array.from(tbody.querySelectorAll("tr"));
+function addRow(type) {
+  const tbody = document.getElementById(`${type}_tbody`);
+  const existingRows = tbody.querySelectorAll("tr");
 
-        for (let row of rows) {
-          const inputs = row.querySelectorAll("input, select");
-          for (let input of inputs) {
-            const name = input.name;
-            const value = input.value.trim();
-            const isRequired = input.hasAttribute("required");
+  if (existingRows.length > 0) {
+    const validation = validateTableRows(type);
+    if (!validation.valid) {
+      alert(validation.message);
+      return;
+    }
+  }
 
-            if (isRequired && !value) {
-              const fieldName = input.placeholder || input.name || "field";
-              const friendlyName = fieldName
-                .replace(/_/g, " ")
-                .replace(/\b\w/g, (l) => l.toUpperCase());
-              return {
-                valid: false,
-                message: `Please complete all required fields before adding another row.\n\nMissing information: ${friendlyName}`,
-              };
-            }
-          }
-        }
-        return { valid: true };
-      }
+  const row = document.createElement("tr");
 
-      function updateRequiredFields(type) {
-        const tbody = document.getElementById(`${type}_tbody`);
-        const rows = tbody.querySelectorAll("tr");
-
-        // Keep the required attribute as set in the row creation
-        // This function is mainly for maintaining consistency
-        rows.forEach((row) => {
-          row.querySelectorAll("input, select").forEach((input) => {
-            // The required attribute is already set correctly in addRow function
-            // No need to change it here
-          });
-        });
-      }
-
-      function addRow(type) {
-        const tbody = document.getElementById(`${type}_tbody`);
-        const existingRows = tbody.querySelectorAll("tr");
-
-        if (existingRows.length > 0) {
-          const validation = validateTableRows(type);
-          if (!validation.valid) {
-            alert(validation.message);
-            return;
-          }
-        }
-
-        const row = document.createElement("tr");
-
-        if (type === "addresses") {
-          row.innerHTML = `<td>${createSelect("address_type", options.address_types, true)}</td>
+  if (type === "addresses") {
+    row.innerHTML = `<td>${createSelect("address_type", options.address_types, true)}</td>
 <td>${createInput("text", "street_address", "Street Address", true)}</td>
 <td>${createInput("text", "city", "City", false, 100)}</td>
 <td>${createInput("text", "state", "State", false, 100)}</td>
@@ -2374,8 +2369,8 @@
 <td>${createInput("text", "country", "Country", false, 100)}</td>
 <td>${createInput("date", "date", "", false)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "language_skills") {
-          row.innerHTML = `<td>${createInput("text", "language", "Language", true, 50)}</td>
+  } else if (type === "language_skills") {
+    row.innerHTML = `<td>${createInput("text", "language", "Language", true, 50)}</td>
 <td>${createSelect("proficiency", options.proficiency_levels, false)}</td>
 <td>${createSelect("reading_skill", options.proficiency_levels, false)}</td>
 <td>${createSelect("writing_skill", options.proficiency_levels, false)}</td>
@@ -2386,25 +2381,25 @@
 <td>${createInput("number", "year", "Year", false)}</td>
 <td>${createInput("text", "degree", "Degree", false, 100)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "family_members") {
-          row.innerHTML = `<td>${createSelect("relationship", options.relationships, true)}</td>
+  } else if (type === "family_members") {
+    row.innerHTML = `<td>${createSelect("relationship", options.relationships, true)}</td>
 <td>${createInput("text", "name", "Name", true, 200)}</td>
 <td>${createInput("text", "nationality", "Nationality", false, 50)}</td>
 <td>${createInput("date", "date_of_birth", "", false)}</td>
-<td>${createSelect("is_deceased", ["false", "true"], true)}</td>
+<td>${createSelect("is_deceased", ["No", "Yes"], true)}</td>
 <td>${createInput("text", "occupation_profession", "Occupation", false, 100)}</td>
 <td>${createInput("number", "annual_income", "Annual Income", false)}</td>
 <td>${createInput("text", "address", "Address", false)}</td>
 <td>${createInput("text", "birth_registration", "Birth Registration", false, 100)}</td>
 <td>${createInput("text", "national_id", "National ID", false, 20)}</td>
 <td>${createInput("text", "education", "Education", false, 200)}</td>
-<td>${createSelect("dependency", ["true", "false"], false)}</td>
+<td>${createSelect("dependency", ["Yes", "No"], false)}</td>
 <td>${createSelect("sex", options.sex, false)}</td>
 <td>${createInput("date", "date_of_expire", "")}</td>
 <td>${createInput("text", "location_of_grave", "Location of Grave", false, 100)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "education") {
-          row.innerHTML = `<td>${createSelect("institution_type", options.education_types, true, 10)}</td>
+  } else if (type === "education") {
+    row.innerHTML = `<td>${createSelect("institution_type", options.education_types, true, 10)}</td>
 <td>${createInput("text", "institution_name", "Institution Name", true, 200)}</td>
 <td>${createInput("date", "start_date", "", false)}</td>
 <td>${createInput("date", "end_date", "", false)}</td>
@@ -2415,8 +2410,8 @@
 <td>${createInput("number", "year_of_passing", "Year", false)}</td>
 <td>${createInput("text", "remarks", "Remarks", true)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "passports") {
-          row.innerHTML = `<td>${createSelect("status", options.passport_status, false)}</td>
+  } else if (type === "passports") {
+    row.innerHTML = `<td>${createSelect("status", options.passport_status, false)}</td>
 <td>${createInput("text", "passport_number", "Passport Number", true, 50)}</td>
 <td>${createInput("date", "issue_date", "", false)}</td>
 <td>${createInput("date", "expiry_date", "", false)}</td>
@@ -2425,8 +2420,8 @@
 <td>${createSelect("purpose", options.passport_purposes, false)}</td>
 <td>${createInput("text", "place_of_issue", "Place of Issue", false, 100)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "medical_histories") {
-          row.innerHTML = `<td>${createInput("text", "name_of_disease", "Disease Name", true)}</td>
+  } else if (type === "medical_histories") {
+    row.innerHTML = `<td>${createInput("text", "name_of_disease", "Disease Name", true)}</td>
 <td>${createSelect("nature_of_injury", options.nature_of_injury, true)}</td>
 <td>${createInput("date", "date_of_medical_admission_from", "", false)}</td>
 <td>${createInput("date", "date_of_medical_admission_to", "", false)}</td>
@@ -2434,23 +2429,23 @@
 <td>${createInput("date", "medical_category_from", "", false)}</td>
 <td>${createInput("date", "medical_category_to", "", false)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "pre_commission_services") {
-          row.innerHTML = `<td>${createInput("text", "unit", "Unit", true, 100)}</td>
+  } else if (type === "pre_commission_services") {
+    row.innerHTML = `<td>${createInput("text", "unit", "Unit", true, 100)}</td>
 <td>${createInput("text", "designation", "Designation", true, 100)}</td>
 <td>${createInput("date", "date_from", "", false)}</td>
 <td>${createInput("date", "date_to", "", false)}</td>
 <td>${createInput("text", "remarks", "Remarks", true)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "pre_commission_trainings") {
-          row.innerHTML = `<td>${createInput("text", "location", "Location", true, 100)}</td>
+  } else if (type === "pre_commission_trainings") {
+    row.innerHTML = `<td>${createInput("text", "location", "Location", true, 100)}</td>
 <td>${createInput("text", "appointment", "Appointment", true, 100)}</td>
 <td>${createInput("text", "distinction", "Distinction", true)}</td>
 <td>${createInput("text", "remarks", "Remarks", true)}</td>
 <td>${createInput("date", "date_from", "", false)}</td>
 <td>${createInput("date", "date_to", "", false)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "post_commission_trainings") {
-          row.innerHTML = `<td>${createSelect("training_type", options.training_types, true)}</td>
+  } else if (type === "post_commission_trainings") {
+    row.innerHTML = `<td>${createSelect("training_type", options.training_types, true)}</td>
 <td>${createInput("text", "course_name", "Course Name", false, 200)}</td>
 <td>${createInput("text", "location", "Location", true, 100)}</td>
 <td>${createInput("date", "date_from", "", false)}</td>
@@ -2463,33 +2458,33 @@
 <td>${createInput("number", "mark_obtained_y_side", "Mark Y Side")}</td>
 <td>${createInput("text", "remarks", "Remarks")}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "additional_qualifications") {
-          row.innerHTML = `<td>${createInput("text", "qualification", "Qualification", true, 200)}</td>
+  } else if (type === "additional_qualifications") {
+    row.innerHTML = `<td>${createInput("text", "qualification", "Qualification", true, 200)}</td>
 <td>${createInput("date", "date_obtained", "", true)}</td>
 <td>${createInput("text", "authority", "Authority", true, 100)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "map_reading_promotion_exams") {
-          row.innerHTML = `<td>${createInput("text", "exam_name", "Exam Name", true, 100)}</td>
+  } else if (type === "map_reading_promotion_exams") {
+    row.innerHTML = `<td>${createInput("text", "exam_name", "Exam Name", true, 100)}</td>
 <td>${createInput("number", "passing_year", "Passing Year", true)}</td>
 <td>${createInput("text", "authority", "Authority", false, 100)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "promotions") {
-          row.innerHTML = `<td>${createInput("date", "promotion_date", "", true)}</td>
+  } else if (type === "promotions") {
+    row.innerHTML = `<td>${createInput("date", "promotion_date", "", true)}</td>
 <td>${createSelect("promotion_type", options.promotion_types, true)}</td>
 <td>${createSelect("rank", options.ranks, true)}</td>
 <td>${createInput("text", "authority", "Authority", false, 100)}</td>
 <td>${createInput("text", "order", "Order", false, 50)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "service_records") {
-          row.innerHTML = `<td>${createInput("date", "date_from", "", true)}</td>
+  } else if (type === "service_records") {
+    row.innerHTML = `<td>${createInput("date", "date_from", "", true)}</td>
 <td>${createInput("date", "date_to", "")}</td>
 <td>${createSelect("appointment_type", options.appointment_types)}</td>
 <td>${createInput("text", "appointment_name", "Appointment Name")}</td>
 <td>${createSelect("service_type", options.service_type, true)}</td>
 <td>${createInput("text", "unit_ere_name", "Unit/ERE Name", true, 100)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "operational_awards") {
-          row.innerHTML = `<td>${createInput("text", "operation_name", "Operation Name", true, 200)}</td>
+  } else if (type === "operational_awards") {
+    row.innerHTML = `<td>${createInput("text", "operation_name", "Operation Name", true, 200)}</td>
 <td>${createInput("date", "date_from", "", false)}</td>
 <td>${createInput("date", "date_to", "", false)}</td>
 <td>${createInput("text", "appointment", "Appointment", true, 100)}</td>
@@ -2497,815 +2492,788 @@
 <td>${createInput("text", "authority", "Authority", false, 100)}</td>
 <td>${createInput("text", "remarks", "Remarks", true)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "non_operational_awards") {
-          row.innerHTML = `<td>${createInput("text", "description", "Description", true)}</td>
+  } else if (type === "non_operational_awards") {
+    row.innerHTML = `<td>${createInput("text", "description", "Description", true)}</td>
 <td>${createInput("date", "date_awarded", "", true)}</td>
 <td>${createInput("text", "details", "Details", true)}</td>
 <td>${createInput("text", "authority", "Authority", true, 100)}</td>
 <td>${createInput("text", "remarks", "Remarks", true)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "overseas_visits") {
-          row.innerHTML = `
+  } else if (type === "overseas_visits") {
+    row.innerHTML = `
 <td>${createSelect("visit_type", options.visit_types, true)}</td>
 <td>${createInput("text", "country", "Country", true, 100)}</td>
 <td>${createInput("date", "start_date", "", true)}</td>
 <td>${createInput("date", "end_date", "", true)}</td>
 <td>${createInput("text", "reason", "Reason", true)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "annual_incomes") {
-          row.innerHTML = `<td>${createInput("text", "person", "Person", true)}</td>
+  } else if (type === "annual_incomes") {
+    row.innerHTML = `<td>${createInput("text", "person", "Person", true)}</td>
 <td>${createSelect("income_source", options.income_sources, true)}</td>
 <td>${createInput("number", "amount", "Amount", true)}</td>
 <td>${createInput("number", "year", "Year", true)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "bank_accounts") {
-          row.innerHTML = `<td>${createInput("text", "bank_name", "Bank Name", true, 100)}</td>
+  } else if (type === "bank_accounts") {
+    row.innerHTML = `<td>${createInput("text", "bank_name", "Bank Name", true, 100)}</td>
 <td>${createInput("text", "account_number", "Account Number", true)}</td>
 <td>${createSelect("account_type", options.account_types, true)}</td>
 <td>${createInput("text", "branch", "Branch", true, 100)}</td>
 <td>${createInput("date", "opening_date", "", false)}</td>
 <td>${createInput("date", "closing_date", "")}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "military_legal_records") {
-          row.innerHTML = `<td>${createSelect("military_legal_type", options.military_legal_type, true)}</td>
+  } else if (type === "military_legal_records") {
+    row.innerHTML = `<td>${createSelect("military_legal_type", options.military_legal_type, true)}</td>
 <td>${createSelect("military_legal_name", options.military_legal_name, true)}</td>
 <td>${createInput("text", "remarks", "Remarks")}</td>
 <td>${createInput("date", "date", "", true)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "civil_legal_records") {
-          row.innerHTML = `<td>${createInput("text", "law_section", "Law Section", true, 100)}</td>
+  } else if (type === "civil_legal_records") {
+    row.innerHTML = `<td>${createInput("text", "law_section", "Law Section", true, 100)}</td>
 <td>${createInput("text", "crime_details", "Crime Details", true)}</td>
 <td>${createInput("date", "date_judgment", "", true)}</td>
 <td>${createInput("text", "place", "Place", true, 100)}</td>
 <td>${createInput("text", "punishment", "Punishment", true)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        } else if (type === "ranks_held") {
-          row.innerHTML = `<td>${createInput("date", "date", "", true)}</td>
+  } else if (type === "ranks_held") {
+    row.innerHTML = `<td>${createInput("date", "date", "", true)}</td>
 <td>${createSelect("promotion_type", options.promotion_types, true)}</td>
 <td>${createSelect("rank", options.ranks, true)}</td>
 <td>${createInput("text", "retrospective", "Retrospective")}</td>
 <td>${createInput("text", "notified", "Notified", false)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
-        }
-
-        tbody.appendChild(row);
-        updateRequiredFields(type);
-        // Update required headers after adding row
-        setTimeout(markRequiredHeaders, 50);
-        // Update button visibility
-        updateTableButtons(type);
-      }
-
-      function deleteRow(btn) {
-        const tbody = btn.closest("tbody");
-        const type = tbody.id.replace("_tbody", "");
-        btn.closest("tr").remove();
-        updateRequiredFields(type);
-        // Update button visibility
-        updateTableButtons(type);
-      }
-
-      // Table display names mapping
-      const tableDisplayNames = {
-        addresses: "Address",
-        language_skills: "Language Skill",
-        family_members: "Family Member",
-        education: "Education",
-        passports: "Passport",
-        medical_histories: "Medical History",
-        pre_commission_services: "Pre Commission Service",
-        pre_commission_trainings: "Pre Commission Training",
-        post_commission_trainings: "Post Commission Training",
-        additional_qualifications: "Additional Qualification",
-        map_reading_promotion_exams: "Map Reading Promotion Exam",
-        promotions: "Promotion",
-        service_records: "Service Record",
-        operational_awards: "Operational Award",
-        non_operational_awards: "Non Operational Award",
-        overseas_visits: "Overseas Visit",
-        annual_incomes: "Annual Income",
-        bank_accounts: "Bank Account",
-        military_legal_records: "Military Legal Record",
-        civil_legal_records: "Civil Legal Record",
-        ranks_held: "Rank Held",
-      };
-
-      function updateTableButtons(type, isInitialLoad = false) {
-        const tbody = document.getElementById(`${type}_tbody`);
-        if (!tbody) return;
-
-        const rows = tbody.querySelectorAll("tr");
-        const hasRows = rows.length > 0;
-
-        // Find the section containing this table
-        const section = tbody.closest(".section");
-        if (!section) return;
-
-        // Find the table and thead
-        const table = tbody.closest("table");
-        const thead = table ? table.querySelector("thead") : null;
-
-        // Hide/show thead based on row count
-        if (thead) {
-          if (hasRows) {
-            thead.style.display = "";
-          } else {
-            thead.style.display = "none";
-          }
-        }
-
-        // Find or create the add-first-row button container
-        let addFirstBtnContainer = section.querySelector(
-          ".add-first-row-container",
-        );
-        let addFirstBtn = addFirstBtnContainer
-          ? addFirstBtnContainer.querySelector(".btn-add-first-row")
-          : null;
-        const addRowBtn = section.querySelector(".btn-add-row");
-
-        if (hasRows) {
-          // Hide add-first-row button container, show add-row button
-          if (addFirstBtnContainer) addFirstBtnContainer.style.display = "none";
-          if (addRowBtn) addRowBtn.style.display = "flex";
-        } else {
-          // Show add-first-row button when there are no rows (including on initial load)
-          const tableContainer = section.querySelector(".table-container");
-          if (!addFirstBtnContainer && tableContainer) {
-            // Create container and button if they don't exist
-            addFirstBtnContainer = document.createElement("div");
-            addFirstBtnContainer.className = "add-first-row-container";
-            addFirstBtnContainer.style.textAlign = "center";
-            addFirstBtnContainer.style.padding = "40px 20px";
-            addFirstBtnContainer.style.background = "#f8f9fc";
-            addFirstBtnContainer.style.borderRadius = "8px";
-            addFirstBtnContainer.style.border = "2px dashed #cbd5e0";
-
-            addFirstBtn = document.createElement("button");
-            addFirstBtn.type = "button";
-            addFirstBtn.className = "btn-add-first-row";
-            addFirstBtn.onclick = () => addRow(type);
-            addFirstBtn.textContent = `Add ${tableDisplayNames[type] || type}`;
-
-            addFirstBtnContainer.appendChild(addFirstBtn);
-            tableContainer.insertBefore(
-              addFirstBtnContainer,
-              tableContainer.firstChild,
-            );
-          }
-          // Ensure the button container is visible
-          if (addFirstBtnContainer) {
-            addFirstBtnContainer.style.display = "block";
-          }
-          if (addRowBtn) addRowBtn.style.display = "none";
-        }
-      }
-
-      function initializeTableButtons() {
-        Object.keys(tableDisplayNames).forEach((type) => {
-          updateTableButtons(type, true); // Pass true to indicate initial load
-        });
-      }
-
-      function getValue(id) {
-        const el = document.getElementById(id);
-        return el ? el.value.trim() : "";
-      }
-
-      function getSelectValue(id) {
-        const val = getValue(id);
-        return val || null;
-      }
-
-      function getDateValue(id) {
-        const val = getValue(id);
-        // HTML date inputs return YYYY-MM-DD format (ISO 8601)
-        // Return null if empty, otherwise return the date string in Y-M-D format
-        return val || null;
-      }
-
-      function getDecimalValue(id) {
-        const val = getValue(id);
-        if (!val) return null;
-        const num = parseFloat(val);
-        if (isNaN(num)) return null;
-        // Ensure it's always a decimal (e.g., 3 becomes 3.0)
-        // Return as float to ensure it's always treated as decimal
-        return parseFloat(num.toFixed(1));
-      }
-
-      function getIntegerValue(id) {
-        const val = getValue(id);
-        if (!val) return null;
-        const num = parseInt(val, 10);
-        if (isNaN(num)) return null;
-        // Return as integer
-        return num;
-      }
-
-      function formatDecimalValue(val) {
-        if (val === null || val === undefined || val === "") return null;
-        const num = parseFloat(val);
-        if (isNaN(num)) return null;
-        // Ensure it's always a decimal (e.g., 3 becomes 3.0)
-        // Return as float to ensure it's always treated as decimal
-        return parseFloat(num.toFixed(1));
-      }
-
-      function formatIntegerValue(val) {
-        if (val === null || val === undefined || val === "") return null;
-        const num = parseInt(val, 10);
-        if (isNaN(num)) return null;
-        // Return as integer
-        return num;
-      }
-
-      function getTableData(type) {
-        const tbody = document.getElementById(`${type}_tbody`);
-        const rows = Array.from(tbody.querySelectorAll("tr"));
-
-        return rows.map((row) => {
-          const data = {};
-          const inputs = row.querySelectorAll("input, select");
-          inputs.forEach((input) => {
-            let val = input.value.trim();
-            const name = input.name;
-
-            if (input.tagName === "SELECT") {
-              if (!val) val = null;
-            } else if (input.type === "number") {
-              // Decimal fields: annual_income, amount, gpa
-              if (
-                name === "annual_income" ||
-                name === "amount" ||
-                name === "gpa"
-              ) {
-                val = formatDecimalValue(val);
-              } else if (
-                // Integer fields: year, passing_year, year_of_passing, mark_obtained_b_side, mark_obtained_y_side
-                name === "year" ||
-                name === "passing_year" ||
-                name === "year_of_passing" ||
-                name === "mark_obtained_b_side" ||
-                name === "mark_obtained_y_side"
-              ) {
-                val = formatIntegerValue(val);
-              } else {
-                val = val ? parseFloat(val) : null;
-              }
-            } else if (input.type === "date") {
-              // HTML date inputs return YYYY-MM-DD format (ISO 8601) - Y-M-D format
-              val = val || null;
-            } else if (!val) {
-              val = null;
-            }
-
-            if (name === "is_deceased" || name === "dependency") {
-              data[name] = val === "true" || val === true;
-            } else {
-              data[name] = val;
-            }
-          });
-          return data;
-        });
-      }
-
-      function validateTableRequiredFields(type, requiredFields, sectionName) {
-        const errors = [];
-        const tbody = document.getElementById(`${type}_tbody`);
-        if (!tbody) return errors;
-
-        const rows = Array.from(tbody.querySelectorAll("tr"));
-        // Skip validation if no rows exist - will return empty array in JSON
-        if (rows.length === 0) {
-          return errors;
-        }
-
-        rows.forEach((row, index) => {
-          const inputs = row.querySelectorAll("input, select");
-          requiredFields.forEach((fieldName) => {
-            const input = Array.from(inputs).find(
-              (inp) => inp.name === fieldName,
-            );
-            if (!input) return;
-
-            let value = input.value.trim();
-
-            // Handle boolean fields (is_deceased) - they should have "true" or "false" value
-            if (fieldName === "is_deceased") {
-              if (!value || value === "" || value === "Select") {
-                const rowNum = index + 1;
-                const friendlyFieldName = "Is Deceased";
-                errors.push(
-                  `${sectionName} - Entry ${rowNum}: ${friendlyFieldName}`,
-                );
-              }
-            } else if (!value || value === "" || value === "Select") {
-              const rowNum = index + 1;
-              // Convert field name to human-readable format
-              const friendlyFieldName = fieldName
-                .replace(/_/g, " ")
-                .replace(/\b\w/g, (l) => l.toUpperCase())
-                .replace(/Id/g, "ID")
-                .replace(/Gpa/g, "GPA")
-                .replace(/No/g, "No.");
-              errors.push(
-                `${sectionName} - Entry ${rowNum}: ${friendlyFieldName}`,
-              );
-            }
-          });
-        });
-
-        return errors;
-      }
-
-      function validateRequiredSections() {
-        const errors = [];
-
-        // Validate Person section
-        if (!getValue("person_name")) errors.push("Person - Name");
-        if (!getValue("short_name")) errors.push("Person - Short Name");
-        if (!getValue("person_personal_no"))
-          errors.push("Person - Personal No");
-
-        // Validate Personal Info section
-        if (!getValue("national_id_number"))
-          errors.push("Personal Info - National ID Number");
-
-        // Validate Address
-        errors.push(
-          ...validateTableRequiredFields(
-            "addresses",
-            ["address_type", "street_address"],
-            "Address",
-          ),
-        );
-
-        // Validate Language Skills
-        errors.push(
-          ...validateTableRequiredFields(
-            "language_skills",
-            ["language"],
-            "Language Skill",
-          ),
-        );
-
-        // Validate Family Members
-        errors.push(
-          ...validateTableRequiredFields(
-            "family_members",
-            ["relationship", "name", "is_deceased"],
-            "Family Member",
-          ),
-        );
-
-        // Validate Education
-        errors.push(
-          ...validateTableRequiredFields(
-            "education",
-            ["institution_type", "institution_name", "remarks"],
-            "Education",
-          ),
-        );
-
-        // Validate Passports
-        errors.push(
-          ...validateTableRequiredFields(
-            "passports",
-            ["passport_number"],
-            "Passport",
-          ),
-        );
-
-        // Validate Medical Histories
-        errors.push(
-          ...validateTableRequiredFields(
-            "medical_histories",
-            ["name_of_disease", "nature_of_injury"],
-            "Medical History",
-          ),
-        );
-
-        // Validate Pre Commission Services
-        errors.push(
-          ...validateTableRequiredFields(
-            "pre_commission_services",
-            ["unit", "designation", "remarks"],
-            "Pre Commission Service",
-          ),
-        );
-
-        // Validate Pre Commission Trainings
-        errors.push(
-          ...validateTableRequiredFields(
-            "pre_commission_trainings",
-            ["location", "appointment", "distinction", "remarks"],
-            "Pre Commission Training",
-          ),
-        );
-
-        // Validate Commission section
-        if (!getValue("academy_course"))
-          errors.push("Commission - Academy Course");
-        if (!getValue("commission_type"))
-          errors.push("Commission - Commission Type");
-        if (!getValue("commission_authority"))
-          errors.push("Commission - Commission Authority");
-        if (!getValue("order_number")) errors.push("Commission - Order Number");
-        if (!getValue("ante_date_seniority"))
-          errors.push("Commission - Ante Date Seniority");
-        if (!getValue("permanent_commission_authority"))
-          errors.push("Commission - Permanent Commission Authority");
-        if (!getValue("joining_bangladesh_army_authority"))
-          errors.push("Commission - Joining Bangladesh Army Authority");
-
-        // Validate Post Commission Trainings
-        errors.push(
-          ...validateTableRequiredFields(
-            "post_commission_trainings",
-            ["training_type", "location"],
-            "Post Commission Training",
-          ),
-        );
-
-        // Validate Additional Qualifications
-        errors.push(
-          ...validateTableRequiredFields(
-            "additional_qualifications",
-            ["qualification", "date_obtained", "authority"],
-            "Additional Qualification",
-          ),
-        );
-
-        // Validate Map Reading Promotion Exams
-        errors.push(
-          ...validateTableRequiredFields(
-            "map_reading_promotion_exams",
-            ["exam_name", "passing_year"],
-            "Map Reading Promotion Exam",
-          ),
-        );
-
-        // Validate Promotions
-        errors.push(
-          ...validateTableRequiredFields(
-            "promotions",
-            ["promotion_date", "promotion_type", "rank"],
-            "Promotion",
-          ),
-        );
-
-        // Validate Service Records
-        errors.push(
-          ...validateTableRequiredFields(
-            "service_records",
-            ["date_from", "service_type", "unit_ere_name"],
-            "Service Record",
-          ),
-        );
-
-        // Validate Operational Awards
-        errors.push(
-          ...validateTableRequiredFields(
-            "operational_awards",
-            ["operation_name", "appointment", "award_receive", "remarks"],
-            "Operational Award",
-          ),
-        );
-
-        // Validate Non Operational Awards
-        errors.push(
-          ...validateTableRequiredFields(
-            "non_operational_awards",
-            ["description", "date_awarded", "details", "authority", "remarks"],
-            "Non Operational Award",
-          ),
-        );
-
-        // Validate Overseas Visits
-        errors.push(
-          ...validateTableRequiredFields(
-            "overseas_visits",
-            ["visit_type", "country", "start_date", "end_date", "reason"],
-            "Overseas Visit",
-          ),
-        );
-
-        // Validate Annual Incomes
-        errors.push(
-          ...validateTableRequiredFields(
-            "annual_incomes",
-            ["person", "income_source", "amount", "year"],
-            "Annual Income",
-          ),
-        );
-
-        // Validate Bank Accounts
-        errors.push(
-          ...validateTableRequiredFields(
-            "bank_accounts",
-            ["bank_name", "account_number", "account_type", "branch"],
-            "Bank Account",
-          ),
-        );
-
-        // Validate Military Legal Records
-        errors.push(
-          ...validateTableRequiredFields(
-            "military_legal_records",
-            ["date", "military_legal_type", "military_legal_name"],
-            "Military Legal Record",
-          ),
-        );
-
-        // Validate Civil Legal Records
-        errors.push(
-          ...validateTableRequiredFields(
-            "civil_legal_records",
-            ["law_section", "crime_details", "place", "punishment"],
-            "Civil Legal Record",
-          ),
-        );
-
-        // Validate Ranks Held
-        errors.push(
-          ...validateTableRequiredFields(
-            "ranks_held",
-            ["date", "promotion_type", "rank"],
-            "Ranks Held",
-          ),
-        );
-
-        if (errors.length > 0) {
-          const errorMessage =
-            "Please complete all required fields before downloading your data.\n\n" +
-            "The following information is missing:\n\n" +
-            errors.join("\n");
-          alert(errorMessage);
-          return false;
-        }
-        return true;
-      }
-
-      function clearForm() {
-        if (!confirm("Clear all data?")) return;
-
-        // Clear all form inputs (non-table inputs)
-        document.querySelectorAll("input, select").forEach((el) => {
-          if (!el.closest("tbody")) {
-            el.value = "";
-          }
-        });
-
-        // Clear all table rows
-        const tableTypes = Object.keys(tableDisplayNames);
-        tableTypes.forEach((type) => {
-          const tbody = document.getElementById(`${type}_tbody`);
-          if (tbody) {
-            const rows = tbody.querySelectorAll("tr");
-            rows.forEach((row) => row.remove());
-            // Update button visibility after clearing
-            updateTableButtons(type);
-          }
-        });
-
-        alert("All form data has been cleared successfully.");
-      }
-
-      function saveJSON() {
-        if (!validateRequiredSections()) {
-          return;
-        }
-
-        const data = {
-          person: {
-            name: getValue("person_name"),
-            personal_no: getValue("person_personal_no"),
-            short_name: getValue("short_name"),
-            mobile_no: getValue("person_mobile_no"),
-            inactive_date: getDateValue("inactive_date"),
-            // picture: getValue("person_picture") || null,
-          },
-          personal_info: {
-            national_id_number: getValue("national_id_number"),
-            arms_service: getValue("arms_service") || null,
-            date_of_birth: getDateValue("date_of_birth"),
-            place_of_birth: getValue("place_of_birth"),
-            birth_certificate_number: getValue("birth_certificate_number"),
-            height_cm: getDecimalValue("height_cm"),
-            height_inch: getDecimalValue("height_inch"),
-            weight_kg: getDecimalValue("weight_kg"),
-            weight_pound: getDecimalValue("weight_pound"),
-            build: getValue("build"),
-            complexion: getValue("complexion"),
-            eye_color: getValue("eye_color"),
-            visible_identification_marks:
-              getValue("visible_identification_marks") || null,
-            blood_group: getSelectValue("blood_group"),
-            religion: getValue("religion"),
-            caste: getValue("caste") || null,
-            nationality: getValue("nationality"),
-            previous_nationality: getValue("previous_nationality") || null,
-            present_medical_category: getValue("present_medical_category"),
-            present_nature_of_disability: getValue(
-              "present_nature_of_disability",
-            ),
-            present_attributes: getValue("present_attributes"),
-            email: getValue("email"),
-            personal_phone_no: getValue("personal_phone_no"),
-            tnt_phone_no: getValue("tnt_phone_no") || null,
-            position_among_siblings: getIntegerValue("position_among_siblings"),
-            marital_status: getSelectValue("marital_status"),
-            date_of_marriage: getDateValue("date_of_marriage"),
-          },
-          addresses: getTableData("addresses"),
-          language_skills: getTableData("language_skills"),
-          family_members: getTableData("family_members"),
-          education: getTableData("education"),
-          passports: getTableData("passports"),
-          medical_histories: getTableData("medical_histories"),
-          pre_commission_services: getTableData("pre_commission_services"),
-          pre_commission_trainings: getTableData("pre_commission_trainings"),
-          commission: {
-            academy_course: getValue("academy_course"),
-            date_of_joining_academy: getDateValue("date_of_joining_academy"),
-            date_of_commission: getDateValue("date_of_commission"),
-            commission_type: getSelectValue("commission_type"),
-            commission_authority: getValue("commission_authority"),
-            order_number: getValue("order_number"),
-            ante_date_seniority: getDateValue("ante_date_seniority"),
-            ante_date_authority: getValue("ante_date_authority") || null,
-            permanent_commission_date: getDateValue(
-              "permanent_commission_date",
-            ),
-            permanent_commission_authority: getValue(
-              "permanent_commission_authority",
-            ),
-            date_of_joining_bangladesh_army: getDateValue(
-              "date_of_joining_bangladesh_army",
-            ),
-            joining_bangladesh_army_authority: getValue(
-              "joining_bangladesh_army_authority",
-            ),
-            original_arms_service: getValue("original_arms_service") || null,
-            previous_arms_service: getValue("previous_arms_service") || null,
-          },
-          post_commission_trainings: getTableData("post_commission_trainings"),
-          additional_qualifications: getTableData("additional_qualifications"),
-          map_reading_promotion_exams: getTableData(
-            "map_reading_promotion_exams",
-          ),
-          promotions: getTableData("promotions"),
-          service_records: getTableData("service_records"),
-          operational_awards: getTableData("operational_awards"),
-          non_operational_awards: getTableData("non_operational_awards"),
-          overseas_visits: getTableData("overseas_visits"),
-          annual_incomes: getTableData("annual_incomes"),
-          bank_accounts: getTableData("bank_accounts"),
-          military_legal_records: getTableData("military_legal_records"),
-          civil_legal_records: getTableData("civil_legal_records"),
-          ranks_held: getTableData("ranks_held"),
-        };
-
-        // Store data in localStorage for the modal
-        localStorage.setItem("personnelData", JSON.stringify(data));
-
-        // Show the modal instead of downloading directly
-        showModal();
-      }
-
-      function markRequiredHeaders() {
-        const tableTypes = [
-          "addresses",
-          "language_skills",
-          "family_members",
-          "education",
-          "passports",
-          "medical_histories",
-          "pre_commission_services",
-          "pre_commission_trainings",
-          "post_commission_trainings",
-          "additional_qualifications",
-          "map_reading_promotion_exams",
-          "promotions",
-          "service_records",
-          "operational_awards",
-          "non_operational_awards",
-          "overseas_visits",
-          "annual_incomes",
-          "bank_accounts",
-          "military_legal_records",
-          "civil_legal_records",
-          "ranks_held",
-        ];
-
-        tableTypes.forEach((type) => {
-          const tbody = document.getElementById(`${type}_tbody`);
-          const thead = tbody.closest("table")?.querySelector("thead");
-          if (!thead) return;
-
-          const headerRow = thead.querySelector("tr");
-          if (!headerRow) return;
-
-          const headers = Array.from(headerRow.querySelectorAll("th"));
-          const firstDataRow = tbody.querySelector("tr");
-
-          if (firstDataRow) {
-            const inputs = firstDataRow.querySelectorAll("input, select");
-            inputs.forEach((input, index) => {
-              // Skip the Action column (last column)
-              if (index < headers.length - 1) {
-                const header = headers[index];
-                if (input.hasAttribute("required")) {
-                  header.classList.add("required-header");
-                } else {
-                  header.classList.remove("required-header");
-                }
-              }
-            });
-          }
-        });
-      }
-
-      // Modal functions
-      let personnelData = {};
-
-      function showModal() {
-        personnelData = JSON.parse(localStorage.getItem("personnelData")) || {};
-        renderContent();
-        document.getElementById("reviewModal").style.display = "flex";
-      }
-
-      function closeModal() {
-        if (confirm("Are you sure you want to back to editing?")) {
-          document.getElementById("reviewModal").style.display = "none";
-        }
-      }
-
-      function downloadJSON() {
-        // First stringify the data
-        let jsonString = JSON.stringify(personnelData, null, 2);
-
-        // List of decimal field names that should always show as decimal (e.g., 3.0)
-        const decimalFields = [
-          "height_cm",
-          "height_inch",
-          "weight_kg",
-          "weight_pound",
-          "annual_income",
-          "gpa",
-          "amount",
-        ];
-
-        // Replace whole numbers in decimal fields with decimal format (3 -> 3.0)
-        decimalFields.forEach((field) => {
-          // Match the field name followed by colon and a whole number
-          // Pattern: "field_name": 3  ->  "field_name": 3.0
-          const regex = new RegExp(`("${field}"\\s*:\\s*)(\\d+)([,\\n])`, "g");
-          jsonString = jsonString.replace(
-            regex,
-            (match, prefix, number, suffix) => {
-              return `${prefix}${parseFloat(number).toFixed(1)}${suffix}`;
-            },
-          );
-        });
-
-        const blob = new Blob([jsonString], {
-          type: "application/json",
-        });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download =
-          `${personnelData.person?.personal_no}-RECORD.json` ||
-          "unknown_record.json";
-        link.click();
-      }
-
-      // Helper function to format values
-      function formatValue(value) {
-        if (
-          value === null ||
-          value === undefined ||
-          value === "" ||
-          value === "-"
+  }
+
+  tbody.appendChild(row);
+  updateRequiredFields(type);
+  // Update required headers after adding row
+  setTimeout(markRequiredHeaders, 50);
+  // Update button visibility
+  updateTableButtons(type);
+}
+
+function deleteRow(btn) {
+  const tbody = btn.closest("tbody");
+  const type = tbody.id.replace("_tbody", "");
+  btn.closest("tr").remove();
+  updateRequiredFields(type);
+  // Update button visibility
+  updateTableButtons(type);
+}
+
+// Table display names mapping
+const tableDisplayNames = {
+  addresses: "Address",
+  language_skills: "Language Skill",
+  family_members: "Family Member",
+  education: "Education",
+  passports: "Passport",
+  medical_histories: "Medical History",
+  pre_commission_services: "Pre Commission Service",
+  pre_commission_trainings: "Pre Commission Training",
+  post_commission_trainings: "Post Commission Training",
+  additional_qualifications: "Additional Qualification",
+  map_reading_promotion_exams: "Map Reading Promotion Exam",
+  promotions: "Promotion",
+  service_records: "Service Record",
+  operational_awards: "Operational Award",
+  non_operational_awards: "Non Operational Award",
+  overseas_visits: "Overseas Visit",
+  annual_incomes: "Annual Income",
+  bank_accounts: "Bank Account",
+  military_legal_records: "Military Legal Record",
+  civil_legal_records: "Civil Legal Record",
+  ranks_held: "Rank Held",
+};
+
+function updateTableButtons(type, isInitialLoad = false) {
+  const tbody = document.getElementById(`${type}_tbody`);
+  if (!tbody) return;
+
+  const rows = tbody.querySelectorAll("tr");
+  const hasRows = rows.length > 0;
+
+  // Find the section containing this table
+  const section = tbody.closest(".section");
+  if (!section) return;
+
+  // Find the table and thead
+  const table = tbody.closest("table");
+  const thead = table ? table.querySelector("thead") : null;
+
+  // Hide/show thead based on row count
+  if (thead) {
+    if (hasRows) {
+      thead.style.display = "";
+    } else {
+      thead.style.display = "none";
+    }
+  }
+
+  // Find or create the add-first-row button container
+  let addFirstBtnContainer = section.querySelector(".add-first-row-container");
+  let addFirstBtn = addFirstBtnContainer
+    ? addFirstBtnContainer.querySelector(".btn-add-first-row")
+    : null;
+  const addRowBtn = section.querySelector(".btn-add-row");
+
+  if (hasRows) {
+    // Hide add-first-row button container, show add-row button
+    if (addFirstBtnContainer) addFirstBtnContainer.style.display = "none";
+    if (addRowBtn) addRowBtn.style.display = "flex";
+  } else {
+    // Show add-first-row button when there are no rows (including on initial load)
+    const tableContainer = section.querySelector(".table-container");
+    if (!addFirstBtnContainer && tableContainer) {
+      // Create container and button if they don't exist
+      addFirstBtnContainer = document.createElement("div");
+      addFirstBtnContainer.className = "add-first-row-container";
+      addFirstBtnContainer.style.textAlign = "center";
+      addFirstBtnContainer.style.padding = "40px 20px";
+      addFirstBtnContainer.style.background = "#f8f9fc";
+      addFirstBtnContainer.style.borderRadius = "8px";
+      addFirstBtnContainer.style.border = "2px dashed #cbd5e0";
+
+      addFirstBtn = document.createElement("button");
+      addFirstBtn.type = "button";
+      addFirstBtn.className = "btn-add-first-row";
+      addFirstBtn.onclick = () => addRow(type);
+      addFirstBtn.textContent = `Add ${tableDisplayNames[type] || type}`;
+
+      addFirstBtnContainer.appendChild(addFirstBtn);
+      tableContainer.insertBefore(
+        addFirstBtnContainer,
+        tableContainer.firstChild,
+      );
+    }
+    // Ensure the button container is visible
+    if (addFirstBtnContainer) {
+      addFirstBtnContainer.style.display = "block";
+    }
+    if (addRowBtn) addRowBtn.style.display = "none";
+  }
+}
+
+function initializeTableButtons() {
+  Object.keys(tableDisplayNames).forEach((type) => {
+    updateTableButtons(type, true); // Pass true to indicate initial load
+  });
+}
+
+function getValue(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : "";
+}
+
+function getSelectValue(id) {
+  const val = getValue(id);
+  return val || null;
+}
+
+function getDateValue(id) {
+  const val = getValue(id);
+  // HTML date inputs return YYYY-MM-DD format (ISO 8601)
+  // Return null if empty, otherwise return the date string in Y-M-D format
+  return val || null;
+}
+
+function getDecimalValue(id) {
+  const val = getValue(id);
+  if (!val) return null;
+  const num = parseFloat(val);
+  if (isNaN(num)) return null;
+  // Ensure it's always a decimal (e.g., 3 becomes 3.0)
+  // Return as float to ensure it's always treated as decimal
+  return parseFloat(num.toFixed(1));
+}
+
+function getIntegerValue(id) {
+  const val = getValue(id);
+  if (!val) return null;
+  const num = parseInt(val, 10);
+  if (isNaN(num)) return null;
+  // Return as integer
+  return num;
+}
+
+function formatDecimalValue(val) {
+  if (val === null || val === undefined || val === "") return null;
+  const num = parseFloat(val);
+  if (isNaN(num)) return null;
+  // Ensure it's always a decimal (e.g., 3 becomes 3.0)
+  // Return as float to ensure it's always treated as decimal
+  return parseFloat(num.toFixed(1));
+}
+
+function formatIntegerValue(val) {
+  if (val === null || val === undefined || val === "") return null;
+  const num = parseInt(val, 10);
+  if (isNaN(num)) return null;
+  // Return as integer
+  return num;
+}
+
+function getTableData(type) {
+  const tbody = document.getElementById(`${type}_tbody`);
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+
+  return rows.map((row) => {
+    const data = {};
+    const inputs = row.querySelectorAll("input, select");
+    inputs.forEach((input) => {
+      let val = input.value.trim();
+      const name = input.name;
+
+      if (input.tagName === "SELECT") {
+        if (!val) val = null;
+      } else if (input.type === "number") {
+        // Decimal fields: annual_income, amount, gpa
+        if (name === "annual_income" || name === "amount" || name === "gpa") {
+          val = formatDecimalValue(val);
+        } else if (
+          // Integer fields: year, passing_year, year_of_passing, mark_obtained_b_side, mark_obtained_y_side
+          name === "year" ||
+          name === "passing_year" ||
+          name === "year_of_passing" ||
+          name === "mark_obtained_b_side" ||
+          name === "mark_obtained_y_side"
         ) {
-          return '<span class="no-data">N/A</span>';
+          val = formatIntegerValue(val);
+        } else {
+          val = val ? parseFloat(val) : null;
         }
-        return value;
+      } else if (input.type === "date") {
+        // HTML date inputs return YYYY-MM-DD format (ISO 8601) - Y-M-D format
+        val = val || null;
+      } else if (!val) {
+        val = null;
       }
 
-      // Helper function to format dates
-      function formatDate(dateString) {
-        if (!dateString) return '<span class="no-data">N/A</span>';
-        const date = new Date(dateString);
-        return date.toLocaleDateString("en-GB");
+      if (name === "is_deceased" || name === "dependency") {
+        data[name] = val === "Yes" || val === "true" || val === true;
+      } else {
+        data[name] = val;
       }
+    });
+    return data;
+  });
+}
 
-      // Generate Personal Information Section
-      function generatePersonalreview() {
-        const person = personnelData.person;
-        const review = personnelData.personal_info;
+function validateTableRequiredFields(type, requiredFields, sectionName) {
+  const errors = [];
+  const tbody = document.getElementById(`${type}_tbody`);
+  if (!tbody) return errors;
 
-        return `
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+  // Skip validation if no rows exist - will return empty array in JSON
+  if (rows.length === 0) {
+    return errors;
+  }
+
+  rows.forEach((row, index) => {
+    const inputs = row.querySelectorAll("input, select");
+    requiredFields.forEach((fieldName) => {
+      const input = Array.from(inputs).find((inp) => inp.name === fieldName);
+      if (!input) return;
+
+      let value = input.value.trim();
+
+      // Handle boolean fields (is_deceased) - they should have "Yes" or "No" value
+      if (fieldName === "is_deceased") {
+        if (!value || value === "" || value === "Select") {
+          const rowNum = index + 1;
+          const friendlyFieldName = "Is Deceased";
+          errors.push(`${sectionName} - Entry ${rowNum}: ${friendlyFieldName}`);
+        }
+      } else if (!value || value === "" || value === "Select") {
+        const rowNum = index + 1;
+        // Convert field name to human-readable format
+        const friendlyFieldName = fieldName
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, (l) => l.toUpperCase())
+          .replace(/Id/g, "ID")
+          .replace(/Gpa/g, "GPA")
+          .replace(/No/g, "No.");
+        errors.push(`${sectionName} - Entry ${rowNum}: ${friendlyFieldName}`);
+      }
+    });
+  });
+
+  return errors;
+}
+
+function validateRequiredSections() {
+  const errors = [];
+
+  // Validate Person section
+  if (!getValue("person_name")) errors.push("Person - Name");
+  if (!getValue("short_name")) errors.push("Person - Short Name");
+  if (!getValue("person_personal_no")) errors.push("Person - Personal No");
+
+  // Validate Personal Info section
+  if (!getValue("national_id_number"))
+    errors.push("Personal Info - National ID Number");
+
+  // Validate Address
+  errors.push(
+    ...validateTableRequiredFields(
+      "addresses",
+      ["address_type", "street_address"],
+      "Address",
+    ),
+  );
+
+  // Validate Language Skills
+  errors.push(
+    ...validateTableRequiredFields(
+      "language_skills",
+      ["language"],
+      "Language Skill",
+    ),
+  );
+
+  // Validate Family Members
+  errors.push(
+    ...validateTableRequiredFields(
+      "family_members",
+      ["relationship", "name", "is_deceased"],
+      "Family Member",
+    ),
+  );
+
+  // Validate Education
+  errors.push(
+    ...validateTableRequiredFields(
+      "education",
+      ["institution_type", "institution_name", "remarks"],
+      "Education",
+    ),
+  );
+
+  // Validate Passports
+  errors.push(
+    ...validateTableRequiredFields(
+      "passports",
+      ["passport_number"],
+      "Passport",
+    ),
+  );
+
+  // Validate Medical Histories
+  errors.push(
+    ...validateTableRequiredFields(
+      "medical_histories",
+      ["name_of_disease", "nature_of_injury"],
+      "Medical History",
+    ),
+  );
+
+  // Validate Pre Commission Services
+  errors.push(
+    ...validateTableRequiredFields(
+      "pre_commission_services",
+      ["unit", "designation", "remarks"],
+      "Pre Commission Service",
+    ),
+  );
+
+  // Validate Pre Commission Trainings
+  errors.push(
+    ...validateTableRequiredFields(
+      "pre_commission_trainings",
+      ["location", "appointment", "distinction", "remarks"],
+      "Pre Commission Training",
+    ),
+  );
+
+  // Validate Commission section
+  if (!getValue("academy_course")) errors.push("Commission - Academy Course");
+  if (!getValue("commission_type")) errors.push("Commission - Commission Type");
+  if (!getValue("commission_authority"))
+    errors.push("Commission - Commission Authority");
+  if (!getValue("order_number")) errors.push("Commission - Order Number");
+  if (!getValue("ante_date_seniority"))
+    errors.push("Commission - Ante Date Seniority");
+  if (!getValue("permanent_commission_authority"))
+    errors.push("Commission - Permanent Commission Authority");
+  if (!getValue("joining_bangladesh_army_authority"))
+    errors.push("Commission - Joining Bangladesh Army Authority");
+
+  // Validate Post Commission Trainings
+  errors.push(
+    ...validateTableRequiredFields(
+      "post_commission_trainings",
+      ["training_type", "location"],
+      "Post Commission Training",
+    ),
+  );
+
+  // Validate Additional Qualifications
+  errors.push(
+    ...validateTableRequiredFields(
+      "additional_qualifications",
+      ["qualification", "date_obtained", "authority"],
+      "Additional Qualification",
+    ),
+  );
+
+  // Validate Map Reading Promotion Exams
+  errors.push(
+    ...validateTableRequiredFields(
+      "map_reading_promotion_exams",
+      ["exam_name", "passing_year"],
+      "Map Reading Promotion Exam",
+    ),
+  );
+
+  // Validate Promotions
+  errors.push(
+    ...validateTableRequiredFields(
+      "promotions",
+      ["promotion_date", "promotion_type", "rank"],
+      "Promotion",
+    ),
+  );
+
+  // Validate Service Records
+  errors.push(
+    ...validateTableRequiredFields(
+      "service_records",
+      ["date_from", "service_type", "unit_ere_name"],
+      "Service Record",
+    ),
+  );
+
+  // Validate Operational Awards
+  errors.push(
+    ...validateTableRequiredFields(
+      "operational_awards",
+      ["operation_name", "appointment", "award_receive", "remarks"],
+      "Operational Award",
+    ),
+  );
+
+  // Validate Non Operational Awards
+  errors.push(
+    ...validateTableRequiredFields(
+      "non_operational_awards",
+      ["description", "date_awarded", "details", "authority", "remarks"],
+      "Non Operational Award",
+    ),
+  );
+
+  // Validate Overseas Visits
+  errors.push(
+    ...validateTableRequiredFields(
+      "overseas_visits",
+      ["visit_type", "country", "start_date", "end_date", "reason"],
+      "Overseas Visit",
+    ),
+  );
+
+  // Validate Annual Incomes
+  errors.push(
+    ...validateTableRequiredFields(
+      "annual_incomes",
+      ["person", "income_source", "amount", "year"],
+      "Annual Income",
+    ),
+  );
+
+  // Validate Bank Accounts
+  errors.push(
+    ...validateTableRequiredFields(
+      "bank_accounts",
+      ["bank_name", "account_number", "account_type", "branch"],
+      "Bank Account",
+    ),
+  );
+
+  // Validate Military Legal Records
+  errors.push(
+    ...validateTableRequiredFields(
+      "military_legal_records",
+      ["date", "military_legal_type", "military_legal_name"],
+      "Military Legal Record",
+    ),
+  );
+
+  // Validate Civil Legal Records
+  errors.push(
+    ...validateTableRequiredFields(
+      "civil_legal_records",
+      ["law_section", "crime_details", "place", "punishment"],
+      "Civil Legal Record",
+    ),
+  );
+
+  // Validate Ranks Held
+  errors.push(
+    ...validateTableRequiredFields(
+      "ranks_held",
+      ["date", "promotion_type", "rank"],
+      "Ranks Held",
+    ),
+  );
+
+  if (errors.length > 0) {
+    const errorMessage =
+      "Please complete all required fields before downloading your data.\n\n" +
+      "The following information is missing:\n\n" +
+      errors.join("\n");
+    alert(errorMessage);
+    return false;
+  }
+  return true;
+}
+
+function clearForm() {
+  if (!confirm("Clear all data?")) return;
+
+  // Clear all form inputs (non-table inputs)
+  document.querySelectorAll("input, select").forEach((el) => {
+    if (!el.closest("tbody")) {
+      el.value = "";
+    }
+  });
+
+  // Clear all table rows
+  const tableTypes = Object.keys(tableDisplayNames);
+  tableTypes.forEach((type) => {
+    const tbody = document.getElementById(`${type}_tbody`);
+    if (tbody) {
+      const rows = tbody.querySelectorAll("tr");
+      rows.forEach((row) => row.remove());
+      // Update button visibility after clearing
+      updateTableButtons(type);
+    }
+  });
+
+  alert("All form data has been cleared successfully.");
+}
+
+function saveJSON() {
+  if (!validateRequiredSections()) {
+    return;
+  }
+
+  const data = {
+    person: {
+      name: getValue("person_name"),
+      personal_no: getValue("person_personal_no"),
+      short_name: getValue("short_name"),
+      mobile_no: getValue("person_mobile_no"),
+      inactive_date: getDateValue("inactive_date"),
+      // picture: getValue("person_picture") || null,
+    },
+    personal_info: {
+      national_id_number: getValue("national_id_number"),
+      arms_service: getValue("arms_service") || null,
+      date_of_birth: getDateValue("date_of_birth"),
+      place_of_birth: getValue("place_of_birth"),
+      birth_certificate_number: getValue("birth_certificate_number"),
+      height_cm: getDecimalValue("height_cm"),
+      height_inch: getDecimalValue("height_inch"),
+      weight_kg: getDecimalValue("weight_kg"),
+      weight_pound: getDecimalValue("weight_pound"),
+      build: getValue("build"),
+      complexion: getValue("complexion"),
+      eye_color: getValue("eye_color"),
+      visible_identification_marks:
+        getValue("visible_identification_marks") || null,
+      blood_group: getSelectValue("blood_group"),
+      religion: getValue("religion"),
+      caste: getValue("caste") || null,
+      nationality: getValue("nationality"),
+      previous_nationality: getValue("previous_nationality") || null,
+      present_medical_category: getValue("present_medical_category"),
+      present_nature_of_disability: getValue("present_nature_of_disability"),
+      present_attributes: getValue("present_attributes"),
+      email: getValue("email"),
+      personal_phone_no: getValue("personal_phone_no"),
+      tnt_phone_no: getValue("tnt_phone_no") || null,
+      position_among_siblings: getIntegerValue("position_among_siblings"),
+      marital_status: getSelectValue("marital_status"),
+      date_of_marriage: getDateValue("date_of_marriage"),
+    },
+    addresses: getTableData("addresses"),
+    language_skills: getTableData("language_skills"),
+    family_members: getTableData("family_members"),
+    education: getTableData("education"),
+    passports: getTableData("passports"),
+    medical_histories: getTableData("medical_histories"),
+    pre_commission_services: getTableData("pre_commission_services"),
+    pre_commission_trainings: getTableData("pre_commission_trainings"),
+    commission: {
+      academy_course: getValue("academy_course"),
+      date_of_joining_academy: getDateValue("date_of_joining_academy"),
+      date_of_commission: getDateValue("date_of_commission"),
+      commission_type: getSelectValue("commission_type"),
+      commission_authority: getValue("commission_authority"),
+      order_number: getValue("order_number"),
+      ante_date_seniority: getDateValue("ante_date_seniority"),
+      ante_date_authority: getValue("ante_date_authority") || null,
+      permanent_commission_date: getDateValue("permanent_commission_date"),
+      permanent_commission_authority: getValue(
+        "permanent_commission_authority",
+      ),
+      date_of_joining_bangladesh_army: getDateValue(
+        "date_of_joining_bangladesh_army",
+      ),
+      joining_bangladesh_army_authority: getValue(
+        "joining_bangladesh_army_authority",
+      ),
+      original_arms_service: getValue("original_arms_service") || null,
+      previous_arms_service: getValue("previous_arms_service") || null,
+    },
+    post_commission_trainings: getTableData("post_commission_trainings"),
+    additional_qualifications: getTableData("additional_qualifications"),
+    map_reading_promotion_exams: getTableData("map_reading_promotion_exams"),
+    promotions: getTableData("promotions"),
+    service_records: getTableData("service_records"),
+    operational_awards: getTableData("operational_awards"),
+    non_operational_awards: getTableData("non_operational_awards"),
+    overseas_visits: getTableData("overseas_visits"),
+    annual_incomes: getTableData("annual_incomes"),
+    bank_accounts: getTableData("bank_accounts"),
+    military_legal_records: getTableData("military_legal_records"),
+    civil_legal_records: getTableData("civil_legal_records"),
+    ranks_held: getTableData("ranks_held"),
+  };
+
+  // Store data in localStorage for the modal
+  localStorage.setItem("personnelData", JSON.stringify(data));
+
+  // Show the modal instead of downloading directly
+  showModal();
+}
+
+function markRequiredHeaders() {
+  const tableTypes = [
+    "addresses",
+    "language_skills",
+    "family_members",
+    "education",
+    "passports",
+    "medical_histories",
+    "pre_commission_services",
+    "pre_commission_trainings",
+    "post_commission_trainings",
+    "additional_qualifications",
+    "map_reading_promotion_exams",
+    "promotions",
+    "service_records",
+    "operational_awards",
+    "non_operational_awards",
+    "overseas_visits",
+    "annual_incomes",
+    "bank_accounts",
+    "military_legal_records",
+    "civil_legal_records",
+    "ranks_held",
+  ];
+
+  tableTypes.forEach((type) => {
+    const tbody = document.getElementById(`${type}_tbody`);
+    const thead = tbody.closest("table")?.querySelector("thead");
+    if (!thead) return;
+
+    const headerRow = thead.querySelector("tr");
+    if (!headerRow) return;
+
+    const headers = Array.from(headerRow.querySelectorAll("th"));
+    const firstDataRow = tbody.querySelector("tr");
+
+    if (firstDataRow) {
+      const inputs = firstDataRow.querySelectorAll("input, select");
+      inputs.forEach((input, index) => {
+        // Skip the Action column (last column)
+        if (index < headers.length - 1) {
+          const header = headers[index];
+          if (input.hasAttribute("required")) {
+            header.classList.add("required-header");
+          } else {
+            header.classList.remove("required-header");
+          }
+        }
+      });
+    }
+  });
+}
+
+// Modal functions
+let personnelData = {};
+
+function showModal() {
+  personnelData = JSON.parse(localStorage.getItem("personnelData")) || {};
+  renderContent();
+  document.getElementById("reviewModal").style.display = "flex";
+}
+
+function closeModal() {
+  if (confirm("Are you sure you want to back to editing?")) {
+    document.getElementById("reviewModal").style.display = "none";
+  }
+}
+
+function downloadJSON() {
+  // First stringify the data
+  let jsonString = JSON.stringify(personnelData, null, 2);
+
+  // List of decimal field names that should always show as decimal (e.g., 3.0)
+  const decimalFields = [
+    "height_cm",
+    "height_inch",
+    "weight_kg",
+    "weight_pound",
+    "annual_income",
+    "gpa",
+    "amount",
+  ];
+
+  // Replace whole numbers in decimal fields with decimal format (3 -> 3.0)
+  decimalFields.forEach((field) => {
+    // Match the field name followed by colon and a whole number
+    // Pattern: "field_name": 3  ->  "field_name": 3.0
+    const regex = new RegExp(`("${field}"\\s*:\\s*)(\\d+)([,\\n])`, "g");
+    jsonString = jsonString.replace(regex, (match, prefix, number, suffix) => {
+      return `${prefix}${parseFloat(number).toFixed(1)}${suffix}`;
+    });
+  });
+
+  const blob = new Blob([jsonString], {
+    type: "application/json",
+  });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download =
+    `${personnelData.person?.personal_no}-RECORD.json` || "unknown_record.json";
+  link.click();
+
+  // Close the modal after download
+  document.getElementById("reviewModal").style.display = "none";
+}
+
+// Helper function to format values
+function formatValue(value) {
+  if (value === null || value === undefined || value === "" || value === "-") {
+    return '<span class="no-data">N/A</span>';
+  }
+  return value;
+}
+
+// Helper function to format dates
+function formatDate(dateString) {
+  if (!dateString) return '<span class="no-data">N/A</span>';
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-GB");
+}
+
+// Generate Personal Information Section
+function generatePersonalreview() {
+  const person = personnelData.person;
+  const review = personnelData.personal_info;
+
+  return `
                 <div class="section">
                     <div class="section-title">BASIC INFORMATION</div>
                     <div class="review-grid">
@@ -3442,15 +3410,15 @@
                     </div>
                 </div>
             `;
-      }
+}
 
-      // Generate Addresses Section
-      function generateAddresses() {
-        if (!personnelData.addresses || personnelData.addresses.length === 0) {
-          return '<div class="section"><div class="section-title">ADDRESSES</div><p class="no-data">No address information available</p></div>';
-        }
+// Generate Addresses Section
+function generateAddresses() {
+  if (!personnelData.addresses || personnelData.addresses.length === 0) {
+    return '<div class="section"><div class="section-title">ADDRESSES</div><p class="no-data">No address information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">ADDRESSES</div>
                     <div class="table-container">
@@ -3469,8 +3437,8 @@
                             <tbody>
             `;
 
-        personnelData.addresses.forEach((addr) => {
-          html += `
+  personnelData.addresses.forEach((addr) => {
+    html += `
                     <tr>
                         <td>${formatValue(addr.address_type)}</td>
                         <td>${formatValue(addr.street_address)}</td>
@@ -3481,28 +3449,28 @@
                         <td>${formatDate(addr.date)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Language Skills Section
-      function generateLanguageSkills() {
-        if (
-          !personnelData.language_skills ||
-          personnelData.language_skills.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">LANGUAGE SKILLS</div><p class="no-data">No language skills information available</p></div>';
-        }
+// Generate Language Skills Section
+function generateLanguageSkills() {
+  if (
+    !personnelData.language_skills ||
+    personnelData.language_skills.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">LANGUAGE SKILLS</div><p class="no-data">No language skills information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">LANGUAGE SKILLS</div>
                     <div class="table-container">
@@ -3524,8 +3492,8 @@
                             <tbody>
             `;
 
-        personnelData.language_skills.forEach((lang) => {
-          html += `
+  personnelData.language_skills.forEach((lang) => {
+    html += `
                     <tr>
                         <td>${formatValue(lang.language)}</td>
                         <td>${formatValue(lang.proficiency)}</td>
@@ -3539,28 +3507,28 @@
                         <td>${formatValue(lang.degree)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Family Members Section
-      function generateFamilyMembers() {
-        if (
-          !personnelData.family_members ||
-          personnelData.family_members.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">FAMILY MEMBERS</div><p class="no-data">No family members information available</p></div>';
-        }
+// Generate Family Members Section
+function generateFamilyMembers() {
+  if (
+    !personnelData.family_members ||
+    personnelData.family_members.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">FAMILY MEMBERS</div><p class="no-data">No family members information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">FAMILY MEMBERS</div>
                     <div class="table-container">
@@ -3571,15 +3539,15 @@
                                     <th>Name</th>
                                     <th>Nationality</th>
                                     <th>Date of Birth</th>
-                                    <th>Sex</th>
+                                    <th>Is Deceased</th>
                                     <th>Occupation</th>
-                                    <th>Education</th>
                                     <th>Annual Income</th>
+                                    <th>Education</th>
                                     <th>Address</th>
                                     <th>Birth Registration</th>
                                     <th>National ID</th>
                                     <th>Dependency</th>
-                                    <th>Status</th>
+                                    <th>Sex</th>
                                     <th>Date of Expire</th>
                                     <th>Location of Grave</th>
                                 </tr>
@@ -3587,45 +3555,45 @@
                             <tbody>
             `;
 
-        personnelData.family_members.forEach((member) => {
-          html += `
+  personnelData.family_members.forEach((member) => {
+    html += `
                     <tr>
                         <td>${formatValue(member.relationship)}</td>
                         <td>${formatValue(member.name)}</td>
                         <td>${formatValue(member.nationality)}</td>
                         <td>${formatDate(member.date_of_birth)}</td>
-                        <td>${formatValue(member.sex)}</td>
+                        <td>${member.is_deceased ? "Yes" : "No"}</td>
                         <td>${formatValue(member.occupation_profession)}</td>
-                        <td>${formatValue(member.education)}</td>
                         <td>${formatValue(member.annual_income)}</td>
+                        <td>${formatValue(member.education)}</td>
                         <td>${formatValue(member.address)}</td>
                         <td>${formatValue(member.birth_registration)}</td>
                         <td>${formatValue(member.national_id)}</td>
                         <td>${member.dependency ? "Yes" : "No"}</td>
-                        <td>${member.is_deceased ? "Deceased" : "Living"}</td>
+                        <td>${formatValue(member.sex)}</td>
                         <td>${formatDate(member.date_of_expire)}</td>
                         <td>${formatValue(member.location_of_grave)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Education Section
-      function generateEducation() {
-        if (!personnelData.education || personnelData.education.length === 0) {
-          return '<div class="section"><div class="section-title">EDUCATION</div><p class="no-data">No education information available</p></div>';
-        }
+// Generate Education Section
+function generateEducation() {
+  if (!personnelData.education || personnelData.education.length === 0) {
+    return '<div class="section"><div class="section-title">EDUCATION</div><p class="no-data">No education information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">EDUCATION</div>
                     <div class="table-container">
@@ -3647,8 +3615,8 @@
                             <tbody>
             `;
 
-        personnelData.education.forEach((edu) => {
-          html += `
+  personnelData.education.forEach((edu) => {
+    html += `
                     <tr>
                         <td>${formatValue(edu.institution_type)}</td>
                         <td>${formatValue(edu.institution_name)}</td>
@@ -3662,26 +3630,26 @@
                         <td>${formatValue(edu.remarks)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Commission Information
-      function generateCommission() {
-        if (!personnelData.commission)
-          return '<div class="section"><div class="section-title">COMMISSION INFORMATION</div><p class="no-data">No commission information available</p></div>';
+// Generate Commission Information
+function generateCommission() {
+  if (!personnelData.commission)
+    return '<div class="section"><div class="section-title">COMMISSION INFORMATION</div><p class="no-data">No commission information available</p></div>';
 
-        const comm = personnelData.commission;
+  const comm = personnelData.commission;
 
-        return `
+  return `
                 <div class="section">
                     <div class="section-title">COMMISSION INFORMATION</div>
                     <div class="review-grid">
@@ -3744,18 +3712,18 @@
                     </div>
                 </div>
             `;
-      }
+}
 
-      // Generate Pre-Commission Services
-      function generatePreCommissionServices() {
-        if (
-          !personnelData.pre_commission_services ||
-          personnelData.pre_commission_services.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">PRE-COMMISSION SERVICES</div><p class="no-data">No pre-commission services information available</p></div>';
-        }
+// Generate Pre-Commission Services
+function generatePreCommissionServices() {
+  if (
+    !personnelData.pre_commission_services ||
+    personnelData.pre_commission_services.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">PRE-COMMISSION SERVICES</div><p class="no-data">No pre-commission services information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">PRE-COMMISSION SERVICES</div>
                     <div class="table-container">
@@ -3772,8 +3740,8 @@
                             <tbody>
             `;
 
-        personnelData.pre_commission_services.forEach((service) => {
-          html += `
+  personnelData.pre_commission_services.forEach((service) => {
+    html += `
                     <tr>
                         <td>${formatValue(service.unit)}</td>
                         <td>${formatValue(service.designation)}</td>
@@ -3782,28 +3750,28 @@
                         <td>${formatValue(service.remarks)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Pre-Commission Trainings
-      function generatePreCommissionTrainings() {
-        if (
-          !personnelData.pre_commission_trainings ||
-          personnelData.pre_commission_trainings.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">PRE-COMMISSION TRAININGS</div><p class="no-data">No pre-commission trainings information available</p></div>';
-        }
+// Generate Pre-Commission Trainings
+function generatePreCommissionTrainings() {
+  if (
+    !personnelData.pre_commission_trainings ||
+    personnelData.pre_commission_trainings.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">PRE-COMMISSION TRAININGS</div><p class="no-data">No pre-commission trainings information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">PRE-COMMISSION TRAININGS</div>
                     <div class="table-container">
@@ -3821,8 +3789,8 @@
                             <tbody>
             `;
 
-        personnelData.pre_commission_trainings.forEach((training) => {
-          html += `
+  personnelData.pre_commission_trainings.forEach((training) => {
+    html += `
                     <tr>
                         <td>${formatValue(training.location)}</td>
                         <td>${formatValue(training.appointment)}</td>
@@ -3832,28 +3800,28 @@
                         <td>${formatValue(training.remarks)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Post Commission Training
-      function generatePostCommissionTraining() {
-        if (
-          !personnelData.post_commission_trainings ||
-          personnelData.post_commission_trainings.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">POST COMMISSION TRAINING</div><p class="no-data">No post commission training information available</p></div>';
-        }
+// Generate Post Commission Training
+function generatePostCommissionTraining() {
+  if (
+    !personnelData.post_commission_trainings ||
+    personnelData.post_commission_trainings.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">POST COMMISSION TRAINING</div><p class="no-data">No post commission training information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">POST COMMISSION TRAINING</div>
                     <div class="table-container">
@@ -3875,8 +3843,8 @@
                             <tbody>
             `;
 
-        personnelData.post_commission_trainings.forEach((training) => {
-          html += `
+  personnelData.post_commission_trainings.forEach((training) => {
+    html += `
                     <tr>
                         <td>${formatValue(training.training_type)}</td>
                         <td>${formatValue(training.course_name)}</td>
@@ -3890,27 +3858,27 @@
                         <td>${formatValue(training.remarks)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Additional Qualifications
-      function generateAdditionalQualifications() {
-        if (
-          !personnelData.additional_qualifications ||
-          personnelData.additional_qualifications.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">ADDITIONAL QUALIFICATIONS</div><p class="no-data">No additional qualifications information available</p></div>';
-        }
+// Generate Additional Qualifications
+function generateAdditionalQualifications() {
+  if (
+    !personnelData.additional_qualifications ||
+    personnelData.additional_qualifications.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">ADDITIONAL QUALIFICATIONS</div><p class="no-data">No additional qualifications information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">ADDITIONAL QUALIFICATIONS</div>
                     <div class="table-container">
@@ -3925,36 +3893,36 @@
                             <tbody>
             `;
 
-        personnelData.additional_qualifications.forEach((qual) => {
-          html += `
+  personnelData.additional_qualifications.forEach((qual) => {
+    html += `
                     <tr>
                         <td>${formatValue(qual.qualification)}</td>
                         <td>${formatDate(qual.date_obtained)}</td>
                         <td>${formatValue(qual.authority)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Map Reading/Promotion Exams
-      function generateMapReadingExams() {
-        if (
-          !personnelData.map_reading_promotion_exams ||
-          personnelData.map_reading_promotion_exams.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">MAP READING & PROMOTION EXAMS</div><p class="no-data">No map reading and promotion exams information available</p></div>';
-        }
+// Generate Map Reading/Promotion Exams
+function generateMapReadingExams() {
+  if (
+    !personnelData.map_reading_promotion_exams ||
+    personnelData.map_reading_promotion_exams.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">MAP READING & PROMOTION EXAMS</div><p class="no-data">No map reading and promotion exams information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">MAP READING & PROMOTION EXAMS</div>
                     <div class="table-container">
@@ -3969,36 +3937,33 @@
                             <tbody>
             `;
 
-        personnelData.map_reading_promotion_exams.forEach((exam) => {
-          html += `
+  personnelData.map_reading_promotion_exams.forEach((exam) => {
+    html += `
                     <tr>
                         <td>${formatValue(exam.exam_name)}</td>
                         <td>${formatValue(exam.passing_year)}</td>
                         <td>${formatValue(exam.authority)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Promotions
-      function generatePromotions() {
-        if (
-          !personnelData.promotions ||
-          personnelData.promotions.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">PROMOTIONS</div><p class="no-data">No promotions information available</p></div>';
-        }
+// Generate Promotions
+function generatePromotions() {
+  if (!personnelData.promotions || personnelData.promotions.length === 0) {
+    return '<div class="section"><div class="section-title">PROMOTIONS</div><p class="no-data">No promotions information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">PROMOTIONS</div>
                     <div class="table-container">
@@ -4015,8 +3980,8 @@
                             <tbody>
             `;
 
-        personnelData.promotions.forEach((promo) => {
-          html += `
+  personnelData.promotions.forEach((promo) => {
+    html += `
                     <tr>
                         <td>${formatDate(promo.promotion_date)}</td>
                         <td>${formatValue(promo.rank)}</td>
@@ -4025,28 +3990,25 @@
                         <td>${formatValue(promo.order)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Ranks Held
-      function generateRanksHeld() {
-        if (
-          !personnelData.ranks_held ||
-          personnelData.ranks_held.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">RANKS HELD</div><p class="no-data">No ranks held information available</p></div>';
-        }
+// Generate Ranks Held
+function generateRanksHeld() {
+  if (!personnelData.ranks_held || personnelData.ranks_held.length === 0) {
+    return '<div class="section"><div class="section-title">RANKS HELD</div><p class="no-data">No ranks held information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">RANKS HELD</div>
                     <div class="table-container">
@@ -4063,8 +4025,8 @@
                             <tbody>
             `;
 
-        personnelData.ranks_held.forEach((rank) => {
-          html += `
+  personnelData.ranks_held.forEach((rank) => {
+    html += `
                     <tr>
                         <td>${formatDate(rank.date)}</td>
                         <td>${formatValue(rank.rank)}</td>
@@ -4073,28 +4035,28 @@
                         <td>${formatValue(rank.notified)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Service Records
-      function generateServiceRecords() {
-        if (
-          !personnelData.service_records ||
-          personnelData.service_records.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">SERVICE RECORDS</div><p class="no-data">No service records information available</p></div>';
-        }
+// Generate Service Records
+function generateServiceRecords() {
+  if (
+    !personnelData.service_records ||
+    personnelData.service_records.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">SERVICE RECORDS</div><p class="no-data">No service records information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">SERVICE RECORDS</div>
                     <div class="table-container">
@@ -4112,8 +4074,8 @@
                             <tbody>
             `;
 
-        personnelData.service_records.forEach((record) => {
-          html += `
+  personnelData.service_records.forEach((record) => {
+    html += `
                     <tr>
                         <td>${formatDate(record.date_from)}</td>
                         <td>${formatDate(record.date_to) || "Present"}</td>
@@ -4123,29 +4085,29 @@
                         <td>${formatValue(record.unit_ere_name)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Awards
-      // Generate Operational Awards Section
-      function generateOperationalAwards() {
-        if (
-          !personnelData.operational_awards ||
-          personnelData.operational_awards.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">OPERATIONAL AWARDS</div><p class="no-data">No operational awards information available</p></div>';
-        }
+// Generate Awards
+// Generate Operational Awards Section
+function generateOperationalAwards() {
+  if (
+    !personnelData.operational_awards ||
+    personnelData.operational_awards.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">OPERATIONAL AWARDS</div><p class="no-data">No operational awards information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">OPERATIONAL AWARDS</div>
                     <div class="table-container">
@@ -4164,8 +4126,8 @@
                             <tbody>
             `;
 
-        personnelData.operational_awards.forEach((award) => {
-          html += `
+  personnelData.operational_awards.forEach((award) => {
+    html += `
                     <tr>
                         <td>${formatValue(award.operation_name)}</td>
                         <td>${formatDate(award.date_from)}</td>
@@ -4176,28 +4138,28 @@
                         <td>${formatValue(award.remarks)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Non-Operational Awards Section
-      function generateNonOperationalAwards() {
-        if (
-          !personnelData.non_operational_awards ||
-          personnelData.non_operational_awards.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">NON-OPERATIONAL AWARDS</div><p class="no-data">No non-operational awards information available</p></div>';
-        }
+// Generate Non-Operational Awards Section
+function generateNonOperationalAwards() {
+  if (
+    !personnelData.non_operational_awards ||
+    personnelData.non_operational_awards.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">NON-OPERATIONAL AWARDS</div><p class="no-data">No non-operational awards information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">NON-OPERATIONAL AWARDS</div>
                     <div class="table-container">
@@ -4214,8 +4176,8 @@
                             <tbody>
             `;
 
-        personnelData.non_operational_awards.forEach((award) => {
-          html += `
+  personnelData.non_operational_awards.forEach((award) => {
+    html += `
                     <tr>
                         <td>${formatValue(award.description)}</td>
                         <td>${formatDate(award.date_awarded)}</td>
@@ -4224,28 +4186,28 @@
                         <td>${formatValue(award.remarks)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Overseas Visits
-      function generateOverseasVisits() {
-        if (
-          !personnelData.overseas_visits ||
-          personnelData.overseas_visits.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">OVERSEAS VISITS</div><p class="no-data">No overseas visits information available</p></div>';
-        }
+// Generate Overseas Visits
+function generateOverseasVisits() {
+  if (
+    !personnelData.overseas_visits ||
+    personnelData.overseas_visits.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">OVERSEAS VISITS</div><p class="no-data">No overseas visits information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">OVERSEAS VISITS</div>
                     <div class="table-container">
@@ -4262,8 +4224,8 @@
                             <tbody>
             `;
 
-        personnelData.overseas_visits.forEach((visit) => {
-          html += `
+  personnelData.overseas_visits.forEach((visit) => {
+    html += `
                     <tr>
                         <td>${formatValue(visit.visit_type)}</td>
                         <td>${formatValue(visit.country)}</td>
@@ -4272,25 +4234,25 @@
                         <td>${formatValue(visit.reason)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Passports
-      function generatePassports() {
-        if (!personnelData.passports || personnelData.passports.length === 0) {
-          return '<div class="section"><div class="section-title">PASSPORT INFORMATION</div><p class="no-data">No passport information available</p></div>';
-        }
+// Generate Passports
+function generatePassports() {
+  if (!personnelData.passports || personnelData.passports.length === 0) {
+    return '<div class="section"><div class="section-title">PASSPORT INFORMATION</div><p class="no-data">No passport information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">PASSPORT INFORMATION</div>
                     <div class="table-container">
@@ -4310,8 +4272,8 @@
                             <tbody>
             `;
 
-        personnelData.passports.forEach((passport) => {
-          html += `
+  personnelData.passports.forEach((passport) => {
+    html += `
                     <tr>
                         <td>${formatValue(passport.status)}</td>
                         <td>${formatValue(passport.passport_number)}</td>
@@ -4323,28 +4285,28 @@
                         <td>${formatValue(passport.place_of_issue)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Bank Accounts
-      function generateBankAccounts() {
-        if (
-          !personnelData.bank_accounts ||
-          personnelData.bank_accounts.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">BANK ACCOUNTS</div><p class="no-data">No bank accounts information available</p></div>';
-        }
+// Generate Bank Accounts
+function generateBankAccounts() {
+  if (
+    !personnelData.bank_accounts ||
+    personnelData.bank_accounts.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">BANK ACCOUNTS</div><p class="no-data">No bank accounts information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">BANK ACCOUNTS</div>
                     <div class="table-container">
@@ -4362,8 +4324,8 @@
                             <tbody>
             `;
 
-        personnelData.bank_accounts.forEach((account) => {
-          html += `
+  personnelData.bank_accounts.forEach((account) => {
+    html += `
                     <tr>
                         <td>${formatValue(account.bank_name)}</td>
                         <td>${formatValue(account.account_number)}</td>
@@ -4373,28 +4335,28 @@
                         <td>${account.closing_date ? "Closed" : "Active"}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Annual Income
-      function generateAnnualIncome() {
-        if (
-          !personnelData.annual_incomes ||
-          personnelData.annual_incomes.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">ANNUAL INCOME</div><p class="no-data">No annual income information available</p></div>';
-        }
+// Generate Annual Income
+function generateAnnualIncome() {
+  if (
+    !personnelData.annual_incomes ||
+    personnelData.annual_incomes.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">ANNUAL INCOME</div><p class="no-data">No annual income information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">ANNUAL INCOME</div>
                     <div class="table-container">
@@ -4409,36 +4371,36 @@
                             <tbody>
             `;
 
-        personnelData.annual_incomes.forEach((income) => {
-          html += `
+  personnelData.annual_incomes.forEach((income) => {
+    html += `
                     <tr>
                         <td>${formatValue(income.income_source)}</td>
                         <td>${formatValue(income.amount)}</td>
                         <td>${formatValue(income.year)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Medical History
-      function generateMedicalHistory() {
-        if (
-          !personnelData.medical_histories ||
-          personnelData.medical_histories.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">MEDICAL HISTORY</div><p class="no-data">No medical history information available</p></div>';
-        }
+// Generate Medical History
+function generateMedicalHistory() {
+  if (
+    !personnelData.medical_histories ||
+    personnelData.medical_histories.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">MEDICAL HISTORY</div><p class="no-data">No medical history information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">MEDICAL HISTORY</div>
                     <div class="table-container">
@@ -4455,8 +4417,8 @@
                             <tbody>
             `;
 
-        personnelData.medical_histories.forEach((medical) => {
-          html += `
+  personnelData.medical_histories.forEach((medical) => {
+    html += `
                     <tr>
                         <td>${formatValue(medical.name_of_disease)}</td>
                         <td>${formatValue(medical.nature_of_injury)}</td>
@@ -4465,28 +4427,28 @@
                         <td>${formatValue(medical.medical_category_class)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Military Legal Records
-      function generateMilitaryLegalRecords() {
-        if (
-          !personnelData.military_legal_records ||
-          personnelData.military_legal_records.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">MILITARY LEGAL RECORDS</div><p class="no-data">No military legal records information available</p></div>';
-        }
+// Generate Military Legal Records
+function generateMilitaryLegalRecords() {
+  if (
+    !personnelData.military_legal_records ||
+    personnelData.military_legal_records.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">MILITARY LEGAL RECORDS</div><p class="no-data">No military legal records information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">MILITARY LEGAL RECORDS</div>
                     <div class="table-container">
@@ -4502,8 +4464,8 @@
                             <tbody>
             `;
 
-        personnelData.military_legal_records.forEach((record) => {
-          html += `
+  personnelData.military_legal_records.forEach((record) => {
+    html += `
                     <tr>
                         <td>${formatValue(record.military_legal_type)}</td>
                         <td>${formatValue(record.military_legal_name)}</td>
@@ -4511,28 +4473,28 @@
                         <td>${formatValue(record.remarks)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Generate Civil Legal Records
-      function generateCivilLegalRecords() {
-        if (
-          !personnelData.civil_legal_records ||
-          personnelData.civil_legal_records.length === 0
-        ) {
-          return '<div class="section"><div class="section-title">CIVIL LEGAL RECORDS</div><p class="no-data">No civil legal records information available</p></div>';
-        }
+// Generate Civil Legal Records
+function generateCivilLegalRecords() {
+  if (
+    !personnelData.civil_legal_records ||
+    personnelData.civil_legal_records.length === 0
+  ) {
+    return '<div class="section"><div class="section-title">CIVIL LEGAL RECORDS</div><p class="no-data">No civil legal records information available</p></div>';
+  }
 
-        let html = `
+  let html = `
                 <div class="section">
                     <div class="section-title">CIVIL LEGAL RECORDS</div>
                     <div class="table-container">
@@ -4549,8 +4511,8 @@
                             <tbody>
             `;
 
-        personnelData.civil_legal_records.forEach((record) => {
-          html += `
+  personnelData.civil_legal_records.forEach((record) => {
+    html += `
                     <tr>
                         <td>${formatValue(record.law_section)}</td>
                         <td>${formatValue(record.crime_details)}</td>
@@ -4559,63 +4521,64 @@
                         <td>${formatValue(record.punishment)}</td>
                     </tr>
                 `;
-        });
+  });
 
-        html += `
+  html += `
                         </tbody>
                     </table>
                     </div>
                 </div>
             `;
 
-        return html;
-      }
+  return html;
+}
 
-      // Main function to render all content
-      function renderContent() {
-        const contentDiv = document.getElementById("popupContent");
+// Main function to render all content
+function renderContent() {
+  const contentDiv = document.getElementById("popupContent");
 
-        let allContent = "";
-        allContent += generatePersonalreview();
-        allContent += generateAddresses();
-        allContent += generateLanguageSkills();
-        allContent += generateFamilyMembers();
-        allContent += generateEducation();
-        allContent += generatePassports();
-        allContent += generateMedicalHistory();
-        allContent += generatePreCommissionServices();
-        allContent += generatePreCommissionTrainings();
-        allContent += generateCommission();
-        allContent += generatePostCommissionTraining();
-        allContent += generateAdditionalQualifications();
-        allContent += generateMapReadingExams();
-        allContent += generatePromotions();
-        allContent += generateServiceRecords();
-        allContent += generateOperationalAwards();
-        allContent += generateNonOperationalAwards();
-        allContent += generateOverseasVisits();
-        allContent += generateAnnualIncome();
-        allContent += generateBankAccounts();
-        allContent += generateMilitaryLegalRecords();
-        allContent += generateCivilLegalRecords();
-        allContent += generateRanksHeld();
+  let allContent = "";
+  allContent += generatePersonalreview();
+  allContent += generateAddresses();
+  allContent += generateLanguageSkills();
+  allContent += generateFamilyMembers();
+  allContent += generateEducation();
+  allContent += generatePassports();
+  allContent += generateMedicalHistory();
+  allContent += generatePreCommissionServices();
+  allContent += generatePreCommissionTrainings();
+  allContent += generateCommission();
+  allContent += generatePostCommissionTraining();
+  allContent += generateAdditionalQualifications();
+  allContent += generateMapReadingExams();
+  allContent += generatePromotions();
+  allContent += generateServiceRecords();
+  allContent += generateOperationalAwards();
+  allContent += generateNonOperationalAwards();
+  allContent += generateOverseasVisits();
+  allContent += generateAnnualIncome();
+  allContent += generateBankAccounts();
+  allContent += generateMilitaryLegalRecords();
+  allContent += generateCivilLegalRecords();
+  allContent += generateRanksHeld();
 
-        contentDiv.innerHTML = allContent;
+  contentDiv.innerHTML = allContent;
 
-        // Update header
-        document.getElementById("headerName").textContent =
-          personnelData.person?.name || "Personnel Information Review";
-        document.getElementById("headerDetails").textContent =
-          `Personal No: ${personnelData.person?.personal_no || "N/A"}`;
-      }
+  // Update header
+  document.getElementById("headerName").textContent =
+    personnelData.person?.name || "Personnel Information Review";
+  document.getElementById("headerDetails").textContent =
+    `Personal No: ${personnelData.person?.personal_no || "N/A"}`;
+}
 
-      window.onload = () => {
-        // Initialize button visibility for all tables
-        initializeTableButtons();
+window.onload = () => {
+  // Initialize button visibility for all tables
+  initializeTableButtons();
 
-        // Mark required headers after initialization
-        setTimeout(markRequiredHeaders, 100);
-      };
+  // Mark required headers after initialization
+  setTimeout(markRequiredHeaders, 100);
+};
+
     </script>
   </body>
 </html>
