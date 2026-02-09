@@ -66,8 +66,8 @@ const options = {
   nature_of_injury: ["Severe", "Minor"],
   medical_category_class: ["Temp C", "Perm C", "D"],
   ranks: [
-    "Lieutenant",
     "Captain",
+    "Lieutenant",
     "Major",
     "Lieutenant Colonel",
     "Colonel",
@@ -200,14 +200,14 @@ function addRow(type) {
 <td>${createInput("text", "name", "Name", true, 200)}</td>
 <td>${createInput("text", "nationality", "Nationality", false, 50)}</td>
 <td>${createInput("date", "date_of_birth", "", false)}</td>
-<td>${createSelect("is_deceased", ["false", "true"], true)}</td>
+<td>${createSelect("is_deceased", ["No", "Yes"], true)}</td>
 <td>${createInput("text", "occupation_profession", "Occupation", false, 100)}</td>
 <td>${createInput("number", "annual_income", "Annual Income", false)}</td>
 <td>${createInput("text", "address", "Address", false)}</td>
 <td>${createInput("text", "birth_registration", "Birth Registration", false, 100)}</td>
 <td>${createInput("text", "national_id", "National ID", false, 20)}</td>
 <td>${createInput("text", "education", "Education", false, 200)}</td>
-<td>${createSelect("dependency", ["true", "false"], false)}</td>
+<td>${createSelect("dependency", ["Yes", "No"], false)}</td>
 <td>${createSelect("sex", options.sex, false)}</td>
 <td>${createInput("date", "date_of_expire", "")}</td>
 <td>${createInput("text", "location_of_grave", "Location of Grave", false, 100)}</td>
@@ -563,7 +563,7 @@ function getTableData(type) {
       }
 
       if (name === "is_deceased" || name === "dependency") {
-        data[name] = val === "true" || val === true;
+        data[name] = val === "Yes" || val === "true" || val === true;
       } else {
         data[name] = val;
       }
@@ -591,7 +591,7 @@ function validateTableRequiredFields(type, requiredFields, sectionName) {
 
       let value = input.value.trim();
 
-      // Handle boolean fields (is_deceased) - they should have "true" or "false" value
+      // Handle boolean fields (is_deceased) - they should have "Yes" or "No" value
       if (fieldName === "is_deceased") {
         if (!value || value === "" || value === "Select") {
           const rowNum = index + 1;
@@ -1062,6 +1062,9 @@ function downloadJSON() {
   link.download =
     `${personnelData.person?.personal_no}-RECORD.json` || "unknown_record.json";
   link.click();
+
+  // Close the modal after download
+  document.getElementById("reviewModal").style.display = "none";
 }
 
 // Helper function to format values
@@ -1350,15 +1353,15 @@ function generateFamilyMembers() {
                                     <th>Name</th>
                                     <th>Nationality</th>
                                     <th>Date of Birth</th>
-                                    <th>Sex</th>
+                                    <th>Is Deceased</th>
                                     <th>Occupation</th>
-                                    <th>Education</th>
                                     <th>Annual Income</th>
+                                    <th>Education</th>
                                     <th>Address</th>
                                     <th>Birth Registration</th>
                                     <th>National ID</th>
                                     <th>Dependency</th>
-                                    <th>Status</th>
+                                    <th>Sex</th>
                                     <th>Date of Expire</th>
                                     <th>Location of Grave</th>
                                 </tr>
@@ -1373,15 +1376,15 @@ function generateFamilyMembers() {
                         <td>${formatValue(member.name)}</td>
                         <td>${formatValue(member.nationality)}</td>
                         <td>${formatDate(member.date_of_birth)}</td>
-                        <td>${formatValue(member.sex)}</td>
+                        <td>${member.is_deceased ? "Yes" : "No"}</td>
                         <td>${formatValue(member.occupation_profession)}</td>
-                        <td>${formatValue(member.education)}</td>
                         <td>${formatValue(member.annual_income)}</td>
+                        <td>${formatValue(member.education)}</td>
                         <td>${formatValue(member.address)}</td>
                         <td>${formatValue(member.birth_registration)}</td>
                         <td>${formatValue(member.national_id)}</td>
                         <td>${member.dependency ? "Yes" : "No"}</td>
-                        <td>${member.is_deceased ? "Deceased" : "Living"}</td>
+                        <td>${formatValue(member.sex)}</td>
                         <td>${formatDate(member.date_of_expire)}</td>
                         <td>${formatValue(member.location_of_grave)}</td>
                     </tr>
