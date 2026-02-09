@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,8 +12,13 @@
       }
 
       body {
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, sans-serif;
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
         min-height: 100vh;
         padding: 40px 20px;
         line-height: 1.6;
@@ -26,7 +31,7 @@
       }
 
       .container {
-        max-width: 1500px;
+        max-width: 1600px;
         margin: 0 auto;
         background: #ffffff;
         border-radius: 3px;
@@ -36,26 +41,26 @@
 
       /* Notice Box */
       .notice-box {
-          background: #000;
-          border-left: 6px solid #ff9800;
-          padding: 10px 15px;
-          margin-bottom: 30px;
-          border-radius: 6px;
+        background: #000;
+        border-left: 6px solid #ff9800;
+        padding: 10px 15px;
+        margin-bottom: 30px;
+        border-radius: 6px;
       }
 
       .notice-box h2 {
-          color: #b36b00;
-          margin-bottom: 15px;
-          font-size: 22px;
+        color: #b36b00;
+        margin-bottom: 15px;
+        font-size: 22px;
       }
 
       .notice-box ol {
-          padding-left: 20px;
+        padding-left: 20px;
       }
 
       .notice-box li {
-          margin-bottom: 4px;
-          color: #fff;
+        margin-bottom: 4px;
+        color: #fff;
       }
 
       /* English text style */
@@ -217,17 +222,22 @@
         background: linear-gradient(135deg, #242424 0%, #6a6b6b 100%);
       }
 
-      th {
+      .table-container th {
         padding: 14px 8px;
         text-align: left;
         font-weight: 600;
         font-size: 0.85em;
         color: #ffffff;
+        background-color: transparent;
         text-transform: uppercase;
         letter-spacing: 1px;
         min-width: 120px;
         width: auto;
         white-space: nowrap;
+      }
+
+      .table-container th:hover {
+        background-color: transparent;
       }
 
       th.required-header::after {
@@ -260,7 +270,6 @@
 
       tbody tr:hover {
         background: #f8f9fc;
-        /* transform: scale(1.01); */
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       }
 
@@ -623,63 +632,435 @@
         scrollbar-width: thin;
         scrollbar-color: #b3b3b3 #f0f0f0;
       }
+
+      /* Review Modal Styles */
+      .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(245, 245, 245, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .popup-container {
+        background-color: #ffffff;
+        width: 100%;
+        max-width: 1500px;
+        max-height: 100vh;
+        border-radius: 8px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .popup-header {
+        background-color: #cfcdcd;
+        color: #333;
+        padding: 20px 30px;
+        border-bottom: 2px solid #ccc;
+      }
+
+      .popup-header h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .popup-header p {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .popup-content {
+        overflow-y: auto;
+        padding: 25px 30px;
+        flex: 1;
+      }
+
+      .section {
+        margin-bottom: 25px;
+      }
+
+      .section-title {
+        background-color: #f0f0f0;
+        color: #333;
+        padding: 10px 15px;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        border-left: 4px solid #bbb;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+        font-size: 14px;
+      }
+
+      table th {
+        background-color: #f9f9f9;
+        color: #212121;
+        padding: 10px 12px;
+        text-align: left;
+        font-weight: bold;
+        border: 1px solid #ddd;
+        font-size: 13px;
+      }
+
+      table td {
+        padding: 9px 12px;
+        border: 1px solid #ddd;
+        color: #333;
+      }
+
+      table tr:nth-child(even) {
+        background-color: #f5f5f5;
+      }
+
+      /* table tr:hover {
+  background-color: #ebebeb;
+} */
+
+      .review-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2px;
+      }
+
+      .review-item {
+        display: flex;
+        border: 1px solid #ddd;
+        background-color: #fafafa;
+      }
+
+      .review-label {
+        background-color: #f5f5f5;
+        padding: 8px 12px;
+        font-weight: bold;
+        font-size: 14px;
+        width: 45%;
+        border-right: 1px solid #ddd;
+      }
+
+      .review-value {
+        padding: 8px 12px;
+        font-size: 14px;
+        width: 55%;
+        color: #333;
+      }
+
+      .popup-footer {
+        background-color: #f5f5f5;
+        padding: 15px 30px;
+        border-top: 1px solid #ddd;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .btn-print {
+        background-color: #fff;
+        color: #333;
+        border: 2px solid #999;
+      }
+
+      .btn-print:hover {
+        background-color: #f0f0f0;
+      }
+
+      .btn-close {
+        background-color: #ccc;
+        color: #333;
+      }
+
+      .btn-close:hover {
+        background-color: #bbb;
+      }
+
+      .no-data {
+        font-style: italic;
+        color: #999;
+        font-size: 12px;
+      }
+
+      @media print {
+        body {
+          background-color: #fff;
+        }
+
+        .popup-overlay {
+          position: static;
+          background-color: #fff;
+        }
+
+        .popup-footer {
+          display: none;
+        }
+
+        .popup-container {
+          max-height: none;
+          box-shadow: none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .review-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .popup-header h1 {
+          font-size: 18px;
+        }
+
+        .popup-header {
+          padding: 15px 20px;
+        }
+
+        .popup-content {
+          padding: 15px 20px;
+        }
+
+        .popup-footer {
+          padding: 15px 20px;
+        }
+
+        table {
+          font-size: 11px;
+        }
+
+        table th,
+        table td {
+          padding: 6px 8px;
+          white-space: nowrap;
+        }
+
+        /* Make tables horizontally scrollable on mobile */
+        .table-container {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .table-container table {
+          min-width: 600px; /* Ensure minimum width for readability */
+        }
+
+        /* Stack review items vertically on very small screens */
+        .review-item {
+          flex-direction: column;
+        }
+
+        .review-label,
+        .review-value {
+          width: 100%;
+          border-right: none;
+          border-bottom: 1px solid #ddd;
+        }
+
+        .review-value {
+          border-bottom: none;
+        }
+
+        /* Improve section spacing on mobile */
+        .section {
+          margin-bottom: 20px;
+        }
+
+        .section-title {
+          font-size: 14px;
+          padding: 8px 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .popup-container {
+          width: 98%;
+          max-height: 95vh;
+        }
+
+        .popup-header h1 {
+          font-size: 16px;
+        }
+
+        .popup-header p {
+          font-size: 12px;
+        }
+
+        table {
+          font-size: 10px;
+        }
+
+        table th,
+        table td {
+          padding: 4px 6px;
+        }
+
+        .review-label,
+        .review-value {
+          padding: 6px 8px;
+          font-size: 13px;
+        }
+
+        .section-title {
+          font-size: 13px;
+          padding: 6px 10px;
+        }
+
+        .btn-print,
+        .btn-close {
+          padding: 8px 16px;
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 320px) {
+        .popup-container {
+          width: 100%;
+          border-radius: 0;
+          max-height: 100vh;
+        }
+
+        .popup-header {
+          padding: 10px 15px;
+        }
+
+        .popup-content {
+          padding: 10px 15px;
+        }
+
+        .popup-footer {
+          padding: 10px 15px;
+        }
+
+        table {
+          font-size: 9px;
+        }
+
+        .table-container table {
+          min-width: 500px;
+        }
+      }
+
+      /* Additional responsive improvements */
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .popup-container {
+          max-width: 1000px;
+        }
+
+        .review-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1025px) and (max-width: 1440px) {
+        .popup-container {
+          max-width: 1100px;
+        }
+      }
+
+      /* Ensure tables are always readable */
+      .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 15px;
+      }
+
+      .table-container table {
+        margin-bottom: 0;
+      }
+
+      /* Improve table readability on all devices */
+      table th {
+        position: sticky;
+        top: 0;
+        background-color: #f9f9f9;
+        z-index: 1;
+      }
+
+      /* Better spacing for review content */
+      .popup-content .section:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Ensure modal doesn't overflow on very wide screens */
+      @media (min-width: 1441px) {
+        .popup-container {
+          max-width: 1300px;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <!-- Notice Section -->
       <div class="notice-box">
-          <h2>গুরুত্বপূর্ণ নির্দেশনা / Important Notice</h2>
+        <h2>গুরুত্বপূর্ণ নির্দেশনা / Important Notice</h2>
 
-          <ol>
-              <li>
-                  এই ফরমটি পূরণ করার পর সবশেষ <strong>Download</strong> বাটনে ক্লিক করলে
-                  তথ্যগুলো একটি ফাইল আকারে Download হবে। যা পরবর্তীতে সেনাসদর,
-                  সাঁজোয়া পরিদপ্তরের আর্মি ই-মেইলে
-                  (<strong>armddte.gso2coord@army.mil.bd, armddte@army.mil.bd, armddte@gmail.com</strong>) প্রেরণ করতে হবে। <br>
-                  <span class="en-text">
-                      After completing the form, click the <strong>Download</strong> button to download the
-                      information as a file. This file must be sent to Army Headquarters,
-                      Armoured Directorate via email at <strong>armddte.gso2coord@army.mil.bd, armddte@army.mil.bd, armddte@gmail.com</strong>.
-                  </span>
-              </li>
+        <ol>
+          <li>
+            এই ফরমটি পূরণ করার পর সবশেষ <strong>Download</strong> বাটনে ক্লিক
+            করলে তথ্যগুলো একটি ফাইল আকারে Download হবে। যা পরবর্তীতে সেনাসদর,
+            সাঁজোয়া পরিদপ্তরের আর্মি ই-মেইলে (<strong
+              >armddte.gso2coord@army.mil.bd, armddte@army.mil.bd,
+              armddte@gmail.com</strong
+            >) প্রেরণ করতে হবে। <br />
+            <span class="en-text">
+              After completing the form, click the
+              <strong>Download</strong> button to download the information as a
+              file. This file must be sent to Army Headquarters, Armoured
+              Directorate via email at
+              <strong
+                >armddte.gso2coord@army.mil.bd, armddte@army.mil.bd,
+                armddte@gmail.com</strong
+              >.
+            </span>
+          </li>
 
-              <li>
-                  ফাইলটি প্রেরণের সময় বর্তমান পদবীর সদ্য তোলা একটি পাসপোর্ট সাইজের ছবি
-                  (৩৫০ কেবির বেশি নয়) সংযুক্ত করে দিতে হবে এবং ফাইল দুটি যিপ করে বিএ নাম্বার হিসেবে সেভ করে পাঠাইতে হবে। <br>
-                  <span class="en-text">
-                      While sending the file, a recent passport-size photograph in the current rank
-                      (not exceeding 350 KB) must be attached and both files should be zipped and saved as BA numbers before sending..
-                  </span>
-              </li>
+          <li>
+            ফাইলটি প্রেরণের সময় বর্তমান পদবীর সদ্য তোলা একটি পাসপোর্ট সাইজের ছবি
+            (৩৫০ কেবির বেশি নয়) সংযুক্ত করে দিতে হবে এবং ফাইল দুটি যিপ করে বিএ
+            নাম্বার হিসেবে সেভ করে পাঠাইতে হবে। <br />
+            <span class="en-text">
+              While sending the file, a recent passport-size photograph in the
+              current rank (not exceeding 350 KB) must be attached and both
+              files should be zipped and saved as BA numbers before sending..
+            </span>
+          </li>
 
-              <li>
-                  <strong>
-                      এই ফরম পূরণের সময় প্রদত্ত তথ্যসমূহ শুধুমাত্র ঐ সময়ে ব্যবহৃত ডিভাইসেই
-                      সংরক্ষিত হবে। পরবর্তীতে অন্য কোন সার্ভার বা কম্পিউটারে এটি দেখা যাবে না।
-                  </strong>
-                  <br>
-                  <strong class="en-text">
-                      The information provided while filling out this form will be stored only on the
-                      device used at that time. It will not be saved or accessible on any server or
-                      other computer.
-                  </strong>
-              </li>
+          <li>
+            <strong>
+              এই ফরম পূরণের সময় প্রদত্ত তথ্যসমূহ শুধুমাত্র ঐ সময়ে ব্যবহৃত
+              ডিভাইসেই সংরক্ষিত হবে। পরবর্তীতে অন্য কোন সার্ভার বা কম্পিউটারে
+              এটি দেখা যাবে না।
+            </strong>
+            <br />
+            <strong class="en-text">
+              The information provided while filling out this form will be
+              stored only on the device used at that time. It will not be saved
+              or accessible on any server or other computer.
+            </strong>
+          </li>
 
-              <li>
-                  <strong>
-                      ফরম পূরণ সম্পূর্ণ না করে কোন কারণে যদি ক্লোজ করে দেয়া হয় তাহলে পুনরায়
-                      আবার প্রথম থেকে শুরু করতে হবে। এক্ষেত্রে পূর্বের কোন তথ্য স্বয়ংক্রিয়ভাবে
-                      ফিরে আসবে না।
-                  </strong>
-                  <br>
-                  <strong class="en-text">
-                      If the form is closed before completion for any reason, the process must be
-                      started again from the beginning. Previously entered data will not be restored
-                      automatically.
-                  </strong>
-              </li>
-          </ol>
+          <li>
+            <strong>
+              ফরম পূরণ সম্পূর্ণ না করে কোন কারণে যদি ক্লোজ করে দেয়া হয় তাহলে
+              পুনরায় আবার প্রথম থেকে শুরু করতে হবে। এক্ষেত্রে পূর্বের কোন তথ্য
+              স্বয়ংক্রিয়ভাবে ফিরে আসবে না।
+            </strong>
+            <br />
+            <strong class="en-text">
+              If the form is closed before completion for any reason, the
+              process must be started again from the beginning. Previously
+              entered data will not be restored automatically.
+            </strong>
+          </li>
+        </ol>
       </div>
 
       <div class="header">
@@ -761,7 +1142,12 @@
             </div>
             <div class="form-group">
               <label>Date of Birth</label
-              ><input type="date" id="date_of_birth"  min="1900-01-01" max="2099-12-31"/>
+              ><input
+                type="date"
+                id="date_of_birth"
+                min="1900-01-01"
+                max="2099-12-31"
+              />
             </div>
             <div class="form-group">
               <label>Place of Birth</label
@@ -974,7 +1360,12 @@
             </div>
             <div class="form-group">
               <label>Date of Marriage</label
-              ><input type="date" id="date_of_marriage" min="1900-01-01" max="2099-12-31" />
+              ><input
+                type="date"
+                id="date_of_marriage"
+                min="1900-01-01"
+                max="2099-12-31"
+              />
             </div>
           </div>
         </div>
@@ -1262,11 +1653,21 @@
             </div>
             <div class="form-group">
               <label>Date of Joining Academy</label
-              ><input type="date" id="date_of_joining_academy"  min="1900-01-01" max="2099-12-31"/>
+              ><input
+                type="date"
+                id="date_of_joining_academy"
+                min="1900-01-01"
+                max="2099-12-31"
+              />
             </div>
             <div class="form-group">
               <label>Date of Commission</label
-              ><input type="date" id="date_of_commission"  min="1900-01-01" max="2099-12-31"/>
+              ><input
+                type="date"
+                id="date_of_commission"
+                min="1900-01-01"
+                max="2099-12-31"
+              />
             </div>
             <div class="form-group">
               <label class="required">Commission Type</label
@@ -1296,7 +1697,13 @@
             </div>
             <div class="form-group">
               <label class="required">Ante Date Seniority</label
-              ><input type="date" id="ante_date_seniority" required  min="1900-01-01" max="2099-12-31"/>
+              ><input
+                type="date"
+                id="ante_date_seniority"
+                required
+                min="1900-01-01"
+                max="2099-12-31"
+              />
             </div>
             <div class="form-group">
               <label>Ante Date Authority</label
@@ -1304,7 +1711,12 @@
             </div>
             <div class="form-group">
               <label>Permanent Commission Date</label
-              ><input type="date" id="permanent_commission_date"  min="1900-01-01" max="2099-12-31"/>
+              ><input
+                type="date"
+                id="permanent_commission_date"
+                min="1900-01-01"
+                max="2099-12-31"
+              />
             </div>
             <div class="form-group">
               <label class="required">Permanent Commission Authority</label
@@ -1317,7 +1729,12 @@
             </div>
             <div class="form-group">
               <label>Date of Joining Bangladesh Army</label
-              ><input type="date" id="date_of_joining_bangladesh_army"  min="1900-01-01" max="2099-12-31"/>
+              ><input
+                type="date"
+                id="date_of_joining_bangladesh_army"
+                min="1900-01-01"
+                max="2099-12-31"
+              />
             </div>
             <div class="form-group">
               <label class="required">Joining Bangladesh Army Authority</label
@@ -1569,7 +1986,7 @@
           <div class="table-container">
             <table>
               <thead>
-                <tr> 
+                <tr>
                   <th>Visit Type</th>
                   <th>Country</th>
                   <th>Start Date</th>
@@ -1740,7 +2157,30 @@
         </div>
       </div>
     </div>
-    
+
+    <!-- Review Modal -->
+    <div class="popup-overlay" id="reviewModal" style="display: none">
+      <div class="popup-container">
+        <div class="popup-header">
+          <h1 id="headerName">Personnel Information Review</h1>
+          <p id="headerDetails">
+            Complete Service Record and Personal Information
+          </p>
+        </div>
+
+        <div class="popup-content" id="popupContent">
+          <!-- Content will be dynamically generated here -->
+        </div>
+
+        <div class="popup-footer">
+          <button class="btn btn-print" onclick="downloadJSON()">
+            Download
+          </button>
+          <button class="btn btn-close" onclick="closeModal()">Back</button>
+        </div>
+      </div>
+    </div>
+
     <script>
       const options = {
         blood_groups: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
@@ -1847,11 +2287,9 @@
       };
 
       function createSelect(name, opts, required = false) {
-        let html = `<select name="${name}" ${
-          required ? "required" : ""
-        }><option value="">Select</option>`;
+        let html = `<select name="${name}" ${required ? "required" : ""}><option value="">Select</option>`;
         opts.forEach(
-          (opt) => (html += `<option value="${opt}">${opt}</option>`)
+          (opt) => (html += `<option value="${opt}">${opt}</option>`),
         );
         return html + "</select>";
       }
@@ -1861,18 +2299,16 @@
         name,
         placeholder = "",
         required = false,
-        maxLength = null
+        maxLength = null,
       ) {
         const maxAttr = maxLength ? ` maxlength="${maxLength}"` : "";
-         // Add min/max for date type to enforce 4-digit year
+        // Add min/max for date type to enforce 4-digit year
         let dateAttr = "";
         if (type === "date") {
           dateAttr = ` min="1900-01-01" max="2099-12-31"`;
         }
 
-        return `<input type="${type}" name="${name}" placeholder="${placeholder}" ${
-        required ? "required" : ""
-        }${maxAttr}${dateAttr}>`;
+        return `<input type="${type}" name="${name}" placeholder="${placeholder}" ${required ? "required" : ""}${maxAttr}${dateAttr}>`;
       }
 
       function validateTableRows(type) {
@@ -1930,361 +2366,186 @@
         const row = document.createElement("tr");
 
         if (type === "addresses") {
-          row.innerHTML = `<td>${createSelect(
-            "address_type",
-            options.address_types,
-            true
-          )}</td>
-      <td>${createInput("text", "street_address", "Street Address", true)}</td>
-      <td>${createInput("text", "city", "City", false, 100)}</td>
-      <td>${createInput("text", "state", "State", false, 100)}</td>
-      <td>${createInput("text", "postal_code", "Postal Code", false, 20)}</td>
-      <td>${createInput("text", "country", "Country", false, 100)}</td>
-      <td>${createInput("date", "date", "", false )}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createSelect("address_type", options.address_types, true)}</td>
+<td>${createInput("text", "street_address", "Street Address", true)}</td>
+<td>${createInput("text", "city", "City", false, 100)}</td>
+<td>${createInput("text", "state", "State", false, 100)}</td>
+<td>${createInput("text", "postal_code", "Postal Code", false, 20)}</td>
+<td>${createInput("text", "country", "Country", false, 100)}</td>
+<td>${createInput("date", "date", "", false)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "language_skills") {
-          row.innerHTML = `<td>${createInput(
-            "text",
-            "language",
-            "Language",
-            true,
-            50
-          )}</td>
-      <td>${createSelect("proficiency", options.proficiency_levels, false)}</td>
-      <td>${createSelect(
-        "reading_skill",
-        options.proficiency_levels,
-        false
-      )}</td>
-      <td>${createSelect(
-        "writing_skill",
-        options.proficiency_levels,
-        false
-      )}</td>
-      <td>${createSelect(
-        "speaking_skill",
-        options.proficiency_levels,
-        false
-      )}</td>
-      <td>${createSelect("acquiring_skill", options.acquiring, false)}</td>
-      <td>${createInput("text", "remarks", "Remarks", false)}</td>
-      <td>${createInput("text", "institution", "Institution", false, 100)}</td>
-      <td>${createInput("number", "year", "Year", false)}</td>
-      <td>${createInput("text", "degree", "Degree", false, 100)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("text", "language", "Language", true, 50)}</td>
+<td>${createSelect("proficiency", options.proficiency_levels, false)}</td>
+<td>${createSelect("reading_skill", options.proficiency_levels, false)}</td>
+<td>${createSelect("writing_skill", options.proficiency_levels, false)}</td>
+<td>${createSelect("speaking_skill", options.proficiency_levels, false)}</td>
+<td>${createSelect("acquiring_skill", options.acquiring, false)}</td>
+<td>${createInput("text", "remarks", "Remarks", false)}</td>
+<td>${createInput("text", "institution", "Institution", false, 100)}</td>
+<td>${createInput("number", "year", "Year", false)}</td>
+<td>${createInput("text", "degree", "Degree", false, 100)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "family_members") {
-          row.innerHTML = `<td>${createSelect(
-            "relationship",
-            options.relationships,
-            true
-          )}</td>
-      <td>${createInput("text", "name", "Name", true, 200)}</td>
-      <td>${createInput("text", "nationality", "Nationality", false, 50)}</td>
-      <td>${createInput("date", "date_of_birth", "", false)}</td>
-      <td>${createSelect("is_deceased", ["false", "true"], true)}</td>
-      <td>${createInput(
-        "text",
-        "occupation_profession",
-        "Occupation",
-        false,
-        100
-      )}</td>
-      <td>${createInput("number", "annual_income", "Annual Income", false)}</td>
-      <td>${createInput("text", "address", "Address", false)}</td>
-      <td>${createInput(
-        "text",
-        "birth_registration",
-        "Birth Registration",
-        false,
-        100
-      )}</td>
-      <td>${createInput("text", "national_id", "National ID", false, 20)}</td>
-      <td>${createInput("text", "education", "Education", false, 200)}</td>
-      <td>${createSelect("dependency", ["true", "false"], false)}</td>
-      <td>${createSelect("sex", options.sex, false)}</td>
-      <td>${createInput("date", "date_of_expire", "")}</td>
-      <td>${createInput(
-        "text",
-        "location_of_grave",
-        "Location of Grave",
-        false,
-        100
-      )}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createSelect("relationship", options.relationships, true)}</td>
+<td>${createInput("text", "name", "Name", true, 200)}</td>
+<td>${createInput("text", "nationality", "Nationality", false, 50)}</td>
+<td>${createInput("date", "date_of_birth", "", false)}</td>
+<td>${createSelect("is_deceased", ["false", "true"], true)}</td>
+<td>${createInput("text", "occupation_profession", "Occupation", false, 100)}</td>
+<td>${createInput("number", "annual_income", "Annual Income", false)}</td>
+<td>${createInput("text", "address", "Address", false)}</td>
+<td>${createInput("text", "birth_registration", "Birth Registration", false, 100)}</td>
+<td>${createInput("text", "national_id", "National ID", false, 20)}</td>
+<td>${createInput("text", "education", "Education", false, 200)}</td>
+<td>${createSelect("dependency", ["true", "false"], false)}</td>
+<td>${createSelect("sex", options.sex, false)}</td>
+<td>${createInput("date", "date_of_expire", "")}</td>
+<td>${createInput("text", "location_of_grave", "Location of Grave", false, 100)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "education") {
-          row.innerHTML = `<td>${createSelect(
-            "institution_type",
-            options.education_types,
-            true,
-            10
-          )}</td>
-      <td>${createInput(
-        "text",
-        "institution_name",
-        "Institution Name",
-        true,
-        200
-      )}</td>
-      <td>${createInput("date", "start_date", "", false)}</td>
-      <td>${createInput("date", "end_date", "", false)}</td>
-      <td>${createInput(
-        "text",
-        "examination_passed",
-        "Examination Passed",
-        false,
-        100
-      )}</td>
-      <td>${createInput("text", "subjects", "Subjects", false)}</td>
-      <td>${createInput("number", "gpa", "GPA", false)}</td>
-      <td>${createSelect("division", options.divisions, false)}</td>
-      <td>${createInput("number", "year_of_passing", "Year", false)}</td>
-      <td>${createInput("text", "remarks", "Remarks", true)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createSelect("institution_type", options.education_types, true, 10)}</td>
+<td>${createInput("text", "institution_name", "Institution Name", true, 200)}</td>
+<td>${createInput("date", "start_date", "", false)}</td>
+<td>${createInput("date", "end_date", "", false)}</td>
+<td>${createInput("text", "examination_passed", "Examination Passed", false, 100)}</td>
+<td>${createInput("text", "subjects", "Subjects", false)}</td>
+<td>${createInput("number", "gpa", "GPA", false)}</td>
+<td>${createSelect("division", options.divisions, false)}</td>
+<td>${createInput("number", "year_of_passing", "Year", false)}</td>
+<td>${createInput("text", "remarks", "Remarks", true)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "passports") {
-          row.innerHTML = `<td>${createSelect(
-            "status",
-            options.passport_status,
-            false
-          )}</td>
-      <td>${createInput(
-        "text",
-        "passport_number",
-        "Passport Number",
-        true,
-        50
-      )}</td>
-      <td>${createInput("date", "issue_date", "", false)}</td>
-      <td>${createInput("date", "expiry_date", "", false)}</td>
-      <td>${createInput("text", "authority", "Authority", false, 100)}</td>
-      <td>${createSelect("passport_type", options.passport_types, false)}</td>
-      <td>${createSelect("purpose", options.passport_purposes, false)}</td>
-      <td>${createInput(
-        "text",
-        "place_of_issue",
-        "Place of Issue",
-        false,
-        100
-      )}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createSelect("status", options.passport_status, false)}</td>
+<td>${createInput("text", "passport_number", "Passport Number", true, 50)}</td>
+<td>${createInput("date", "issue_date", "", false)}</td>
+<td>${createInput("date", "expiry_date", "", false)}</td>
+<td>${createInput("text", "authority", "Authority", false, 100)}</td>
+<td>${createSelect("passport_type", options.passport_types, false)}</td>
+<td>${createSelect("purpose", options.passport_purposes, false)}</td>
+<td>${createInput("text", "place_of_issue", "Place of Issue", false, 100)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "medical_histories") {
-          row.innerHTML = `<td>${createInput(
-            "text",
-            "name_of_disease",
-            "Disease Name",
-            true
-          )}</td>
-      <td>${createSelect(
-        "nature_of_injury",
-        options.nature_of_injury,
-        true
-      )}</td>
-      <td>${createInput(
-        "date",
-        "date_of_medical_admission_from",
-        "",
-        false
-      )}</td>
-      <td>${createInput("date", "date_of_medical_admission_to", "", false)}</td>
-      <td>${createSelect(
-        "medical_category_class",
-        options.medical_category_class,
-        false
-      )}</td>
-      <td>${createInput("date", "medical_category_from", "", false)}</td>
-      <td>${createInput("date", "medical_category_to", "", false)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("text", "name_of_disease", "Disease Name", true)}</td>
+<td>${createSelect("nature_of_injury", options.nature_of_injury, true)}</td>
+<td>${createInput("date", "date_of_medical_admission_from", "", false)}</td>
+<td>${createInput("date", "date_of_medical_admission_to", "", false)}</td>
+<td>${createSelect("medical_category_class", options.medical_category_class, false)}</td>
+<td>${createInput("date", "medical_category_from", "", false)}</td>
+<td>${createInput("date", "medical_category_to", "", false)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "pre_commission_services") {
-          row.innerHTML = `<td>${createInput(
-            "text",
-            "unit",
-            "Unit",
-            true,
-            100
-          )}</td>
-      <td>${createInput("text", "designation", "Designation", true, 100)}</td>
-      <td>${createInput("date", "date_from", "", false)}</td>
-      <td>${createInput("date", "date_to", "", false)}</td>
-      <td>${createInput("text", "remarks", "Remarks", true)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("text", "unit", "Unit", true, 100)}</td>
+<td>${createInput("text", "designation", "Designation", true, 100)}</td>
+<td>${createInput("date", "date_from", "", false)}</td>
+<td>${createInput("date", "date_to", "", false)}</td>
+<td>${createInput("text", "remarks", "Remarks", true)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "pre_commission_trainings") {
-          row.innerHTML = `<td>${createInput(
-            "text",
-            "location",
-            "Location",
-            true,
-            100
-          )}</td>
-      <td>${createInput("text", "appointment", "Appointment", true, 100)}</td>
-      <td>${createInput("text", "distinction", "Distinction", true)}</td>
-      <td>${createInput("text", "remarks", "Remarks", true)}</td>
-      <td>${createInput("date", "date_from", "", false)}</td>
-      <td>${createInput("date", "date_to", "", false)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("text", "location", "Location", true, 100)}</td>
+<td>${createInput("text", "appointment", "Appointment", true, 100)}</td>
+<td>${createInput("text", "distinction", "Distinction", true)}</td>
+<td>${createInput("text", "remarks", "Remarks", true)}</td>
+<td>${createInput("date", "date_from", "", false)}</td>
+<td>${createInput("date", "date_to", "", false)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "post_commission_trainings") {
-          row.innerHTML = `<td>${createSelect(
-            "training_type",
-            options.training_types,
-            true
-          )}</td>
-      <td>${createInput("text", "course_name", "Course Name", false, 200)}</td>
-      <td>${createInput("text", "location", "Location", true, 100)}</td>
-      <td>${createInput("date", "date_from", "", false)}</td>
-      <td>${createInput("date", "date_to", "", false)}</td>
-       
-      <td>${createSelect("result_b_side", options.result_b_side)}</td>
-       
-      <td>${createSelect("result_y_side", options.result_y_side)}</td>
-      <td>${createInput("number", "mark_obtained_b_side", "Mark B Side")}</td>
-      <td>${createInput("number", "mark_obtained_y_side", "Mark Y Side")}</td>
-      <td>${createInput("text", "remarks", "Remarks")}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createSelect("training_type", options.training_types, true)}</td>
+<td>${createInput("text", "course_name", "Course Name", false, 200)}</td>
+<td>${createInput("text", "location", "Location", true, 100)}</td>
+<td>${createInput("date", "date_from", "", false)}</td>
+<td>${createInput("date", "date_to", "", false)}</td>
+
+<td>${createSelect("result_b_side", options.result_b_side)}</td>
+
+<td>${createSelect("result_y_side", options.result_y_side)}</td>
+<td>${createInput("number", "mark_obtained_b_side", "Mark B Side")}</td>
+<td>${createInput("number", "mark_obtained_y_side", "Mark Y Side")}</td>
+<td>${createInput("text", "remarks", "Remarks")}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "additional_qualifications") {
-          row.innerHTML = `<td>${createInput(
-            "text",
-            "qualification",
-            "Qualification",
-            true,
-            200
-          )}</td>
-      <td>${createInput("date", "date_obtained", "", true)}</td>
-      <td>${createInput("text", "authority", "Authority", true, 100)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("text", "qualification", "Qualification", true, 200)}</td>
+<td>${createInput("date", "date_obtained", "", true)}</td>
+<td>${createInput("text", "authority", "Authority", true, 100)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "map_reading_promotion_exams") {
-          row.innerHTML = `<td>${createInput(
-            "text",
-            "exam_name",
-            "Exam Name",
-            true,
-            100
-          )}</td>
-      <td>${createInput("number", "passing_year", "Passing Year", true)}</td>
-      <td>${createInput("text", "authority", "Authority", false, 100)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("text", "exam_name", "Exam Name", true, 100)}</td>
+<td>${createInput("number", "passing_year", "Passing Year", true)}</td>
+<td>${createInput("text", "authority", "Authority", false, 100)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "promotions") {
-          row.innerHTML = `<td>${createInput(
-            "date",
-            "promotion_date",
-            "",
-            true
-          )}</td>
-      <td>${createSelect("promotion_type", options.promotion_types, true)}</td>
-      <td>${createSelect("rank", options.ranks, true)}</td>
-      <td>${createInput("text", "authority", "Authority", false, 100)}</td>
-      <td>${createInput("text", "order", "Order", false, 50)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("date", "promotion_date", "", true)}</td>
+<td>${createSelect("promotion_type", options.promotion_types, true)}</td>
+<td>${createSelect("rank", options.ranks, true)}</td>
+<td>${createInput("text", "authority", "Authority", false, 100)}</td>
+<td>${createInput("text", "order", "Order", false, 50)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "service_records") {
-          row.innerHTML = `<td>${createInput(
-            "date",
-            "date_from",
-            "",
-            true
-          )}</td>
-      <td>${createInput("date", "date_to", "")}</td>
-      <td>${createSelect("appointment_type", options.appointment_types)}</td>
-      <td>${createInput("text", "appointment_name", "Appointment Name")}</td>
-       <td>${createSelect("service_type", options.service_type, true)}</td>
-      <td>${createInput(
-        "text",
-        "unit_ere_name",
-        "Unit/ERE Name",
-        true,
-        100
-      )}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("date", "date_from", "", true)}</td>
+<td>${createInput("date", "date_to", "")}</td>
+<td>${createSelect("appointment_type", options.appointment_types)}</td>
+<td>${createInput("text", "appointment_name", "Appointment Name")}</td>
+<td>${createSelect("service_type", options.service_type, true)}</td>
+<td>${createInput("text", "unit_ere_name", "Unit/ERE Name", true, 100)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "operational_awards") {
-          row.innerHTML = `<td>${createInput(
-            "text",
-            "operation_name",
-            "Operation Name",
-            true,
-            200
-          )}</td>
-      <td>${createInput("date", "date_from", "", false)}</td>
-      <td>${createInput("date", "date_to", "", false)}</td>
-      <td>${createInput("text", "appointment", "Appointment", true, 100)}</td>
-      <td>${createInput("text", "award_receive", "Award Receive", true)}</td>
-      <td>${createInput("text", "authority", "Authority", false, 100)}</td>
-      <td>${createInput("text", "remarks", "Remarks", true)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("text", "operation_name", "Operation Name", true, 200)}</td>
+<td>${createInput("date", "date_from", "", false)}</td>
+<td>${createInput("date", "date_to", "", false)}</td>
+<td>${createInput("text", "appointment", "Appointment", true, 100)}</td>
+<td>${createInput("text", "award_receive", "Award Receive", true)}</td>
+<td>${createInput("text", "authority", "Authority", false, 100)}</td>
+<td>${createInput("text", "remarks", "Remarks", true)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "non_operational_awards") {
-          row.innerHTML = `<td>${createInput(
-            "text",
-            "description",
-            "Description",
-            true
-          )}</td>
-      <td>${createInput("date", "date_awarded", "", true)}</td>
-      <td>${createInput("text", "details", "Details", true)}</td>
-      <td>${createInput("text", "authority", "Authority", true, 100)}</td>
-      <td>${createInput("text", "remarks", "Remarks", true)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("text", "description", "Description", true)}</td>
+<td>${createInput("date", "date_awarded", "", true)}</td>
+<td>${createInput("text", "details", "Details", true)}</td>
+<td>${createInput("text", "authority", "Authority", true, 100)}</td>
+<td>${createInput("text", "remarks", "Remarks", true)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "overseas_visits") {
-          row.innerHTML = ` 
-      <td>${createSelect("visit_type", options.visit_types, true)}</td>
-      <td>${createInput("text", "country", "Country", true, 100)}</td>
-      <td>${createInput("date", "start_date", "", true)}</td>
-      <td>${createInput("date", "end_date", "", true)}</td>
-      <td>${createInput("text", "reason", "Reason", true)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `
+<td>${createSelect("visit_type", options.visit_types, true)}</td>
+<td>${createInput("text", "country", "Country", true, 100)}</td>
+<td>${createInput("date", "start_date", "", true)}</td>
+<td>${createInput("date", "end_date", "", true)}</td>
+<td>${createInput("text", "reason", "Reason", true)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "annual_incomes") {
-          row.innerHTML = `<td>${createInput(
-            "text",
-            "person",
-            "Person",
-            true
-          )}</td>
-      <td>${createSelect("income_source", options.income_sources, true)}</td>
-      <td>${createInput("number", "amount", "Amount", true)}</td>
-      <td>${createInput("number", "year", "Year", true)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("text", "person", "Person", true)}</td>
+<td>${createSelect("income_source", options.income_sources, true)}</td>
+<td>${createInput("number", "amount", "Amount", true)}</td>
+<td>${createInput("number", "year", "Year", true)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "bank_accounts") {
-          row.innerHTML = `<td>${createInput(
-            "text",
-            "bank_name",
-            "Bank Name",
-            true,
-            100
-          )}</td>
-      <td>${createInput("text", "account_number", "Account Number", true)}</td>
-      <td>${createSelect("account_type", options.account_types, true)}</td>
-      <td>${createInput("text", "branch", "Branch", true, 100)}</td>
-      <td>${createInput("date", "opening_date", "", false)}</td>
-      <td>${createInput("date", "closing_date", "")}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("text", "bank_name", "Bank Name", true, 100)}</td>
+<td>${createInput("text", "account_number", "Account Number", true)}</td>
+<td>${createSelect("account_type", options.account_types, true)}</td>
+<td>${createInput("text", "branch", "Branch", true, 100)}</td>
+<td>${createInput("date", "opening_date", "", false)}</td>
+<td>${createInput("date", "closing_date", "")}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "military_legal_records") {
-          row.innerHTML = `<td>${createSelect(
-            "military_legal_type",
-            options.military_legal_type,
-            true
-          )}</td>
-      <td>${createSelect(
-        "military_legal_name",
-        options.military_legal_name,
-        true
-      )}</td>
-      <td>${createInput("text", "remarks", "Remarks")}</td>
-      <td>${createInput("date", "date", "", true)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createSelect("military_legal_type", options.military_legal_type, true)}</td>
+<td>${createSelect("military_legal_name", options.military_legal_name, true)}</td>
+<td>${createInput("text", "remarks", "Remarks")}</td>
+<td>${createInput("date", "date", "", true)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "civil_legal_records") {
-          row.innerHTML = `<td>${createInput(
-            "text",
-            "law_section",
-            "Law Section",
-            true,
-            100
-          )}</td>
-      <td>${createInput("text", "crime_details", "Crime Details", true)}</td>
-      <td>${createInput("date", "date_judgment", "", true)}</td>
-      <td>${createInput("text", "place", "Place", true, 100)}</td>
-      <td>${createInput("text", "punishment", "Punishment", true)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+          row.innerHTML = `<td>${createInput("text", "law_section", "Law Section", true, 100)}</td>
+<td>${createInput("text", "crime_details", "Crime Details", true)}</td>
+<td>${createInput("date", "date_judgment", "", true)}</td>
+<td>${createInput("text", "place", "Place", true, 100)}</td>
+<td>${createInput("text", "punishment", "Punishment", true)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         } else if (type === "ranks_held") {
           row.innerHTML = `<td>${createInput("date", "date", "", true)}</td>
-      <td>${createSelect("promotion_type", options.promotion_types, true)}</td>
-      <td>${createSelect("rank", options.ranks, true)}</td>
-      <td>${createInput("text", "retrospective", "Retrospective")}</td>
-      <td>${createInput("text", "notified", "Notified", false)}</td>
-      <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+<td>${createSelect("promotion_type", options.promotion_types, true)}</td>
+<td>${createSelect("rank", options.ranks, true)}</td>
+<td>${createInput("text", "retrospective", "Retrospective")}</td>
+<td>${createInput("text", "notified", "Notified", false)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
         }
 
         tbody.appendChild(row);
@@ -2355,7 +2616,7 @@
 
         // Find or create the add-first-row button container
         let addFirstBtnContainer = section.querySelector(
-          ".add-first-row-container"
+          ".add-first-row-container",
         );
         let addFirstBtn = addFirstBtnContainer
           ? addFirstBtnContainer.querySelector(".btn-add-first-row")
@@ -2388,7 +2649,7 @@
             addFirstBtnContainer.appendChild(addFirstBtn);
             tableContainer.insertBefore(
               addFirstBtnContainer,
-              tableContainer.firstChild
+              tableContainer.firstChild,
             );
           }
           // Ensure the button container is visible
@@ -2523,7 +2784,7 @@
           const inputs = row.querySelectorAll("input, select");
           requiredFields.forEach((fieldName) => {
             const input = Array.from(inputs).find(
-              (inp) => inp.name === fieldName
+              (inp) => inp.name === fieldName,
             );
             if (!input) return;
 
@@ -2535,7 +2796,7 @@
                 const rowNum = index + 1;
                 const friendlyFieldName = "Is Deceased";
                 errors.push(
-                  `${sectionName} - Entry ${rowNum}: ${friendlyFieldName}`
+                  `${sectionName} - Entry ${rowNum}: ${friendlyFieldName}`,
                 );
               }
             } else if (!value || value === "" || value === "Select") {
@@ -2548,7 +2809,7 @@
                 .replace(/Gpa/g, "GPA")
                 .replace(/No/g, "No.");
               errors.push(
-                `${sectionName} - Entry ${rowNum}: ${friendlyFieldName}`
+                `${sectionName} - Entry ${rowNum}: ${friendlyFieldName}`,
               );
             }
           });
@@ -2575,8 +2836,8 @@
           ...validateTableRequiredFields(
             "addresses",
             ["address_type", "street_address"],
-            "Address"
-          )
+            "Address",
+          ),
         );
 
         // Validate Language Skills
@@ -2584,8 +2845,8 @@
           ...validateTableRequiredFields(
             "language_skills",
             ["language"],
-            "Language Skill"
-          )
+            "Language Skill",
+          ),
         );
 
         // Validate Family Members
@@ -2593,8 +2854,8 @@
           ...validateTableRequiredFields(
             "family_members",
             ["relationship", "name", "is_deceased"],
-            "Family Member"
-          )
+            "Family Member",
+          ),
         );
 
         // Validate Education
@@ -2602,8 +2863,8 @@
           ...validateTableRequiredFields(
             "education",
             ["institution_type", "institution_name", "remarks"],
-            "Education"
-          )
+            "Education",
+          ),
         );
 
         // Validate Passports
@@ -2611,8 +2872,8 @@
           ...validateTableRequiredFields(
             "passports",
             ["passport_number"],
-            "Passport"
-          )
+            "Passport",
+          ),
         );
 
         // Validate Medical Histories
@@ -2620,8 +2881,8 @@
           ...validateTableRequiredFields(
             "medical_histories",
             ["name_of_disease", "nature_of_injury"],
-            "Medical History"
-          )
+            "Medical History",
+          ),
         );
 
         // Validate Pre Commission Services
@@ -2629,8 +2890,8 @@
           ...validateTableRequiredFields(
             "pre_commission_services",
             ["unit", "designation", "remarks"],
-            "Pre Commission Service"
-          )
+            "Pre Commission Service",
+          ),
         );
 
         // Validate Pre Commission Trainings
@@ -2638,8 +2899,8 @@
           ...validateTableRequiredFields(
             "pre_commission_trainings",
             ["location", "appointment", "distinction", "remarks"],
-            "Pre Commission Training"
-          )
+            "Pre Commission Training",
+          ),
         );
 
         // Validate Commission section
@@ -2662,8 +2923,8 @@
           ...validateTableRequiredFields(
             "post_commission_trainings",
             ["training_type", "location"],
-            "Post Commission Training"
-          )
+            "Post Commission Training",
+          ),
         );
 
         // Validate Additional Qualifications
@@ -2671,8 +2932,8 @@
           ...validateTableRequiredFields(
             "additional_qualifications",
             ["qualification", "date_obtained", "authority"],
-            "Additional Qualification"
-          )
+            "Additional Qualification",
+          ),
         );
 
         // Validate Map Reading Promotion Exams
@@ -2680,8 +2941,8 @@
           ...validateTableRequiredFields(
             "map_reading_promotion_exams",
             ["exam_name", "passing_year"],
-            "Map Reading Promotion Exam"
-          )
+            "Map Reading Promotion Exam",
+          ),
         );
 
         // Validate Promotions
@@ -2689,8 +2950,8 @@
           ...validateTableRequiredFields(
             "promotions",
             ["promotion_date", "promotion_type", "rank"],
-            "Promotion"
-          )
+            "Promotion",
+          ),
         );
 
         // Validate Service Records
@@ -2698,8 +2959,8 @@
           ...validateTableRequiredFields(
             "service_records",
             ["date_from", "service_type", "unit_ere_name"],
-            "Service Record"
-          )
+            "Service Record",
+          ),
         );
 
         // Validate Operational Awards
@@ -2707,8 +2968,8 @@
           ...validateTableRequiredFields(
             "operational_awards",
             ["operation_name", "appointment", "award_receive", "remarks"],
-            "Operational Award"
-          )
+            "Operational Award",
+          ),
         );
 
         // Validate Non Operational Awards
@@ -2716,23 +2977,17 @@
           ...validateTableRequiredFields(
             "non_operational_awards",
             ["description", "date_awarded", "details", "authority", "remarks"],
-            "Non Operational Award"
-          )
+            "Non Operational Award",
+          ),
         );
 
         // Validate Overseas Visits
         errors.push(
           ...validateTableRequiredFields(
             "overseas_visits",
-            [ 
-              "visit_type",
-              "country",
-              "start_date",
-              "end_date",
-              "reason",
-            ],
-            "Overseas Visit"
-          )
+            ["visit_type", "country", "start_date", "end_date", "reason"],
+            "Overseas Visit",
+          ),
         );
 
         // Validate Annual Incomes
@@ -2740,8 +2995,8 @@
           ...validateTableRequiredFields(
             "annual_incomes",
             ["person", "income_source", "amount", "year"],
-            "Annual Income"
-          )
+            "Annual Income",
+          ),
         );
 
         // Validate Bank Accounts
@@ -2749,8 +3004,8 @@
           ...validateTableRequiredFields(
             "bank_accounts",
             ["bank_name", "account_number", "account_type", "branch"],
-            "Bank Account"
-          )
+            "Bank Account",
+          ),
         );
 
         // Validate Military Legal Records
@@ -2758,8 +3013,8 @@
           ...validateTableRequiredFields(
             "military_legal_records",
             ["date", "military_legal_type", "military_legal_name"],
-            "Military Legal Record"
-          )
+            "Military Legal Record",
+          ),
         );
 
         // Validate Civil Legal Records
@@ -2767,8 +3022,8 @@
           ...validateTableRequiredFields(
             "civil_legal_records",
             ["law_section", "crime_details", "place", "punishment"],
-            "Civil Legal Record"
-          )
+            "Civil Legal Record",
+          ),
         );
 
         // Validate Ranks Held
@@ -2776,8 +3031,8 @@
           ...validateTableRequiredFields(
             "ranks_held",
             ["date", "promotion_type", "rank"],
-            "Ranks Held"
-          )
+            "Ranks Held",
+          ),
         );
 
         if (errors.length > 0) {
@@ -2852,7 +3107,7 @@
             previous_nationality: getValue("previous_nationality") || null,
             present_medical_category: getValue("present_medical_category"),
             present_nature_of_disability: getValue(
-              "present_nature_of_disability"
+              "present_nature_of_disability",
             ),
             present_attributes: getValue("present_attributes"),
             email: getValue("email"),
@@ -2880,16 +3135,16 @@
             ante_date_seniority: getDateValue("ante_date_seniority"),
             ante_date_authority: getValue("ante_date_authority") || null,
             permanent_commission_date: getDateValue(
-              "permanent_commission_date"
+              "permanent_commission_date",
             ),
             permanent_commission_authority: getValue(
-              "permanent_commission_authority"
+              "permanent_commission_authority",
             ),
             date_of_joining_bangladesh_army: getDateValue(
-              "date_of_joining_bangladesh_army"
+              "date_of_joining_bangladesh_army",
             ),
             joining_bangladesh_army_authority: getValue(
-              "joining_bangladesh_army_authority"
+              "joining_bangladesh_army_authority",
             ),
             original_arms_service: getValue("original_arms_service") || null,
             previous_arms_service: getValue("previous_arms_service") || null,
@@ -2897,7 +3152,7 @@
           post_commission_trainings: getTableData("post_commission_trainings"),
           additional_qualifications: getTableData("additional_qualifications"),
           map_reading_promotion_exams: getTableData(
-            "map_reading_promotion_exams"
+            "map_reading_promotion_exams",
           ),
           promotions: getTableData("promotions"),
           service_records: getTableData("service_records"),
@@ -2911,41 +3166,11 @@
           ranks_held: getTableData("ranks_held"),
         };
 
-        // First stringify the data
-        let jsonString = JSON.stringify(data, null, 2);
+        // Store data in localStorage for the modal
+        localStorage.setItem("personnelData", JSON.stringify(data));
 
-        // List of decimal field names that should always show as decimal (e.g., 3.0)
-        const decimalFields = [
-          "height_cm",
-          "height_inch",
-          "weight_kg",
-          "weight_pound",
-          "annual_income",
-          "gpa",
-          "amount",
-        ];
-
-        // Replace whole numbers in decimal fields with decimal format (3 -> 3.0)
-        decimalFields.forEach((field) => {
-          // Match the field name followed by colon and a whole number
-          // Pattern: "field_name": 3  ->  "field_name": 3.0
-          const regex = new RegExp(`("${field}"\\s*:\\s*)(\\d+)([,\\n])`, "g");
-          jsonString = jsonString.replace(
-            regex,
-            (match, prefix, number, suffix) => {
-              return `${prefix}${parseFloat(number).toFixed(1)}${suffix}`;
-            }
-          );
-        });
-
-        const blob = new Blob([jsonString], {
-          type: "application/json",
-        });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download =
-          `${data.person.personal_no}-RECORD.json` || "unknown_record.json";
-        link.click();
+        // Show the modal instead of downloading directly
+        showModal();
       }
 
       function markRequiredHeaders() {
@@ -2999,6 +3224,1389 @@
             });
           }
         });
+      }
+
+      // Modal functions
+      let personnelData = {};
+
+      function showModal() {
+        personnelData = JSON.parse(localStorage.getItem("personnelData")) || {};
+        renderContent();
+        document.getElementById("reviewModal").style.display = "flex";
+      }
+
+      function closeModal() {
+        if (confirm("Are you sure you want to back to editing?")) {
+          document.getElementById("reviewModal").style.display = "none";
+        }
+      }
+
+      function downloadJSON() {
+        // First stringify the data
+        let jsonString = JSON.stringify(personnelData, null, 2);
+
+        // List of decimal field names that should always show as decimal (e.g., 3.0)
+        const decimalFields = [
+          "height_cm",
+          "height_inch",
+          "weight_kg",
+          "weight_pound",
+          "annual_income",
+          "gpa",
+          "amount",
+        ];
+
+        // Replace whole numbers in decimal fields with decimal format (3 -> 3.0)
+        decimalFields.forEach((field) => {
+          // Match the field name followed by colon and a whole number
+          // Pattern: "field_name": 3  ->  "field_name": 3.0
+          const regex = new RegExp(`("${field}"\\s*:\\s*)(\\d+)([,\\n])`, "g");
+          jsonString = jsonString.replace(
+            regex,
+            (match, prefix, number, suffix) => {
+              return `${prefix}${parseFloat(number).toFixed(1)}${suffix}`;
+            },
+          );
+        });
+
+        const blob = new Blob([jsonString], {
+          type: "application/json",
+        });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download =
+          `${personnelData.person?.personal_no}-RECORD.json` ||
+          "unknown_record.json";
+        link.click();
+      }
+
+      // Helper function to format values
+      function formatValue(value) {
+        if (
+          value === null ||
+          value === undefined ||
+          value === "" ||
+          value === "-"
+        ) {
+          return '<span class="no-data">N/A</span>';
+        }
+        return value;
+      }
+
+      // Helper function to format dates
+      function formatDate(dateString) {
+        if (!dateString) return '<span class="no-data">N/A</span>';
+        const date = new Date(dateString);
+        return date.toLocaleDateString("en-GB");
+      }
+
+      // Generate Personal Information Section
+      function generatePersonalreview() {
+        const person = personnelData.person;
+        const review = personnelData.personal_info;
+
+        return `
+                <div class="section">
+                    <div class="section-title">BASIC INFORMATION</div>
+                    <div class="review-grid">
+                        <div class="review-item">
+                            <div class="review-label">Name</div>
+                            <div class="review-value">${formatValue(person.name)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Personal Number</div>
+                            <div class="review-value">${formatValue(person.personal_no)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Short Name</div>
+                            <div class="review-value">${formatValue(person.short_name)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Mobile Number</div>
+                            <div class="review-value">${formatValue(person.mobile_no)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">National ID</div>
+                            <div class="review-value">${formatValue(review.national_id_number)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Arms/Service</div>
+                            <div class="review-value">${formatValue(review.arms_service)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Date of Birth</div>
+                            <div class="review-value">${formatDate(review.date_of_birth)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Place of Birth</div>
+                            <div class="review-value">${formatValue(review.place_of_birth)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Birth Certificate</div>
+                            <div class="review-value">${formatValue(review.birth_certificate_number)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Blood Group</div>
+                            <div class="review-value">${formatValue(review.blood_group)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Religion</div>
+                            <div class="review-value">${formatValue(review.religion)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Nationality</div>
+                            <div class="review-value">${formatValue(review.nationality)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Marital Status</div>
+                            <div class="review-value">${formatValue(review.marital_status)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Date of Marriage</div>
+                            <div class="review-value">${formatDate(review.date_of_marriage)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Email</div>
+                            <div class="review-value">${formatValue(review.email)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Medical Category</div>
+                            <div class="review-value">${formatValue(review.present_medical_category)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Caste</div>
+                            <div class="review-value">${formatValue(review.caste)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Previous Nationality</div>
+                            <div class="review-value">${formatValue(review.previous_nationality)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Nature of Disability</div>
+                            <div class="review-value">${formatValue(review.present_nature_of_disability)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Disability Attributes</div>
+                            <div class="review-value">${formatValue(review.present_attributes)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Personal Phone</div>
+                            <div class="review-value">${formatValue(review.personal_phone_no)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">T&T Phone</div>
+                            <div class="review-value">${formatValue(review.tnt_phone_no)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Position Among Siblings</div>
+                            <div class="review-value">${formatValue(review.position_among_siblings)}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">PHYSICAL ATTRIBUTES</div>
+                    <div class="review-grid">
+                        <div class="review-item">
+                            <div class="review-label">Height (cm)</div>
+                            <div class="review-value">${formatValue(review.height_cm)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Height (inch)</div>
+                            <div class="review-value">${formatValue(review.height_inch)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Weight (kg)</div>
+                            <div class="review-value">${formatValue(review.weight_kg)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Weight (pound)</div>
+                            <div class="review-value">${formatValue(review.weight_pound)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Build</div>
+                            <div class="review-value">${formatValue(review.build)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Complexion</div>
+                            <div class="review-value">${formatValue(review.complexion)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Eye Color</div>
+                            <div class="review-value">${formatValue(review.eye_color)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Identification Marks</div>
+                            <div class="review-value">${formatValue(review.visible_identification_marks)}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+      }
+
+      // Generate Addresses Section
+      function generateAddresses() {
+        if (!personnelData.addresses || personnelData.addresses.length === 0) {
+          return '<div class="section"><div class="section-title">ADDRESSES</div><p class="no-data">No address information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">ADDRESSES</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Street Address</th>
+                                    <th>City</th>
+                                    <th>State</th>
+                                    <th>Postal Code</th>
+                                    <th>Country</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.addresses.forEach((addr) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(addr.address_type)}</td>
+                        <td>${formatValue(addr.street_address)}</td>
+                        <td>${formatValue(addr.city)}</td>
+                        <td>${formatValue(addr.state)}</td>
+                        <td>${formatValue(addr.postal_code)}</td>
+                        <td>${formatValue(addr.country)}</td>
+                        <td>${formatDate(addr.date)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Language Skills Section
+      function generateLanguageSkills() {
+        if (
+          !personnelData.language_skills ||
+          personnelData.language_skills.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">LANGUAGE SKILLS</div><p class="no-data">No language skills information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">LANGUAGE SKILLS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Language</th>
+                                    <th>Proficiency</th>
+                                    <th>Reading</th>
+                                    <th>Writing</th>
+                                    <th>Speaking</th>
+                                    <th>Acquiring Skill</th>
+                                    <th>Remarks</th>
+                                    <th>Institution</th>
+                                    <th>Year</th>
+                                    <th>Degree</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.language_skills.forEach((lang) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(lang.language)}</td>
+                        <td>${formatValue(lang.proficiency)}</td>
+                        <td>${formatValue(lang.reading_skill)}</td>
+                        <td>${formatValue(lang.writing_skill)}</td>
+                        <td>${formatValue(lang.speaking_skill)}</td>
+                        <td>${formatValue(lang.acquiring_skill)}</td>
+                        <td>${formatValue(lang.remarks)}</td>
+                        <td>${formatValue(lang.institution)}</td>
+                        <td>${formatValue(lang.year)}</td>
+                        <td>${formatValue(lang.degree)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Family Members Section
+      function generateFamilyMembers() {
+        if (
+          !personnelData.family_members ||
+          personnelData.family_members.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">FAMILY MEMBERS</div><p class="no-data">No family members information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">FAMILY MEMBERS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Relationship</th>
+                                    <th>Name</th>
+                                    <th>Nationality</th>
+                                    <th>Date of Birth</th>
+                                    <th>Sex</th>
+                                    <th>Occupation</th>
+                                    <th>Education</th>
+                                    <th>Annual Income</th>
+                                    <th>Address</th>
+                                    <th>Birth Registration</th>
+                                    <th>National ID</th>
+                                    <th>Dependency</th>
+                                    <th>Status</th>
+                                    <th>Date of Expire</th>
+                                    <th>Location of Grave</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.family_members.forEach((member) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(member.relationship)}</td>
+                        <td>${formatValue(member.name)}</td>
+                        <td>${formatValue(member.nationality)}</td>
+                        <td>${formatDate(member.date_of_birth)}</td>
+                        <td>${formatValue(member.sex)}</td>
+                        <td>${formatValue(member.occupation_profession)}</td>
+                        <td>${formatValue(member.education)}</td>
+                        <td>${formatValue(member.annual_income)}</td>
+                        <td>${formatValue(member.address)}</td>
+                        <td>${formatValue(member.birth_registration)}</td>
+                        <td>${formatValue(member.national_id)}</td>
+                        <td>${member.dependency ? "Yes" : "No"}</td>
+                        <td>${member.is_deceased ? "Deceased" : "Living"}</td>
+                        <td>${formatDate(member.date_of_expire)}</td>
+                        <td>${formatValue(member.location_of_grave)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Education Section
+      function generateEducation() {
+        if (!personnelData.education || personnelData.education.length === 0) {
+          return '<div class="section"><div class="section-title">EDUCATION</div><p class="no-data">No education information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">EDUCATION</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Institution</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Examination</th>
+                                    <th>Subjects</th>
+                                    <th>GPA</th>
+                                    <th>Division</th>
+                                    <th>Year</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.education.forEach((edu) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(edu.institution_type)}</td>
+                        <td>${formatValue(edu.institution_name)}</td>
+                        <td>${formatDate(edu.start_date)}</td>
+                        <td>${formatDate(edu.end_date)}</td>
+                        <td>${formatValue(edu.examination_passed)}</td>
+                        <td>${formatValue(edu.subjects)}</td>
+                        <td>${formatValue(edu.gpa)}</td>
+                        <td>${formatValue(edu.division)}</td>
+                        <td>${formatValue(edu.year_of_passing)}</td>
+                        <td>${formatValue(edu.remarks)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Commission Information
+      function generateCommission() {
+        if (!personnelData.commission)
+          return '<div class="section"><div class="section-title">COMMISSION INFORMATION</div><p class="no-data">No commission information available</p></div>';
+
+        const comm = personnelData.commission;
+
+        return `
+                <div class="section">
+                    <div class="section-title">COMMISSION INFORMATION</div>
+                    <div class="review-grid">
+                        <div class="review-item">
+                            <div class="review-label">Academy Course</div>
+                            <div class="review-value">${formatValue(comm.academy_course)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Date of Joining Academy</div>
+                            <div class="review-value">${formatDate(comm.date_of_joining_academy)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Date of Commission</div>
+                            <div class="review-value">${formatDate(comm.date_of_commission)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Commission Type</div>
+                            <div class="review-value">${formatValue(comm.commission_type)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Commission Authority</div>
+                            <div class="review-value">${formatValue(comm.commission_authority)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Order Number</div>
+                            <div class="review-value">${formatValue(comm.order_number)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Ante Date Seniority</div>
+                            <div class="review-value">${formatDate(comm.ante_date_seniority)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Date of Joining Bangladesh Army</div>
+                            <div class="review-value">${formatDate(comm.date_of_joining_bangladesh_army)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Joining Authority</div>
+                            <div class="review-value">${formatValue(comm.joining_bangladesh_army_authority)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Ante Date Authority</div>
+                            <div class="review-value">${formatValue(comm.ante_date_authority)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Permanent Commission Date</div>
+                            <div class="review-value">${formatDate(comm.permanent_commission_date)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Permanent Commission Authority</div>
+                            <div class="review-value">${formatValue(comm.permanent_commission_authority)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Original Arms/Service</div>
+                            <div class="review-value">${formatValue(comm.original_arms_service)}</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">Previous Arms/Service</div>
+                            <div class="review-value">${formatValue(comm.previous_arms_service)}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+      }
+
+      // Generate Pre-Commission Services
+      function generatePreCommissionServices() {
+        if (
+          !personnelData.pre_commission_services ||
+          personnelData.pre_commission_services.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">PRE-COMMISSION SERVICES</div><p class="no-data">No pre-commission services information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">PRE-COMMISSION SERVICES</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Unit</th>
+                                    <th>Designation</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.pre_commission_services.forEach((service) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(service.unit)}</td>
+                        <td>${formatValue(service.designation)}</td>
+                        <td>${formatDate(service.date_from)}</td>
+                        <td>${formatDate(service.date_to)}</td>
+                        <td>${formatValue(service.remarks)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Pre-Commission Trainings
+      function generatePreCommissionTrainings() {
+        if (
+          !personnelData.pre_commission_trainings ||
+          personnelData.pre_commission_trainings.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">PRE-COMMISSION TRAININGS</div><p class="no-data">No pre-commission trainings information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">PRE-COMMISSION TRAININGS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Location</th>
+                                    <th>Appointment</th>
+                                    <th>Distinction</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.pre_commission_trainings.forEach((training) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(training.location)}</td>
+                        <td>${formatValue(training.appointment)}</td>
+                        <td>${formatValue(training.distinction)}</td>
+                        <td>${formatDate(training.date_from)}</td>
+                        <td>${formatDate(training.date_to)}</td>
+                        <td>${formatValue(training.remarks)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Post Commission Training
+      function generatePostCommissionTraining() {
+        if (
+          !personnelData.post_commission_trainings ||
+          personnelData.post_commission_trainings.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">POST COMMISSION TRAINING</div><p class="no-data">No post commission training information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">POST COMMISSION TRAINING</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Course Name</th>
+                                    <th>Location</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Result B Side</th>
+                                    <th>Result Y Side</th>
+                                    <th>Mark B Side</th>
+                                    <th>Mark Y Side</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.post_commission_trainings.forEach((training) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(training.training_type)}</td>
+                        <td>${formatValue(training.course_name)}</td>
+                        <td>${formatValue(training.location)}</td>
+                        <td>${formatDate(training.date_from)}</td>
+                        <td>${formatDate(training.date_to)}</td>
+                        <td>${formatValue(training.result_b_side)} </td>
+                        <td>${formatValue(training.result_y_side)}  </td>
+                        <td> ${formatValue(training.mark_obtained_b_side)}</td>
+                        <td> ${formatValue(training.mark_obtained_y_side)}</td>
+                        <td>${formatValue(training.remarks)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Additional Qualifications
+      function generateAdditionalQualifications() {
+        if (
+          !personnelData.additional_qualifications ||
+          personnelData.additional_qualifications.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">ADDITIONAL QUALIFICATIONS</div><p class="no-data">No additional qualifications information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">ADDITIONAL QUALIFICATIONS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Qualification</th>
+                                    <th>Date Obtained</th>
+                                    <th>Authority</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.additional_qualifications.forEach((qual) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(qual.qualification)}</td>
+                        <td>${formatDate(qual.date_obtained)}</td>
+                        <td>${formatValue(qual.authority)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Map Reading/Promotion Exams
+      function generateMapReadingExams() {
+        if (
+          !personnelData.map_reading_promotion_exams ||
+          personnelData.map_reading_promotion_exams.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">MAP READING & PROMOTION EXAMS</div><p class="no-data">No map reading and promotion exams information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">MAP READING & PROMOTION EXAMS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Exam Name</th>
+                                    <th>Passing Year</th>
+                                    <th>Authority</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.map_reading_promotion_exams.forEach((exam) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(exam.exam_name)}</td>
+                        <td>${formatValue(exam.passing_year)}</td>
+                        <td>${formatValue(exam.authority)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Promotions
+      function generatePromotions() {
+        if (
+          !personnelData.promotions ||
+          personnelData.promotions.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">PROMOTIONS</div><p class="no-data">No promotions information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">PROMOTIONS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Rank</th>
+                                    <th>Type</th>
+                                    <th>Authority</th>
+                                    <th>Order</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.promotions.forEach((promo) => {
+          html += `
+                    <tr>
+                        <td>${formatDate(promo.promotion_date)}</td>
+                        <td>${formatValue(promo.rank)}</td>
+                        <td>${formatValue(promo.promotion_type)}</td>
+                        <td>${formatValue(promo.authority)}</td>
+                        <td>${formatValue(promo.order)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Ranks Held
+      function generateRanksHeld() {
+        if (
+          !personnelData.ranks_held ||
+          personnelData.ranks_held.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">RANKS HELD</div><p class="no-data">No ranks held information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">RANKS HELD</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Rank</th>
+                                    <th>Promotion Type</th>
+                                    <th>Retrospective</th>
+                                    <th>Notified</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.ranks_held.forEach((rank) => {
+          html += `
+                    <tr>
+                        <td>${formatDate(rank.date)}</td>
+                        <td>${formatValue(rank.rank)}</td>
+                        <td>${formatValue(rank.promotion_type)}</td>
+                        <td>${formatValue(rank.retrospective)}</td>
+                        <td>${formatValue(rank.notified)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Service Records
+      function generateServiceRecords() {
+        if (
+          !personnelData.service_records ||
+          personnelData.service_records.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">SERVICE RECORDS</div><p class="no-data">No service records information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">SERVICE RECORDS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Appointment Type</th>
+                                    <th>Appointment Name</th>
+                                    <th>Service Type</th>
+                                    <th>Unit/ERE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.service_records.forEach((record) => {
+          html += `
+                    <tr>
+                        <td>${formatDate(record.date_from)}</td>
+                        <td>${formatDate(record.date_to) || "Present"}</td>
+                        <td>${formatValue(record.appointment_type)}</td>
+                        <td>${formatValue(record.appointment_name)}</td>
+                        <td>${formatValue(record.service_type)}</td>
+                        <td>${formatValue(record.unit_ere_name)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Awards
+      // Generate Operational Awards Section
+      function generateOperationalAwards() {
+        if (
+          !personnelData.operational_awards ||
+          personnelData.operational_awards.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">OPERATIONAL AWARDS</div><p class="no-data">No operational awards information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">OPERATIONAL AWARDS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation Name</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Appointment</th>
+                                    <th>Award</th>
+                                    <th>Authority</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.operational_awards.forEach((award) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(award.operation_name)}</td>
+                        <td>${formatDate(award.date_from)}</td>
+                        <td>${formatDate(award.date_to)}</td>
+                        <td>${formatValue(award.appointment)}</td>
+                        <td>${formatValue(award.award_receive)}</td>
+                        <td>${formatValue(award.authority)}</td>
+                        <td>${formatValue(award.remarks)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Non-Operational Awards Section
+      function generateNonOperationalAwards() {
+        if (
+          !personnelData.non_operational_awards ||
+          personnelData.non_operational_awards.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">NON-OPERATIONAL AWARDS</div><p class="no-data">No non-operational awards information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">NON-OPERATIONAL AWARDS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Details</th>
+                                    <th>Authority</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.non_operational_awards.forEach((award) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(award.description)}</td>
+                        <td>${formatDate(award.date_awarded)}</td>
+                        <td>${formatValue(award.details)}</td>
+                        <td>${formatValue(award.authority)}</td>
+                        <td>${formatValue(award.remarks)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Overseas Visits
+      function generateOverseasVisits() {
+        if (
+          !personnelData.overseas_visits ||
+          personnelData.overseas_visits.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">OVERSEAS VISITS</div><p class="no-data">No overseas visits information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">OVERSEAS VISITS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Visit Type</th>
+                                    <th>Country</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Reason</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.overseas_visits.forEach((visit) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(visit.visit_type)}</td>
+                        <td>${formatValue(visit.country)}</td>
+                        <td>${formatDate(visit.start_date)}</td>
+                        <td>${formatDate(visit.end_date)}</td>
+                        <td>${formatValue(visit.reason)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Passports
+      function generatePassports() {
+        if (!personnelData.passports || personnelData.passports.length === 0) {
+          return '<div class="section"><div class="section-title">PASSPORT INFORMATION</div><p class="no-data">No passport information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">PASSPORT INFORMATION</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Passport Number</th>
+                                    <th>Type</th>
+                                    <th>Issue Date</th>
+                                    <th>Expiry Date</th>
+                                    <th>Authority</th>
+                                    <th>Purpose</th>
+                                    <th>Place of Issue</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.passports.forEach((passport) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(passport.status)}</td>
+                        <td>${formatValue(passport.passport_number)}</td>
+                        <td>${formatValue(passport.passport_type)}</td>
+                        <td>${formatDate(passport.issue_date)}</td>
+                        <td>${formatDate(passport.expiry_date)}</td>
+                        <td>${formatValue(passport.authority)}</td>
+                        <td>${formatValue(passport.purpose)}</td>
+                        <td>${formatValue(passport.place_of_issue)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Bank Accounts
+      function generateBankAccounts() {
+        if (
+          !personnelData.bank_accounts ||
+          personnelData.bank_accounts.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">BANK ACCOUNTS</div><p class="no-data">No bank accounts information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">BANK ACCOUNTS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Bank Name</th>
+                                    <th>Account Number</th>
+                                    <th>Account Type</th>
+                                    <th>Branch</th>
+                                    <th>Opening Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.bank_accounts.forEach((account) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(account.bank_name)}</td>
+                        <td>${formatValue(account.account_number)}</td>
+                        <td>${formatValue(account.account_type)}</td>
+                        <td>${formatValue(account.branch)}</td>
+                        <td>${formatDate(account.opening_date)}</td>
+                        <td>${account.closing_date ? "Closed" : "Active"}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Annual Income
+      function generateAnnualIncome() {
+        if (
+          !personnelData.annual_incomes ||
+          personnelData.annual_incomes.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">ANNUAL INCOME</div><p class="no-data">No annual income information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">ANNUAL INCOME</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Income Source</th>
+                                    <th>Amount (BDT)</th>
+                                    <th>Year</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.annual_incomes.forEach((income) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(income.income_source)}</td>
+                        <td>${formatValue(income.amount)}</td>
+                        <td>${formatValue(income.year)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Medical History
+      function generateMedicalHistory() {
+        if (
+          !personnelData.medical_histories ||
+          personnelData.medical_histories.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">MEDICAL HISTORY</div><p class="no-data">No medical history information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">MEDICAL HISTORY</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Disease/Injury</th>
+                                    <th>Nature</th>
+                                    <th>Admission From</th>
+                                    <th>Admission To</th>
+                                    <th>Medical Category</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.medical_histories.forEach((medical) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(medical.name_of_disease)}</td>
+                        <td>${formatValue(medical.nature_of_injury)}</td>
+                        <td>${formatDate(medical.admission_from)}</td>
+                        <td>${formatDate(medical.admission_to)}</td>
+                        <td>${formatValue(medical.medical_category_class)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Military Legal Records
+      function generateMilitaryLegalRecords() {
+        if (
+          !personnelData.military_legal_records ||
+          personnelData.military_legal_records.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">MILITARY LEGAL RECORDS</div><p class="no-data">No military legal records information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">MILITARY LEGAL RECORDS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.military_legal_records.forEach((record) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(record.military_legal_type)}</td>
+                        <td>${formatValue(record.military_legal_name)}</td>
+                        <td>${formatDate(record.date)}</td>
+                        <td>${formatValue(record.remarks)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Generate Civil Legal Records
+      function generateCivilLegalRecords() {
+        if (
+          !personnelData.civil_legal_records ||
+          personnelData.civil_legal_records.length === 0
+        ) {
+          return '<div class="section"><div class="section-title">CIVIL LEGAL RECORDS</div><p class="no-data">No civil legal records information available</p></div>';
+        }
+
+        let html = `
+                <div class="section">
+                    <div class="section-title">CIVIL LEGAL RECORDS</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Law Section</th>
+                                    <th>Crime Details</th>
+                                    <th>Date of Judgment</th>
+                                    <th>Place</th>
+                                    <th>Punishment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+        personnelData.civil_legal_records.forEach((record) => {
+          html += `
+                    <tr>
+                        <td>${formatValue(record.law_section)}</td>
+                        <td>${formatValue(record.crime_details)}</td>
+                        <td>${formatDate(record.date_judgment)}</td>
+                        <td>${formatValue(record.place)}</td>
+                        <td>${formatValue(record.punishment)}</td>
+                    </tr>
+                `;
+        });
+
+        html += `
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            `;
+
+        return html;
+      }
+
+      // Main function to render all content
+      function renderContent() {
+        const contentDiv = document.getElementById("popupContent");
+
+        let allContent = "";
+        allContent += generatePersonalreview();
+        allContent += generateAddresses();
+        allContent += generateLanguageSkills();
+        allContent += generateFamilyMembers();
+        allContent += generateEducation();
+        allContent += generatePassports();
+        allContent += generateMedicalHistory();
+        allContent += generatePreCommissionServices();
+        allContent += generatePreCommissionTrainings();
+        allContent += generateCommission();
+        allContent += generatePostCommissionTraining();
+        allContent += generateAdditionalQualifications();
+        allContent += generateMapReadingExams();
+        allContent += generatePromotions();
+        allContent += generateServiceRecords();
+        allContent += generateOperationalAwards();
+        allContent += generateNonOperationalAwards();
+        allContent += generateOverseasVisits();
+        allContent += generateAnnualIncome();
+        allContent += generateBankAccounts();
+        allContent += generateMilitaryLegalRecords();
+        allContent += generateCivilLegalRecords();
+        allContent += generateRanksHeld();
+
+        contentDiv.innerHTML = allContent;
+
+        // Update header
+        document.getElementById("headerName").textContent =
+          personnelData.person?.name || "Personnel Information Review";
+        document.getElementById("headerDetails").textContent =
+          `Personal No: ${personnelData.person?.personal_no || "N/A"}`;
       }
 
       window.onload = () => {
