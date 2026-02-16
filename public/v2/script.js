@@ -66,8 +66,9 @@ const options = {
   nature_of_injury: ["Severe", "Minor"],
   medical_category_class: ["Temp C", "Perm C", "D"],
   ranks: [
-    "Captain",
+    "2nd Lieutenant",
     "Lieutenant",
+    "Captain",
     "Major",
     "Lieutenant Colonel",
     "Colonel",
