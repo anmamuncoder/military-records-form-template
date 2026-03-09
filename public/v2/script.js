@@ -863,6 +863,10 @@ function clearForm() {
     }
   });
 
+  // Clear auto-saved data from localStorage
+  localStorage.removeItem("formData_autosave");
+  console.log("Auto-saved form data cleared");
+
   alert("All form data has been cleared successfully.");
 }
 
@@ -1064,8 +1068,15 @@ function downloadJSON() {
     `${personnelData.person?.personal_no}-RECORD.json` || "unknown_record.json";
   link.click();
 
+  // Clear auto-saved data from localStorage after successful download
+  localStorage.removeItem("formData_autosave");
+  localStorage.removeItem("personnelData");
+  console.log("Form data cleared after successful download");
+
   // Close the modal after download
   document.getElementById("reviewModal").style.display = "none";
+
+  alert("Record downloaded successfully. Form data has been cleared.");
 }
 
 // Helper function to format values
@@ -2386,7 +2397,334 @@ function renderContent() {
     `Personal No: ${personnelData.person?.personal_no || "N/A"}`;
 }
 
+// Auto-save functionality
+let autoSaveTimeout;
+const AUTOSAVE_DELAY = 1500; // Save after 1.5 seconds of inactivity
+
+function autoSaveFormData() {
+  clearTimeout(autoSaveTimeout);
+  autoSaveTimeout = setTimeout(() => {
+    try {
+      const data = {
+        person: {
+          name: getValue("person_name"),
+          personal_no: getValue("person_personal_no"),
+          short_name: getValue("short_name"),
+          mobile_no: getValue("person_mobile_no"),
+          inactive_date: getDateValue("inactive_date"),
+        },
+        personal_info: {
+          national_id_number: getValue("national_id_number"),
+          arms_service: getValue("arms_service") || null,
+          date_of_birth: getDateValue("date_of_birth"),
+          place_of_birth: getValue("place_of_birth"),
+          birth_certificate_number: getValue("birth_certificate_number"),
+          height_cm: getDecimalValue("height_cm"),
+          height_inch: getDecimalValue("height_inch"),
+          weight_kg: getDecimalValue("weight_kg"),
+          weight_pound: getDecimalValue("weight_pound"),
+          build: getValue("build"),
+          complexion: getValue("complexion"),
+          eye_color: getValue("eye_color"),
+          visible_identification_marks:
+            getValue("visible_identification_marks") || null,
+          blood_group: getSelectValue("blood_group"),
+          religion: getValue("religion"),
+          caste: getValue("caste") || null,
+          nationality: getValue("nationality"),
+          previous_nationality: getValue("previous_nationality") || null,
+          present_medical_category: getValue("present_medical_category"),
+          present_nature_of_disability: getValue("present_nature_of_disability"),
+          present_attributes: getValue("present_attributes"),
+          email: getValue("email"),
+          personal_phone_no: getValue("personal_phone_no"),
+          tnt_phone_no: getValue("tnt_phone_no") || null,
+          position_among_siblings: getIntegerValue("position_among_siblings"),
+          marital_status: getSelectValue("marital_status"),
+          date_of_marriage: getDateValue("date_of_marriage"),
+        },
+        addresses: getTableData("addresses"),
+        language_skills: getTableData("language_skills"),
+        family_members: getTableData("family_members"),
+        education: getTableData("education"),
+        passports: getTableData("passports"),
+        medical_histories: getTableData("medical_histories"),
+        pre_commission_services: getTableData("pre_commission_services"),
+        pre_commission_trainings: getTableData("pre_commission_trainings"),
+        commission: {
+          academy_course: getValue("academy_course"),
+          date_of_joining_academy: getDateValue("date_of_joining_academy"),
+          date_of_commission: getDateValue("date_of_commission"),
+          commission_type: getSelectValue("commission_type"),
+          commission_authority: getValue("commission_authority"),
+          order_number: getValue("order_number"),
+          ante_date_seniority: getDateValue("ante_date_seniority"),
+          ante_date_authority: getValue("ante_date_authority") || null,
+          permanent_commission_date: getDateValue("permanent_commission_date"),
+          permanent_commission_authority: getValue(
+            "permanent_commission_authority",
+          ),
+          date_of_joining_bangladesh_army: getDateValue(
+            "date_of_joining_bangladesh_army",
+          ),
+          joining_bangladesh_army_authority: getValue(
+            "joining_bangladesh_army_authority",
+          ),
+          original_arms_service: getValue("original_arms_service") || null,
+          previous_arms_service: getValue("previous_arms_service") || null,
+        },
+        post_commission_trainings: getTableData("post_commission_trainings"),
+        additional_qualifications: getTableData("additional_qualifications"),
+        map_reading_promotion_exams: getTableData("map_reading_promotion_exams"),
+        promotions: getTableData("promotions"),
+        service_records: getTableData("service_records"),
+        operational_awards: getTableData("operational_awards"),
+        non_operational_awards: getTableData("non_operational_awards"),
+        overseas_visits: getTableData("overseas_visits"),
+        annual_incomes: getTableData("annual_incomes"),
+        bank_accounts: getTableData("bank_accounts"),
+        military_legal_records: getTableData("military_legal_records"),
+        civil_legal_records: getTableData("civil_legal_records"),
+        ranks_held: getTableData("ranks_held"),
+      };
+
+      // Save to localStorage with a separate key for auto-save
+      localStorage.setItem("formData_autosave", JSON.stringify(data));
+      console.log("Form data auto-saved successfully");
+    } catch (error) {
+      console.error("Error auto-saving form data:", error);
+    }
+  }, AUTOSAVE_DELAY);
+}
+
+function loadFormDataFromStorage() {
+  try {
+    const savedData = localStorage.getItem("formData_autosave");
+    if (!savedData) {
+      return; // No saved data to load
+    }
+
+    const data = JSON.parse(savedData);
+
+    // Load person data
+    if (data.person) {
+      setFieldValue("person_name", data.person.name);
+      setFieldValue("person_personal_no", data.person.personal_no);
+      setFieldValue("short_name", data.person.short_name);
+      setFieldValue("person_mobile_no", data.person.mobile_no);
+      setFieldValue("inactive_date", data.person.inactive_date);
+    }
+
+    // Load personal info data
+    if (data.personal_info) {
+      const pi = data.personal_info;
+      setFieldValue("national_id_number", pi.national_id_number);
+      setFieldValue("arms_service", pi.arms_service);
+      setFieldValue("date_of_birth", pi.date_of_birth);
+      setFieldValue("place_of_birth", pi.place_of_birth);
+      setFieldValue("birth_certificate_number", pi.birth_certificate_number);
+      setFieldValue("height_cm", pi.height_cm);
+      setFieldValue("height_inch", pi.height_inch);
+      setFieldValue("weight_kg", pi.weight_kg);
+      setFieldValue("weight_pound", pi.weight_pound);
+      setFieldValue("build", pi.build);
+      setFieldValue("complexion", pi.complexion);
+      setFieldValue("eye_color", pi.eye_color);
+      setFieldValue("visible_identification_marks", pi.visible_identification_marks);
+      setFieldValue("blood_group", pi.blood_group);
+      setFieldValue("religion", pi.religion);
+      setFieldValue("caste", pi.caste);
+      setFieldValue("nationality", pi.nationality);
+      setFieldValue("previous_nationality", pi.previous_nationality);
+      setFieldValue("present_medical_category", pi.present_medical_category);
+      setFieldValue("present_nature_of_disability", pi.present_nature_of_disability);
+      setFieldValue("present_attributes", pi.present_attributes);
+      setFieldValue("email", pi.email);
+      setFieldValue("personal_phone_no", pi.personal_phone_no);
+      setFieldValue("tnt_phone_no", pi.tnt_phone_no);
+      setFieldValue("position_among_siblings", pi.position_among_siblings);
+      setFieldValue("marital_status", pi.marital_status);
+      setFieldValue("date_of_marriage", pi.date_of_marriage);
+    }
+
+    // Load commission data
+    if (data.commission) {
+      const c = data.commission;
+      setFieldValue("academy_course", c.academy_course);
+      setFieldValue("date_of_joining_academy", c.date_of_joining_academy);
+      setFieldValue("date_of_commission", c.date_of_commission);
+      setFieldValue("commission_type", c.commission_type);
+      setFieldValue("commission_authority", c.commission_authority);
+      setFieldValue("order_number", c.order_number);
+      setFieldValue("ante_date_seniority", c.ante_date_seniority);
+      setFieldValue("ante_date_authority", c.ante_date_authority);
+      setFieldValue("permanent_commission_date", c.permanent_commission_date);
+      setFieldValue("permanent_commission_authority", c.permanent_commission_authority);
+      setFieldValue("date_of_joining_bangladesh_army", c.date_of_joining_bangladesh_army);
+      setFieldValue("joining_bangladesh_army_authority", c.joining_bangladesh_army_authority);
+      setFieldValue("original_arms_service", c.original_arms_service);
+      setFieldValue("previous_arms_service", c.previous_arms_service);
+    }
+
+    // Load table data
+    loadTableData("addresses", data.addresses);
+    loadTableData("language_skills", data.language_skills);
+    loadTableData("family_members", data.family_members);
+    loadTableData("education", data.education);
+    loadTableData("passports", data.passports);
+    loadTableData("medical_histories", data.medical_histories);
+    loadTableData("pre_commission_services", data.pre_commission_services);
+    loadTableData("pre_commission_trainings", data.pre_commission_trainings);
+    loadTableData("post_commission_trainings", data.post_commission_trainings);
+    loadTableData("additional_qualifications", data.additional_qualifications);
+    loadTableData("map_reading_promotion_exams", data.map_reading_promotion_exams);
+    loadTableData("promotions", data.promotions);
+    loadTableData("service_records", data.service_records);
+    loadTableData("operational_awards", data.operational_awards);
+    loadTableData("non_operational_awards", data.non_operational_awards);
+    loadTableData("overseas_visits", data.overseas_visits);
+    loadTableData("annual_incomes", data.annual_incomes);
+    loadTableData("bank_accounts", data.bank_accounts);
+    loadTableData("military_legal_records", data.military_legal_records);
+    loadTableData("civil_legal_records", data.civil_legal_records);
+    loadTableData("ranks_held", data.ranks_held);
+
+    console.log("Form data loaded from storage successfully");
+  } catch (error) {
+    console.error("Error loading form data from storage:", error);
+  }
+}
+
+function setFieldValue(id, value) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.value = value || "";
+  }
+}
+
+function loadTableData(type, rows) {
+  if (!rows || rows.length === 0) {
+    return;
+  }
+
+  const tbody = document.getElementById(`${type}_tbody`);
+  if (!tbody) {
+    return;
+  }
+
+  // Clear existing rows
+  tbody.innerHTML = "";
+
+  rows.forEach((rowData) => {
+    try {
+      // Add a new row
+      addRow(type);
+
+      // Get the newly added row
+      const newRow = tbody.querySelector("tr:last-child");
+      if (!newRow) {
+        return;
+      }
+
+      // Fill in the data
+      const inputs = newRow.querySelectorAll("input, select");
+      inputs.forEach((input) => {
+        const name = input.name;
+        if (rowData.hasOwnProperty(name)) {
+          input.value = rowData[name] || "";
+        }
+      });
+
+      // Update button visibility
+      updateTableButtons(type);
+    } catch (error) {
+      console.error(`Error loading row data for ${type}:`, error);
+    }
+  });
+}
+
+function createTableRow(type, rowData = null) {
+  const row = document.createElement("tr");
+
+  if (type === "addresses") {
+    row.innerHTML = `<td>${createSelect("address_type", options.address_types, true)}</td>
+<td>${createInput("text", "street_address", "Street Address", true)}</td>
+<td>${createInput("text", "city", "City", false, 100)}</td>
+<td>${createInput("text", "state", "State", false, 100)}</td>
+<td>${createInput("text", "postal_code", "Postal Code", false, 20)}</td>
+<td>${createInput("text", "country", "Country", false, 100)}</td>
+<td>${createInput("date", "date", "", false)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+  } else if (type === "language_skills") {
+    row.innerHTML = `<td>${createInput("text", "language", "Language", true, 50)}</td>
+<td>${createSelect("proficiency", options.proficiency_levels, false)}</td>
+<td>${createSelect("reading_skill", options.proficiency_levels, false)}</td>
+<td>${createSelect("writing_skill", options.proficiency_levels, false)}</td>
+<td>${createSelect("speaking_skill", options.proficiency_levels, false)}</td>
+<td>${createSelect("acquiring_skill", options.acquiring, false)}</td>
+<td>${createInput("text", "remarks", "Remarks", false)}</td>
+<td>${createInput("text", "institution", "Institution", false, 100)}</td>
+<td>${createInput("number", "year", "Year", false)}</td>
+<td>${createInput("text", "degree", "Degree", false, 100)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+  } else if (type === "family_members") {
+    row.innerHTML = `<td>${createSelect("relationship", options.relationships, true)}</td>
+<td>${createInput("text", "name", "Name", true, 200)}</td>
+<td>${createInput("text", "nationality", "Nationality", false, 50)}</td>
+<td>${createInput("date", "date_of_birth", "", false)}</td>
+<td>${createSelect("is_deceased", ["No", "Yes"], true)}</td>
+<td>${createInput("text", "occupation_profession", "Occupation", false, 100)}</td>
+<td>${createInput("number", "annual_income", "Annual Income", false)}</td>
+<td>${createInput("text", "address", "Address", false)}</td>
+<td>${createInput("text", "birth_registration", "Birth Registration", false, 100)}</td>
+<td>${createInput("text", "national_id", "National ID", false, 20)}</td>
+<td>${createInput("text", "education", "Education", false, 200)}</td>
+<td>${createSelect("dependency", ["Yes", "No"], false)}</td>
+<td>${createSelect("sex", options.sex, false)}</td>
+<td>${createInput("date", "date_of_expire", "")}</td>
+<td>${createInput("text", "location_of_grave", "Location of Grave", false, 100)}</td>
+<td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
+  }
+  
+  // Fill in the data if provided
+  if (rowData) {
+    const inputs = row.querySelectorAll("input, select");
+    inputs.forEach((input) => {
+      const name = input.name;
+      if (rowData.hasOwnProperty(name)) {
+        input.value = rowData[name] || "";
+      }
+    });
+  }
+
+  return row;
+}
+
+function attachAutoSaveListeners() {
+  // Use event delegation on the document for all inputs and selects
+  // This automatically handles both existing and dynamically added elements
+  document.addEventListener("input", (e) => {
+    if (e.target.matches("input, select")) {
+      autoSaveFormData();
+    }
+  });
+
+  document.addEventListener("change", (e) => {
+    if (e.target.matches("input, select")) {
+      autoSaveFormData();
+    }
+  });
+
+  console.log("Auto-save listeners attached");
+}
+
 window.onload = () => {
+  // Load saved form data from local storage
+  loadFormDataFromStorage();
+
+  // Attach auto-save listeners
+  attachAutoSaveListeners();
+
   // Initialize button visibility for all tables
   initializeTableButtons();
 
