@@ -74,9 +74,82 @@
       </div>
 
       <div class="header">
-        <div class="header-content">
-          <h1>BAFZ-2043</h1>
-          <!-- <p><span class="status-indicator"></span>BAFZ Securz InformationDatabase</p> -->
+        <div
+          class="header-content"
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 1.5rem;
+          "
+        >
+          <h1
+            style="
+              margin: 0;
+              font-size: 22px;
+              font-weight: 500;
+              letter-spacing: -0.3px;
+            "
+          >
+            BAFZ-2043
+          </h1>
+
+          <label
+            for="form-upload"
+            id="upload-label"
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 8px;
+              padding: 8px 14px;
+              border-radius: 8px;
+              border: 1px solid #d1d5db;
+              background: #ffffff;
+              cursor: pointer;
+              font-size: 13px;
+              font-weight: 500;
+              color: #6b7280;
+              transition:
+                background 0.15s,
+                border-color 0.15s;
+              white-space: nowrap;
+            "
+          >
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2 11.5V13.5C2 13.7761 2.22386 14 2.5 14H13.5C13.7761 14 14 13.7761 14 13.5V11.5"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M8 2V10M8 2L5 5M8 2L11 5"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span id="label-text">Edit Old Form / Load JSON</span>
+          </label>
+
+          <input
+            type="file"
+            id="form-upload"
+            accept=".pdf,.doc,.docx,.xls,.xlsx,.json"
+            style="display: none"
+          />
+          <!-- json import helper -->
+          <small style="display:none; margin-top:4px; color:#6b7280; font-size:11px;">
+            (click the button above and choose a previously downloaded JSON file to auto-fill the form)
+          </small>
         </div>
       </div>
 
@@ -693,23 +766,17 @@
             </div>
             <div class="form-group">
               <label>Commission Authority</label
-              ><input
-                type="text"
-                id="commission_authority"
-               
-                maxlength="100"
-              />
+              ><input type="text" id="commission_authority" maxlength="100" />
             </div>
             <div class="form-group">
-              <label >Order Number</label
-              ><input type="text" id="order_number"  maxlength="50" />
+              <label>Order Number</label
+              ><input type="text" id="order_number" maxlength="50" />
             </div>
             <div class="form-group">
-              <label >Ante Date Seniority</label
+              <label>Ante Date Seniority</label
               ><input
                 type="date"
                 id="ante_date_seniority"
-                
                 min="1900-01-01"
                 max="2099-12-31"
               />
@@ -732,7 +799,6 @@
               ><input
                 type="text"
                 id="permanent_commission_authority"
-                
                 maxlength="100"
               />
             </div>
@@ -750,7 +816,6 @@
               ><input
                 type="text"
                 id="joining_bangladesh_army_authority"
-               
                 maxlength="100"
               />
             </div>
@@ -1162,7 +1227,11 @@
           <button class="btn btn-primary" onclick="clearForm()" type="button">
             Clear All
           </button>
-          <button class="btn btn-secondary" onclick="alert('Your form data has been saved as draft')" type="button">
+          <button
+            class="btn btn-secondary"
+            onclick="alert('Your form data has been saved as draft')"
+            type="button"
+          >
             Save as Draft
           </button>
           <button class="btn btn-success" onclick="saveJSON()">Next</button>

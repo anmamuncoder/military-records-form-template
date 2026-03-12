@@ -2501,6 +2501,115 @@ function autoSaveFormData() {
   }, AUTOSAVE_DELAY);
 }
 
+// Common routine used both for loading from storage and for importing
+// a JSON file.  It walks through the expected data object and populates the
+// form fields and tables exactly the same way the autosave loader previously
+// did.  By keeping the logic in one place we avoid divergent behaviour.
+function applyDataToForm(data) {
+  if (!data) return;
+
+  // Load person data
+  if (data.person) {
+    setFieldValue("person_name", data.person.name);
+    setFieldValue("person_personal_no", data.person.personal_no);
+    setFieldValue("short_name", data.person.short_name);
+    setFieldValue("person_mobile_no", data.person.mobile_no);
+    setFieldValue("inactive_date", data.person.inactive_date);
+  }
+
+  // Load personal info data
+  if (data.personal_info) {
+    const pi = data.personal_info;
+    setFieldValue("national_id_number", pi.national_id_number);
+    setFieldValue("arms_service", pi.arms_service);
+    setFieldValue("date_of_birth", pi.date_of_birth);
+    setFieldValue("place_of_birth", pi.place_of_birth);
+    setFieldValue("birth_certificate_number", pi.birth_certificate_number);
+    setFieldValue("height_cm", pi.height_cm);
+    setFieldValue("height_inch", pi.height_inch);
+    setFieldValue("weight_kg", pi.weight_kg);
+    setFieldValue("weight_pound", pi.weight_pound);
+    setFieldValue("build", pi.build);
+    setFieldValue("complexion", pi.complexion);
+    setFieldValue("eye_color", pi.eye_color);
+    setFieldValue(
+      "visible_identification_marks",
+      pi.visible_identification_marks,
+    );
+    setFieldValue("blood_group", pi.blood_group);
+    setFieldValue("religion", pi.religion);
+    setFieldValue("caste", pi.caste);
+    setFieldValue("nationality", pi.nationality);
+    setFieldValue("previous_nationality", pi.previous_nationality);
+    setFieldValue("present_medical_category", pi.present_medical_category);
+    setFieldValue(
+      "present_nature_of_disability",
+      pi.present_nature_of_disability,
+    );
+    setFieldValue("present_attributes", pi.present_attributes);
+    setFieldValue("email", pi.email);
+    setFieldValue("personal_phone_no", pi.personal_phone_no);
+    setFieldValue("tnt_phone_no", pi.tnt_phone_no);
+    setFieldValue("position_among_siblings", pi.position_among_siblings);
+    setFieldValue("marital_status", pi.marital_status);
+    setFieldValue("date_of_marriage", pi.date_of_marriage);
+  }
+
+  // Load commission data
+  if (data.commission) {
+    const c = data.commission;
+    setFieldValue("academy_course", c.academy_course);
+    setFieldValue("date_of_joining_academy", c.date_of_joining_academy);
+    setFieldValue("date_of_commission", c.date_of_commission);
+    setFieldValue("commission_type", c.commission_type);
+    setFieldValue("commission_authority", c.commission_authority);
+    setFieldValue("order_number", c.order_number);
+    setFieldValue("ante_date_seniority", c.ante_date_seniority);
+    setFieldValue("ante_date_authority", c.ante_date_authority);
+    setFieldValue("permanent_commission_date", c.permanent_commission_date);
+    setFieldValue(
+      "permanent_commission_authority",
+      c.permanent_commission_authority,
+    );
+    setFieldValue(
+      "date_of_joining_bangladesh_army",
+      c.date_of_joining_bangladesh_army,
+    );
+    setFieldValue(
+      "joining_bangladesh_army_authority",
+      c.joining_bangladesh_army_authority,
+    );
+    setFieldValue("original_arms_service", c.original_arms_service);
+    setFieldValue("previous_arms_service", c.previous_arms_service);
+  }
+
+  // Load table data
+  loadTableData("addresses", data.addresses);
+  loadTableData("language_skills", data.language_skills);
+  loadTableData("family_members", data.family_members);
+  loadTableData("education", data.education);
+  loadTableData("passports", data.passports);
+  loadTableData("medical_histories", data.medical_histories);
+  loadTableData("pre_commission_services", data.pre_commission_services);
+  loadTableData("pre_commission_trainings", data.pre_commission_trainings);
+  loadTableData("post_commission_trainings", data.post_commission_trainings);
+  loadTableData("additional_qualifications", data.additional_qualifications);
+  loadTableData(
+    "map_reading_promotion_exams",
+    data.map_reading_promotion_exams,
+  );
+  loadTableData("promotions", data.promotions);
+  loadTableData("service_records", data.service_records);
+  loadTableData("operational_awards", data.operational_awards);
+  loadTableData("non_operational_awards", data.non_operational_awards);
+  loadTableData("overseas_visits", data.overseas_visits);
+  loadTableData("annual_incomes", data.annual_incomes);
+  loadTableData("bank_accounts", data.bank_accounts);
+  loadTableData("military_legal_records", data.military_legal_records);
+  loadTableData("civil_legal_records", data.civil_legal_records);
+  loadTableData("ranks_held", data.ranks_held);
+}
+
 function loadFormDataFromStorage() {
   try {
     const savedData = localStorage.getItem("formData_autosave");
@@ -2508,109 +2617,7 @@ function loadFormDataFromStorage() {
       return; // No saved data to load
     }
 
-    const data = JSON.parse(savedData);
-
-    // Load person data
-    if (data.person) {
-      setFieldValue("person_name", data.person.name);
-      setFieldValue("person_personal_no", data.person.personal_no);
-      setFieldValue("short_name", data.person.short_name);
-      setFieldValue("person_mobile_no", data.person.mobile_no);
-      setFieldValue("inactive_date", data.person.inactive_date);
-    }
-
-    // Load personal info data
-    if (data.personal_info) {
-      const pi = data.personal_info;
-      setFieldValue("national_id_number", pi.national_id_number);
-      setFieldValue("arms_service", pi.arms_service);
-      setFieldValue("date_of_birth", pi.date_of_birth);
-      setFieldValue("place_of_birth", pi.place_of_birth);
-      setFieldValue("birth_certificate_number", pi.birth_certificate_number);
-      setFieldValue("height_cm", pi.height_cm);
-      setFieldValue("height_inch", pi.height_inch);
-      setFieldValue("weight_kg", pi.weight_kg);
-      setFieldValue("weight_pound", pi.weight_pound);
-      setFieldValue("build", pi.build);
-      setFieldValue("complexion", pi.complexion);
-      setFieldValue("eye_color", pi.eye_color);
-      setFieldValue(
-        "visible_identification_marks",
-        pi.visible_identification_marks,
-      );
-      setFieldValue("blood_group", pi.blood_group);
-      setFieldValue("religion", pi.religion);
-      setFieldValue("caste", pi.caste);
-      setFieldValue("nationality", pi.nationality);
-      setFieldValue("previous_nationality", pi.previous_nationality);
-      setFieldValue("present_medical_category", pi.present_medical_category);
-      setFieldValue(
-        "present_nature_of_disability",
-        pi.present_nature_of_disability,
-      );
-      setFieldValue("present_attributes", pi.present_attributes);
-      setFieldValue("email", pi.email);
-      setFieldValue("personal_phone_no", pi.personal_phone_no);
-      setFieldValue("tnt_phone_no", pi.tnt_phone_no);
-      setFieldValue("position_among_siblings", pi.position_among_siblings);
-      setFieldValue("marital_status", pi.marital_status);
-      setFieldValue("date_of_marriage", pi.date_of_marriage);
-    }
-
-    // Load commission data
-    if (data.commission) {
-      const c = data.commission;
-      setFieldValue("academy_course", c.academy_course);
-      setFieldValue("date_of_joining_academy", c.date_of_joining_academy);
-      setFieldValue("date_of_commission", c.date_of_commission);
-      setFieldValue("commission_type", c.commission_type);
-      setFieldValue("commission_authority", c.commission_authority);
-      setFieldValue("order_number", c.order_number);
-      setFieldValue("ante_date_seniority", c.ante_date_seniority);
-      setFieldValue("ante_date_authority", c.ante_date_authority);
-      setFieldValue("permanent_commission_date", c.permanent_commission_date);
-      setFieldValue(
-        "permanent_commission_authority",
-        c.permanent_commission_authority,
-      );
-      setFieldValue(
-        "date_of_joining_bangladesh_army",
-        c.date_of_joining_bangladesh_army,
-      );
-      setFieldValue(
-        "joining_bangladesh_army_authority",
-        c.joining_bangladesh_army_authority,
-      );
-      setFieldValue("original_arms_service", c.original_arms_service);
-      setFieldValue("previous_arms_service", c.previous_arms_service);
-    }
-
-    // Load table data
-    loadTableData("addresses", data.addresses);
-    loadTableData("language_skills", data.language_skills);
-    loadTableData("family_members", data.family_members);
-    loadTableData("education", data.education);
-    loadTableData("passports", data.passports);
-    loadTableData("medical_histories", data.medical_histories);
-    loadTableData("pre_commission_services", data.pre_commission_services);
-    loadTableData("pre_commission_trainings", data.pre_commission_trainings);
-    loadTableData("post_commission_trainings", data.post_commission_trainings);
-    loadTableData("additional_qualifications", data.additional_qualifications);
-    loadTableData(
-      "map_reading_promotion_exams",
-      data.map_reading_promotion_exams,
-    );
-    loadTableData("promotions", data.promotions);
-    loadTableData("service_records", data.service_records);
-    loadTableData("operational_awards", data.operational_awards);
-    loadTableData("non_operational_awards", data.non_operational_awards);
-    loadTableData("overseas_visits", data.overseas_visits);
-    loadTableData("annual_incomes", data.annual_incomes);
-    loadTableData("bank_accounts", data.bank_accounts);
-    loadTableData("military_legal_records", data.military_legal_records);
-    loadTableData("civil_legal_records", data.civil_legal_records);
-    loadTableData("ranks_held", data.ranks_held);
-
+    applyDataToForm(JSON.parse(savedData));
     console.log("Form data loaded from storage successfully");
   } catch (error) {
     console.error("Error loading form data from storage:", error);
@@ -2740,12 +2747,52 @@ function attachAutoSaveListeners() {
   console.log("Auto-save listeners attached");
 }
 
+
+// When a file is chosen via the "Edit Old Form" control we only care about
+// JSON files.  The existing accept list still allows binary documents for
+// backwards compatibility, but those are ignored here so that existing
+// functionality is unaffected.
+function handleFileUpload(evt) {
+  const file = evt.target.files[0];
+  if (!file) return;
+
+  const name = file.name.toLowerCase();
+  if (name.endsWith(".json")) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const data = JSON.parse(e.target.result);
+        // apply to form and also update the global data so review/download work
+        applyDataToForm(data);
+        personnelData = data;
+        // save a copy immediately in case user downloads without editing
+        autoSaveFormData();
+        alert("Form populated from JSON. You can now modify or update the data.");
+      } catch (err) {
+        alert("Could not parse JSON file: " + err.message);
+      }
+    };
+    reader.readAsText(file);
+  } else {
+    // Non-JSON files are ignored; older flow simply did nothing.
+  }
+
+  // Reset input so the same file can be selected again later if needed.
+  evt.target.value = "";
+}
+
 window.onload = () => {
   // Load saved form data from local storage
   loadFormDataFromStorage();
 
   // Attach auto-save listeners
   attachAutoSaveListeners();
+
+  // Wire up the hidden file input so that JSON uploads trigger population
+  const uploadInput = document.getElementById("form-upload");
+  if (uploadInput) {
+    uploadInput.addEventListener("change", handleFileUpload);
+  }
 
   // Initialize button visibility for all tables
   initializeTableButtons();
