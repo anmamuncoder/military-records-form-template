@@ -201,7 +201,7 @@ function addRow(type) {
 <td>${createInput("text", "name", "Name", true, 200)}</td>
 <td>${createInput("text", "nationality", "Nationality", false, 50)}</td>
 <td>${createInput("date", "date_of_birth", "", false)}</td>
-<td>${createSelect("is_deceased", ["No", "Yes"], true)}</td>
+<td>${createSelect("is_deceased", ["No", "Yes"], false)}</td>
 <td>${createInput("text", "occupation_profession", "Occupation", false, 100)}</td>
 <td>${createInput("number", "annual_income", "Annual Income", false)}</td>
 <td>${createInput("text", "address", "Address", false)}</td>
@@ -223,7 +223,7 @@ function addRow(type) {
 <td>${createInput("number", "gpa", "GPA", false)}</td>
 <td>${createSelect("division", options.divisions, false)}</td>
 <td>${createInput("number", "year_of_passing", "Year", false)}</td>
-<td>${createInput("text", "remarks", "Remarks", true)}</td>
+<td>${createInput("text", "remarks", "Remarks", false)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "passports") {
     row.innerHTML = `<td>${createSelect("status", options.passport_status, false)}</td>
@@ -249,13 +249,13 @@ function addRow(type) {
 <td>${createInput("text", "designation", "Designation", true, 100)}</td>
 <td>${createInput("date", "date_from", "", false)}</td>
 <td>${createInput("date", "date_to", "", false)}</td>
-<td>${createInput("text", "remarks", "Remarks", true)}</td>
+<td>${createInput("text", "remarks", "Remarks", false)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "pre_commission_trainings") {
     row.innerHTML = `<td>${createInput("text", "location", "Location", true, 100)}</td>
 <td>${createInput("text", "appointment", "Appointment", true, 100)}</td>
-<td>${createInput("text", "distinction", "Distinction", true)}</td>
-<td>${createInput("text", "remarks", "Remarks", true)}</td>
+<td>${createInput("text", "distinction", "Distinction", false)}</td>
+<td>${createInput("text", "remarks", "Remarks", false)}</td>
 <td>${createInput("date", "date_from", "", false)}</td>
 <td>${createInput("date", "date_to", "", false)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
@@ -303,16 +303,16 @@ function addRow(type) {
 <td>${createInput("date", "date_from", "", false)}</td>
 <td>${createInput("date", "date_to", "", false)}</td>
 <td>${createInput("text", "appointment", "Appointment", true, 100)}</td>
-<td>${createInput("text", "award_receive", "Award Receive", true)}</td>
+<td>${createInput("text", "award_receive", "Award Receive", false)}</td>
 <td>${createInput("text", "authority", "Authority", false, 100)}</td>
-<td>${createInput("text", "remarks", "Remarks", true)}</td>
+<td>${createInput("text", "remarks", "Remarks", false)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "non_operational_awards") {
     row.innerHTML = `<td>${createInput("text", "description", "Description", true)}</td>
 <td>${createInput("date", "date_awarded", "", true)}</td>
-<td>${createInput("text", "details", "Details", true)}</td>
-<td>${createInput("text", "authority", "Authority", true, 100)}</td>
-<td>${createInput("text", "remarks", "Remarks", true)}</td>
+<td>${createInput("text", "details", "Details", false)}</td>
+<td>${createInput("text", "authority", "Authority", false, 100)}</td>
+<td>${createInput("text", "remarks", "Remarks", false)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "overseas_visits") {
     row.innerHTML = `
@@ -320,10 +320,10 @@ function addRow(type) {
 <td>${createInput("text", "country", "Country", true, 100)}</td>
 <td>${createInput("date", "start_date", "", true)}</td>
 <td>${createInput("date", "end_date", "", true)}</td>
-<td>${createInput("text", "reason", "Reason", true)}</td>
+<td>${createInput("text", "reason", "Reason", false)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "annual_incomes") {
-    row.innerHTML = `<td>${createInput("text", "person", "Person", true)}</td>
+    row.innerHTML = `<td>${createInput("text", "person", "Person", false)}</td>
 <td>${createSelect("income_source", options.income_sources, true)}</td>
 <td>${createInput("number", "amount", "Amount", true)}</td>
 <td>${createInput("number", "year", "Year", true)}</td>
@@ -344,10 +344,10 @@ function addRow(type) {
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "civil_legal_records") {
     row.innerHTML = `<td>${createInput("text", "law_section", "Law Section", true, 100)}</td>
-<td>${createInput("text", "crime_details", "Crime Details", true)}</td>
-<td>${createInput("date", "date_judgment", "", true)}</td>
+<td>${createInput("text", "crime_details", "Crime Details", false)}</td>
+<td>${createInput("date", "date_judgment", "", false)}</td>
 <td>${createInput("text", "place", "Place", true, 100)}</td>
-<td>${createInput("text", "punishment", "Punishment", true)}</td>
+<td>${createInput("text", "punishment", "Punishment", false)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "ranks_held") {
     row.innerHTML = `<td>${createInput("date", "date", "", true)}</td>
@@ -621,7 +621,7 @@ function validateRequiredSections() {
 
   // Validate Person section
   if (!getValue("person_name")) errors.push("Person - Name");
-  if (!getValue("short_name")) errors.push("Person - Short Name");
+  // if (!getValue("short_name")) errors.push("Person - Short Name");
   if (!getValue("person_personal_no")) errors.push("Person - Personal No");
 
   // Validate Personal Info section
@@ -650,7 +650,7 @@ function validateRequiredSections() {
   errors.push(
     ...validateTableRequiredFields(
       "family_members",
-      ["relationship", "name", "is_deceased"],
+      ["relationship", "name"],
       "Family Member",
     ),
   );
@@ -659,7 +659,7 @@ function validateRequiredSections() {
   errors.push(
     ...validateTableRequiredFields(
       "education",
-      ["institution_type", "institution_name", "remarks"],
+      ["institution_type", "institution_name"],
       "Education",
     ),
   );
@@ -686,7 +686,7 @@ function validateRequiredSections() {
   errors.push(
     ...validateTableRequiredFields(
       "pre_commission_services",
-      ["unit", "designation", "remarks"],
+      ["unit", "designation"],
       "Pre Commission Service",
     ),
   );
@@ -695,7 +695,7 @@ function validateRequiredSections() {
   errors.push(
     ...validateTableRequiredFields(
       "pre_commission_trainings",
-      ["location", "appointment", "distinction", "remarks"],
+      ["location", "appointment"],
       "Pre Commission Training",
     ),
   );
@@ -703,15 +703,15 @@ function validateRequiredSections() {
   // Validate Commission section
   if (!getValue("academy_course")) errors.push("Commission - Academy Course");
   if (!getValue("commission_type")) errors.push("Commission - Commission Type");
-  if (!getValue("commission_authority"))
-    errors.push("Commission - Commission Authority");
-  if (!getValue("order_number")) errors.push("Commission - Order Number");
-  if (!getValue("ante_date_seniority"))
-    errors.push("Commission - Ante Date Seniority");
-  if (!getValue("permanent_commission_authority"))
-    errors.push("Commission - Permanent Commission Authority");
-  if (!getValue("joining_bangladesh_army_authority"))
-    errors.push("Commission - Joining Bangladesh Army Authority");
+  // if (!getValue("commission_authority"))
+  //   errors.push("Commission - Commission Authority");
+  // if (!getValue("order_number")) errors.push("Commission - Order Number");
+  // if (!getValue("ante_date_seniority"))
+  //   errors.push("Commission - Ante Date Seniority");
+  // if (!getValue("permanent_commission_authority"))
+  //   errors.push("Commission - Permanent Commission Authority");
+  // if (!getValue("joining_bangladesh_army_authority"))
+  //   errors.push("Commission - Joining Bangladesh Army Authority");
 
   // Validate Post Commission Trainings
   errors.push(
@@ -762,7 +762,7 @@ function validateRequiredSections() {
   errors.push(
     ...validateTableRequiredFields(
       "operational_awards",
-      ["operation_name", "appointment", "award_receive", "remarks"],
+      ["operation_name", "appointment"],
       "Operational Award",
     ),
   );
@@ -771,7 +771,7 @@ function validateRequiredSections() {
   errors.push(
     ...validateTableRequiredFields(
       "non_operational_awards",
-      ["description", "date_awarded", "details", "authority", "remarks"],
+      ["description", "date_awarded"],
       "Non Operational Award",
     ),
   );
@@ -780,7 +780,7 @@ function validateRequiredSections() {
   errors.push(
     ...validateTableRequiredFields(
       "overseas_visits",
-      ["visit_type", "country", "start_date", "end_date", "reason"],
+      ["visit_type", "country", "start_date", "end_date"],
       "Overseas Visit",
     ),
   );
@@ -789,7 +789,7 @@ function validateRequiredSections() {
   errors.push(
     ...validateTableRequiredFields(
       "annual_incomes",
-      ["person", "income_source", "amount", "year"],
+      ["income_source", "amount", "year"],
       "Annual Income",
     ),
   );
@@ -816,7 +816,7 @@ function validateRequiredSections() {
   errors.push(
     ...validateTableRequiredFields(
       "civil_legal_records",
-      ["law_section", "crime_details", "place", "punishment"],
+      ["law_section", "place"],
       "Civil Legal Record",
     ),
   );
@@ -2434,7 +2434,9 @@ function autoSaveFormData() {
           nationality: getValue("nationality"),
           previous_nationality: getValue("previous_nationality") || null,
           present_medical_category: getValue("present_medical_category"),
-          present_nature_of_disability: getValue("present_nature_of_disability"),
+          present_nature_of_disability: getValue(
+            "present_nature_of_disability",
+          ),
           present_attributes: getValue("present_attributes"),
           email: getValue("email"),
           personal_phone_no: getValue("personal_phone_no"),
@@ -2475,7 +2477,9 @@ function autoSaveFormData() {
         },
         post_commission_trainings: getTableData("post_commission_trainings"),
         additional_qualifications: getTableData("additional_qualifications"),
-        map_reading_promotion_exams: getTableData("map_reading_promotion_exams"),
+        map_reading_promotion_exams: getTableData(
+          "map_reading_promotion_exams",
+        ),
         promotions: getTableData("promotions"),
         service_records: getTableData("service_records"),
         operational_awards: getTableData("operational_awards"),
@@ -2530,14 +2534,20 @@ function loadFormDataFromStorage() {
       setFieldValue("build", pi.build);
       setFieldValue("complexion", pi.complexion);
       setFieldValue("eye_color", pi.eye_color);
-      setFieldValue("visible_identification_marks", pi.visible_identification_marks);
+      setFieldValue(
+        "visible_identification_marks",
+        pi.visible_identification_marks,
+      );
       setFieldValue("blood_group", pi.blood_group);
       setFieldValue("religion", pi.religion);
       setFieldValue("caste", pi.caste);
       setFieldValue("nationality", pi.nationality);
       setFieldValue("previous_nationality", pi.previous_nationality);
       setFieldValue("present_medical_category", pi.present_medical_category);
-      setFieldValue("present_nature_of_disability", pi.present_nature_of_disability);
+      setFieldValue(
+        "present_nature_of_disability",
+        pi.present_nature_of_disability,
+      );
       setFieldValue("present_attributes", pi.present_attributes);
       setFieldValue("email", pi.email);
       setFieldValue("personal_phone_no", pi.personal_phone_no);
@@ -2559,9 +2569,18 @@ function loadFormDataFromStorage() {
       setFieldValue("ante_date_seniority", c.ante_date_seniority);
       setFieldValue("ante_date_authority", c.ante_date_authority);
       setFieldValue("permanent_commission_date", c.permanent_commission_date);
-      setFieldValue("permanent_commission_authority", c.permanent_commission_authority);
-      setFieldValue("date_of_joining_bangladesh_army", c.date_of_joining_bangladesh_army);
-      setFieldValue("joining_bangladesh_army_authority", c.joining_bangladesh_army_authority);
+      setFieldValue(
+        "permanent_commission_authority",
+        c.permanent_commission_authority,
+      );
+      setFieldValue(
+        "date_of_joining_bangladesh_army",
+        c.date_of_joining_bangladesh_army,
+      );
+      setFieldValue(
+        "joining_bangladesh_army_authority",
+        c.joining_bangladesh_army_authority,
+      );
       setFieldValue("original_arms_service", c.original_arms_service);
       setFieldValue("previous_arms_service", c.previous_arms_service);
     }
@@ -2577,7 +2596,10 @@ function loadFormDataFromStorage() {
     loadTableData("pre_commission_trainings", data.pre_commission_trainings);
     loadTableData("post_commission_trainings", data.post_commission_trainings);
     loadTableData("additional_qualifications", data.additional_qualifications);
-    loadTableData("map_reading_promotion_exams", data.map_reading_promotion_exams);
+    loadTableData(
+      "map_reading_promotion_exams",
+      data.map_reading_promotion_exams,
+    );
     loadTableData("promotions", data.promotions);
     loadTableData("service_records", data.service_records);
     loadTableData("operational_awards", data.operational_awards);
@@ -2672,7 +2694,7 @@ function createTableRow(type, rowData = null) {
 <td>${createInput("text", "name", "Name", true, 200)}</td>
 <td>${createInput("text", "nationality", "Nationality", false, 50)}</td>
 <td>${createInput("date", "date_of_birth", "", false)}</td>
-<td>${createSelect("is_deceased", ["No", "Yes"], true)}</td>
+<td>${createSelect("is_deceased", ["No", "Yes"], false)}</td>
 <td>${createInput("text", "occupation_profession", "Occupation", false, 100)}</td>
 <td>${createInput("number", "annual_income", "Annual Income", false)}</td>
 <td>${createInput("text", "address", "Address", false)}</td>
@@ -2685,7 +2707,7 @@ function createTableRow(type, rowData = null) {
 <td>${createInput("text", "location_of_grave", "Location of Grave", false, 100)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   }
-  
+
   // Fill in the data if provided
   if (rowData) {
     const inputs = row.querySelectorAll("input, select");
