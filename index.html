@@ -192,8 +192,9 @@
               />
             </div>
             <div class="form-group">
-              <label>Short Name (Capital) </label
+              <label class="required">Short Name (Capital) </label
               ><input
+                required
                 type="text"
                 id="short_name"
                 maxlength="150"
@@ -227,12 +228,11 @@
           <h2 class="section-title">Personal Information</h2>
           <div class="form-grid">
             <div class="form-group">
-              <label class="required">National ID Number</label
+              <label>National ID Number</label
               ><input
                 type="text"
                 id="national_id_number"
                 maxlength="50"
-                required
                 placeholder="e.g, 19750515123456789"
               />
             </div>
@@ -748,13 +748,8 @@
           <h2 class="section-title">Commission</h2>
           <div class="form-grid">
             <div class="form-group">
-              <label class="required">Academy Course</label
-              ><input
-                type="text"
-                id="academy_course"
-                required
-                maxlength="100"
-              />
+              <label>Academy Course</label
+              ><input type="text" id="academy_course" maxlength="100" />
             </div>
             <div class="form-group">
               <label>Date of Joining Academy</label
@@ -775,8 +770,8 @@
               />
             </div>
             <div class="form-group">
-              <label class="required">Commission Type</label
-              ><select id="commission_type" required>
+              <label>Commission Type</label
+              ><select id="commission_type">
                 <option value="">Select</option>
                 <option value="Regular Commission">Regular Commission</option>
                 <option value="Short Service Commission">

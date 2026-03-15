@@ -378,6 +378,12 @@ function addRow(type) {
   }
 
   tbody.appendChild(row);
+
+  // Ensure unit/ERE fields are synced with the hidden value if this is a service record row
+  if (type === "service_records") {
+    syncServiceRecordUnitEreRow(row);
+  }
+
   updateRequiredFields(type);
   // Update required headers after adding row
   setTimeout(markRequiredHeaders, 50);
@@ -491,6 +497,40 @@ function initializeTableButtons() {
   Object.keys(tableDisplayNames).forEach((type) => {
     updateTableButtons(type, true); // Pass true to indicate initial load
   });
+}
+
+function syncServiceRecordUnitEreRow(row) {
+  if (!row) return;
+
+  const serviceTypeSelect = row.querySelector('select[name="service_type"]');
+  const unitSelect = row.querySelector('select[name="unit_ere_name_select"]');
+  const customInput = row.querySelector('input[name="unit_ere_name_custom"]');
+  const hiddenInput = row.querySelector('input[name="unit_ere_name"]');
+
+  if (!serviceTypeSelect || !unitSelect || !customInput || !hiddenInput) {
+    return;
+  }
+
+  const serviceType = serviceTypeSelect.value;
+  const selectedUnit = unitSelect.value;
+  const customValue = customInput.value.trim();
+
+  if (serviceType === "Unit") {
+    // Unit: show dropdown and optionally custom input when 'Other' is selected
+    unitSelect.style.display = "";
+    if (selectedUnit === "Other") {
+      customInput.style.display = "";
+      hiddenInput.value = customValue;
+    } else {
+      customInput.style.display = "none";
+      hiddenInput.value = selectedUnit || "";
+    }
+  } else {
+    // ERE (or blank): show free text input and hide dropdown
+    unitSelect.style.display = "none";
+    customInput.style.display = "";
+    hiddenInput.value = customValue;
+  }
 }
 
 function getValue(id) {
@@ -2683,6 +2723,11 @@ function loadTableData(type, rows) {
         }
       });
 
+      // Sync service record unit/ERE fields so the correct inputs are shown and the hidden value is set.
+      if (type === "service_records") {
+        syncServiceRecordUnitEreRow(newRow);
+      }
+
       // Update button visibility
       updateTableButtons(type);
     } catch (error) {
@@ -2755,11 +2800,25 @@ function attachAutoSaveListeners() {
     if (e.target.matches("input, select")) {
       autoSaveFormData();
     }
+
+    if (e.target.matches("input[name=\"unit_ere_name_custom\"]")) {
+      const row = e.target.closest("tr");
+      syncServiceRecordUnitEreRow(row);
+    }
   });
 
   document.addEventListener("change", (e) => {
     if (e.target.matches("input, select")) {
       autoSaveFormData();
+    }
+
+    if (
+      e.target.matches(
+        "select[name=\"service_type\"], select[name=\"unit_ere_name_select\"], input[name=\"unit_ere_name_custom\"]",
+      )
+    ) {
+      const row = e.target.closest("tr");
+      syncServiceRecordUnitEreRow(row);
     }
   });
 
