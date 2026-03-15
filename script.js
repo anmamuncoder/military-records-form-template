@@ -296,7 +296,26 @@ function addRow(type) {
 <td>${createSelect("appointment_type", options.appointment_types)}</td>
 <td>${createInput("text", "appointment_name", "Appointment Name")}</td>
 <td>${createSelect("service_type", options.service_type, true)}</td>
-<td>${createInput("text", "unit_ere_name", "Unit/ERE Name", true, 100)}</td>
+<td>
+  <div class="unit-ere-wrapper" style="display:flex; flex-direction:column; gap:4px;">
+    <select name="unit_ere_name_select" class="unit-ere-select" style="width:100%">
+      <option value="">Select</option>
+      <option value="93 Armd Bde">93 Armd Bde</option>
+      <option value="Bengal Cavalry (B Cav)">Bengal Cavalry (B Cav)</option>
+      <option value="4 Horse (4H)">4 Horse (4H)</option>
+      <option value="6 Cavalry (6 Cav)">6 Cavalry (6 Cav)</option>
+      <option value="7 Horse (7H)">7 Horse (7H)</option>
+      <option value="9 Lancers (9 BL)">9 Lancers (9 BL)</option>
+      <option value="12 Lancers (12 L)">12 Lancers (12 L)</option>
+      <option value="16 Cavalry (16 Cav)">16 Cavalry (16 Cav)</option>
+      <option value="26 Horse (26 H)">26 Horse (26 H)</option>
+      <option value="15 IAS">15 IAS</option>
+      <option value="Other">Other</option>
+    </select>
+    <input type="text" name="unit_ere_name_custom" placeholder="Unit/ERE Name (custom)" style="display:none; width:100%" />
+    <input type="hidden" name="unit_ere_name" required />
+  </div>
+</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "operational_awards") {
     row.innerHTML = `<td>${createInput("text", "operation_name", "Operation Name", true, 200)}</td>
@@ -359,6 +378,12 @@ function addRow(type) {
   }
 
   tbody.appendChild(row);
+
+  // Ensure unit/ERE fields are synced with the hidden value if this is a service record row
+  if (type === "service_records") {
+    syncServiceRecordUnitEreRow(row);
+  }
+
   updateRequiredFields(type);
   // Update required headers after adding row
   setTimeout(markRequiredHeaders, 50);
@@ -472,6 +497,40 @@ function initializeTableButtons() {
   Object.keys(tableDisplayNames).forEach((type) => {
     updateTableButtons(type, true); // Pass true to indicate initial load
   });
+}
+
+function syncServiceRecordUnitEreRow(row) {
+  if (!row) return;
+
+  const serviceTypeSelect = row.querySelector('select[name="service_type"]');
+  const unitSelect = row.querySelector('select[name="unit_ere_name_select"]');
+  const customInput = row.querySelector('input[name="unit_ere_name_custom"]');
+  const hiddenInput = row.querySelector('input[name="unit_ere_name"]');
+
+  if (!serviceTypeSelect || !unitSelect || !customInput || !hiddenInput) {
+    return;
+  }
+
+  const serviceType = serviceTypeSelect.value;
+  const selectedUnit = unitSelect.value;
+  const customValue = customInput.value.trim();
+
+  if (serviceType === "Unit") {
+    // Unit: show dropdown and optionally custom input when 'Other' is selected
+    unitSelect.style.display = "";
+    if (selectedUnit === "Other") {
+      customInput.style.display = "";
+      hiddenInput.value = customValue;
+    } else {
+      customInput.style.display = "none";
+      hiddenInput.value = selectedUnit || "";
+    }
+  } else {
+    // ERE (or blank): show free text input and hide dropdown
+    unitSelect.style.display = "none";
+    customInput.style.display = "";
+    hiddenInput.value = customValue;
+  }
 }
 
 function getValue(id) {
@@ -2664,6 +2723,11 @@ function loadTableData(type, rows) {
         }
       });
 
+      // Sync service record unit/ERE fields so the correct inputs are shown and the hidden value is set.
+      if (type === "service_records") {
+        syncServiceRecordUnitEreRow(newRow);
+      }
+
       // Update button visibility
       updateTableButtons(type);
     } catch (error) {
@@ -2736,11 +2800,25 @@ function attachAutoSaveListeners() {
     if (e.target.matches("input, select")) {
       autoSaveFormData();
     }
+
+    if (e.target.matches("input[name=\"unit_ere_name_custom\"]")) {
+      const row = e.target.closest("tr");
+      syncServiceRecordUnitEreRow(row);
+    }
   });
 
   document.addEventListener("change", (e) => {
     if (e.target.matches("input, select")) {
       autoSaveFormData();
+    }
+
+    if (
+      e.target.matches(
+        "select[name=\"service_type\"], select[name=\"unit_ere_name_select\"], input[name=\"unit_ere_name_custom\"]",
+      )
+    ) {
+      const row = e.target.closest("tr");
+      syncServiceRecordUnitEreRow(row);
     }
   });
 
