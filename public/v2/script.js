@@ -1007,7 +1007,11 @@ function saveJSON() {
     additional_qualifications: getTableData("additional_qualifications"),
     map_reading_promotion_exams: getTableData("map_reading_promotion_exams"),
     promotions: getTableData("promotions"),
-    service_records: getTableData("service_records"),
+    // Export all service record fields except internal helper inputs
+    service_records: getTableData("service_records").map((row) => {
+      const { unit_ere_name_select, unit_ere_name_custom, ...rest } = row;
+      return rest;
+    }),
     operational_awards: getTableData("operational_awards"),
     non_operational_awards: getTableData("non_operational_awards"),
     overseas_visits: getTableData("overseas_visits"),
@@ -2801,7 +2805,7 @@ function attachAutoSaveListeners() {
       autoSaveFormData();
     }
 
-    if (e.target.matches("input[name=\"unit_ere_name_custom\"]")) {
+    if (e.target.matches('input[name="unit_ere_name_custom"]')) {
       const row = e.target.closest("tr");
       syncServiceRecordUnitEreRow(row);
     }
@@ -2814,7 +2818,7 @@ function attachAutoSaveListeners() {
 
     if (
       e.target.matches(
-        "select[name=\"service_type\"], select[name=\"unit_ere_name_select\"], input[name=\"unit_ere_name_custom\"]",
+        'select[name="service_type"], select[name="unit_ere_name_select"], input[name="unit_ere_name_custom"]',
       )
     ) {
       const row = e.target.closest("tr");
@@ -2824,7 +2828,6 @@ function attachAutoSaveListeners() {
 
   console.log("Auto-save listeners attached");
 }
-
 
 // When a file is chosen via the "Edit Old Form" control we only care about
 // JSON files.  The existing accept list still allows binary documents for
@@ -2845,7 +2848,9 @@ function handleFileUpload(evt) {
         personnelData = data;
         // save a copy immediately in case user downloads without editing
         autoSaveFormData();
-        alert("Form populated from JSON. You can now modify or update the data.");
+        alert(
+          "Form populated from JSON. You can now modify or update the data.",
+        );
       } catch (err) {
         alert("Could not parse JSON file: " + err.message);
       }

@@ -310,7 +310,6 @@ function addRow(type) {
       <option value="16 Cavalry (16 Cav)">16 Cavalry (16 Cav)</option>
       <option value="26 Horse (26 H)">26 Horse (26 H)</option>
       <option value="15 IAS">15 IAS</option>
-      <option value="Other">Other</option>
     </select>
     <input type="text" name="unit_ere_name_custom" placeholder="Unit/ERE Name (custom)" style="display:none; width:100%" />
     <input type="hidden" name="unit_ere_name" required />
@@ -999,7 +998,11 @@ function saveJSON() {
     additional_qualifications: getTableData("additional_qualifications"),
     map_reading_promotion_exams: getTableData("map_reading_promotion_exams"),
     promotions: getTableData("promotions"),
-    service_records: getTableData("service_records"),
+    // Export all service record fields except internal helper inputs
+    service_records: getTableData("service_records").map((row) => {
+      const { unit_ere_name_select, unit_ere_name_custom, ...rest } = row;
+      return rest;
+    }),
     operational_awards: getTableData("operational_awards"),
     non_operational_awards: getTableData("non_operational_awards"),
     overseas_visits: getTableData("overseas_visits"),
