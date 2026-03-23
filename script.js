@@ -301,7 +301,7 @@ function addRow(type) {
     <select name="unit_ere_name_select" class="unit-ere-select" style="width:100%">
       <option value="">Select</option>
       <option value="93 Armd Bde">93 Armd Bde</option>
-      <option value="'Bengal Cavalry">'Bengal Cavalry</option>
+      <option value="Bengal Cavalry">Bengal Cavalry</option>
       <option value="4 Horse">4 Horse</option>
       <option value="6 Cavalry">6 Cavalry</option>
       <option value="7 Horse">7 Horse</option>
