@@ -246,7 +246,7 @@ function addRow(type) {
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "pre_commission_services") {
     row.innerHTML = `<td>${createInput("text", "unit", "Unit", false, 100)}</td>
-<td>${createInput("text", "designation", "Designation", false , 100)}</td>
+<td>${createInput("text", "designation", "Designation", false, 100)}</td>
 <td>${createInput("date", "date_from", "", false)}</td>
 <td>${createInput("date", "date_to", "", false)}</td>
 <td>${createInput("text", "remarks", "Remarks", false)}</td>
@@ -301,14 +301,14 @@ function addRow(type) {
     <select name="unit_ere_name_select" class="unit-ere-select" style="width:100%">
       <option value="">Select</option>
       <option value="93 Armd Bde">93 Armd Bde</option>
-      <option value="Bengal Cavalry (B Cav)">Bengal Cavalry (B Cav)</option>
-      <option value="4 Horse (4H)">4 Horse (4H)</option>
-      <option value="6 Cavalry (6 Cav)">6 Cavalry (6 Cav)</option>
-      <option value="7 Horse (7H)">7 Horse (7H)</option>
-      <option value="9 Lancers (9 BL)">9 Lancers (9 BL)</option>
-      <option value="12 Lancers (12 L)">12 Lancers (12 L)</option>
-      <option value="16 Cavalry (16 Cav)">16 Cavalry (16 Cav)</option>
-      <option value="26 Horse (26 H)">26 Horse (26 H)</option>
+      <option value="'Bengal Cavalry">'Bengal Cavalry</option>
+      <option value="4 Horse">4 Horse</option>
+      <option value="6 Cavalry">6 Cavalry</option>
+      <option value="7 Horse">7 Horse</option>
+      <option value="9 Lancers">9 Lancers</option>
+      <option value="12 Lancers">12 Lancers</option>
+      <option value="16 Cavalry">16 Cavalry</option>
+      <option value="26 Horse">26 Horse</option>
       <option value="15 IAS">15 IAS</option>
     </select>
     <input type="text" name="unit_ere_name_custom" placeholder="Unit/ERE Name (custom)" style="display:none; width:100%" />
@@ -337,7 +337,7 @@ function addRow(type) {
 <td>${createSelect("visit_type", options.visit_types, false)}</td>
 <td>${createInput("text", "country", "Country", false, 100)}</td>
 <td>${createInput("date", "start_date", "", false)}</td>
-<td>${createInput("date", "end_date", "", false )}</td>
+<td>${createInput("date", "end_date", "", false)}</td>
 <td>${createInput("text", "reason", "Reason", false)}</td>
 <td style="text-align:center;"><button type="button" onclick="deleteRow(this)" class="btn btn-danger">Remove</button></td>`;
   } else if (type === "annual_incomes") {
@@ -761,7 +761,6 @@ function validateRequiredSections() {
   // Validate Commission section
   // if (!getValue("academy_course")) errors.push("Commission - Academy Course");
   // if (!getValue("commission_type")) errors.push("Commission - Commission Type");
-   
 
   // Validate Post Commission Trainings
   // errors.push(
@@ -2796,7 +2795,7 @@ function attachAutoSaveListeners() {
       autoSaveFormData();
     }
 
-    if (e.target.matches("input[name=\"unit_ere_name_custom\"]")) {
+    if (e.target.matches('input[name="unit_ere_name_custom"]')) {
       const row = e.target.closest("tr");
       syncServiceRecordUnitEreRow(row);
     }
@@ -2809,7 +2808,7 @@ function attachAutoSaveListeners() {
 
     if (
       e.target.matches(
-        "select[name=\"service_type\"], select[name=\"unit_ere_name_select\"], input[name=\"unit_ere_name_custom\"]",
+        'select[name="service_type"], select[name="unit_ere_name_select"], input[name="unit_ere_name_custom"]',
       )
     ) {
       const row = e.target.closest("tr");
@@ -2819,7 +2818,6 @@ function attachAutoSaveListeners() {
 
   console.log("Auto-save listeners attached");
 }
-
 
 // When a file is chosen via the "Edit Old Form" control we only care about
 // JSON files.  The existing accept list still allows binary documents for
@@ -2840,7 +2838,9 @@ function handleFileUpload(evt) {
         personnelData = data;
         // save a copy immediately in case user downloads without editing
         autoSaveFormData();
-        alert("Form populated from JSON. You can now modify or update the data.");
+        alert(
+          "Form populated from JSON. You can now modify or update the data.",
+        );
       } catch (err) {
         alert("Could not parse JSON file: " + err.message);
       }
